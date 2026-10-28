@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🏆 Best-Paper-Writing-Skill
+# <img src="assets/logo.svg" height="44" align="top" alt="logo"> Best-Paper-Writing-Skill
 
 **Generate high-quality paper drafts: abstract, introduction, method and experiments, written the way best papers are written**
 
-Writing patterns distilled from 60 CVPR / ICCV / NeurIPS award papers, packaged as a skill for both Claude and Codex
+🏆 Writing patterns distilled from 60 CVPR / ICCV / NeurIPS award papers, packaged as a skill for both Claude and Codex
 
 ![version](https://img.shields.io/badge/version-v1.0-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
 

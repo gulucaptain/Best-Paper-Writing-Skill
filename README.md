@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🏆 Best-Paper-Writing-Skill
+# <img src="assets/logo.svg" height="44" align="top" alt="logo"> Best-Paper-Writing-Skill
 
 **生成最佳论文风格的高质量论文底稿：摘要、引言、方法、实验**
 
-写作规律提炼自 60 篇 CVPR / ICCV / NeurIPS 获奖论文，一个 Skill 同时支持 Claude 与 Codex
+🏆 写作规律提炼自 60 篇 CVPR / ICCV / NeurIPS 获奖论文，一个 Skill 同时支持 Claude 与 Codex
 
 ![version](https://img.shields.io/badge/version-v1.0-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
 
