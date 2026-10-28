@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: next-scale-autoregressive-images
+expected_outcome: |
+  Source paper (hidden from the tester): Visual Autoregressive Modeling: Scalable Image Generation via
+  Next-Scale Prediction (NeurIPS 2024 Best Paper). A submission-ready abstract and introduction in the
+  CVPR author kit that uses only the given facts and references, states a clear stance and core idea,
+  respects the number budget, contains no limitations, and matches the original award paper in
+  persuasiveness.
+context:
+  scaffold_script: place-files.sh

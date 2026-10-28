@@ -1,0 +1,61 @@
+id,venue,year,short_name,title,type,type_name,role
+P01,CVPR,2022,EPro-PnP,EPro-PnP: Generalized End-to-End Probabilistic Perspective-N-Points for Monocular Object Pose Estimation,L1,Method improvement / problem reframing,corpus
+P02,CVPR,2022,Hard Minimal Problems,Learning To Solve Hard Minimal Problems,L1,Method improvement / problem reframing,corpus
+P03,CVPR,2022,Dual-Shutter Vibration Sensing,Dual-Shutter Optical Vibration Sensing,L8,Measurement / system,corpus
+P04,CVPR,2023,VISPROG,Visual Programming: Compositional Visual Reasoning Without Training,L2,New task / new capability,corpus
+P05,CVPR,2023,DynIBaR,DynIBaR: Neural Dynamic Image-Based Rendering,L1,Method improvement / problem reframing,corpus
+P06,CVPR,2023,DreamBooth,DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation,L2,New task / new capability,corpus
+P07,CVPR,2023,3D Registration with Maximal Cliques,3D Registration With Maximal Cliques,L1,Method improvement / problem reframing,corpus
+P08,CVPR,2024,pixelSplat,pixelSplat: 3D Gaussian Splats from Image Pairs for Scalable Generalizable 3D Reconstruction,L1,Method improvement / problem reframing,corpus
+P09,CVPR,2024,Transformers vs. CNNs Explanations,Comparing the Decision-Making Mechanisms by Transformers and CNNs via Explanation Methods,L5,Mechanism / analysis,corpus
+P10,CVPR,2024,Generative Image Dynamics,Generative Image Dynamics,L2,New task / new capability,held-out
+P11,CVPR,2024,Objects as Volumes,Objects as Volumes: A Stochastic Geometry View of Opaque Solids,L6,Theory,corpus
+P12,CVPR,2024,SpiderMatch,SpiderMatch: 3D Shape Matching with Global Optimality and Geometric Consistency,L1,Method improvement / problem reframing,corpus
+P13,CVPR,2024,IPG,Image Processing GNN: Breaking Rigidity in Super-Resolution,L1,Method improvement / problem reframing,corpus
+P14,CVPR,2024,EventPS,EventPS: Real-Time Photometric Stereo Using an Event Camera,L8,Measurement / system,corpus
+P15,CVPR,2024,Mip-Splatting,Mip-Splatting: Alias-free 3D Gaussian Splatting,L1,Method improvement / problem reframing,corpus
+P16,CVPR,2025,Navigation World Models,Navigation World Models,L2,New task / new capability,corpus
+P17,CVPR,2025,Molmo and PixMo,Molmo and PixMo: Open Weights and Open Data for State-of-the-Art Vision-Language Models,L7,Dataset / benchmark / resource,corpus
+P18,CVPR,2025,MegaSaM,"MegaSaM: Accurate, Fast and Robust Structure and Motion from Casual Dynamic Videos",L1,Method improvement / problem reframing,corpus
+P19,CVPR,2025,Propagating Light Inverse Rendering,Neural Inverse Rendering from Propagating Light,L8,Measurement / system,corpus
+P20,CVPR,2025,DDT-LLaMA,Generative Multimodal Pretraining with Discrete Diffusion Timestep Tokens,L1,Method improvement / problem reframing,corpus
+P21,CVPR,2025,VGGT,VGGT: Visual Geometry Grounded Transformer,L2,New task / new capability,corpus
+P22,CVPR,2025,Student Splatting and Scooping,3D Student Splatting and Scooping,L1,Method improvement / problem reframing,corpus
+P23,ICCV,2021,Viewing Graph Solvability,Viewing Graph Solvability via Cycle Consistency,L6,Theory,corpus
+P24,ICCV,2021,Mip-NeRF,Mip-NeRF: A Multiscale Representation for Anti-Aliasing Neural Radiance Fields,L1,Method improvement / problem reframing,corpus
+P25,ICCV,2021,OpenGAN,OpenGAN: Open-Set Recognition via Open Data Generation,L1,Method improvement / problem reframing,corpus
+P26,ICCV,2021,Pixel-Perfect SfM,Pixel-Perfect Structure-From-Motion With Featuremetric Refinement,L1,Method improvement / problem reframing,corpus
+P27,ICCV,2021,Swin Transformer,Swin Transformer: Hierarchical Vision Transformer Using Shifted Windows,L1,Method improvement / problem reframing,corpus
+P28,ICCV,2021,CO3D,Common Objects in 3D: Large-Scale Learning and Evaluation of Real-Life 3D Category Reconstruction,L7,Dataset / benchmark / resource,corpus
+P29,ICCV,2023,Segment Anything,Segment Anything,L2,New task / new capability,corpus
+P30,ICCV,2023,OmniMotion,Tracking Everything Everywhere All at Once,L1,Method improvement / problem reframing,corpus
+P31,ICCV,2023,Passive Single-Photon Imaging,Passive Ultra-Wideband Single-Photon Imaging,L8,Measurement / system,corpus
+P32,ICCV,2025,FlowEdit,FlowEdit: Inversion-Free Text-Based Editing Using Pre-Trained Flow Models,L1,Method improvement / problem reframing,corpus
+P33,ICCV,2025,BrickGPT,Generating Physically Stable and Buildable Brick Structures from Text,L2,New task / new capability,corpus
+P34,ICCV,2025,Spatially-Varying Autofocus,Spatially-Varying Autofocus,L8,Measurement / system,corpus
+P35,NeurIPS,2022,Chinchilla,An Empirical Analysis of Compute-Optimal Large Language Model Training,L3,Empirical law / practical guide,corpus
+P36,NeurIPS,2022,Data Pruning,Beyond Neural Scaling Laws: Beating Power Law Scaling via Data Pruning,L3,Empirical law / practical guide,corpus
+P37,NeurIPS,2022,EDM,Elucidating the Design Space of Diffusion-Based Generative Models,L1,Method improvement / problem reframing,corpus
+P38,NeurIPS,2022,RODEO,Gradient Estimation with Discrete Stein Operators,L1,Method improvement / problem reframing,corpus
+P39,NeurIPS,2022,SGD Limit Theorems,High-Dimensional Limit Theorems for SGD: Effective Dynamics and Critical Scaling,L6,Theory,corpus
+P40,NeurIPS,2022,LAION-5B,LAION-5B: An Open Large-Scale Dataset for Training Next Generation Image-Text Models,L7,Dataset / benchmark / resource,corpus
+P41,NeurIPS,2022,MineDojo,MineDojo: Building Open-Ended Embodied Agents with Internet-Scale Knowledge,L7,Dataset / benchmark / resource,corpus
+P42,NeurIPS,2022,Imagen,Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding,L1,Method improvement / problem reframing,corpus
+P44,NeurIPS,2022,Riemannian SGM,Riemannian Score-Based Generative Modelling,L1,Method improvement / problem reframing,corpus
+P45,NeurIPS,2022,Human Inductive Biases,Using Natural Language and Program Abstractions to Instill Human Inductive Biases in Machines,L5,Mechanism / analysis,corpus
+P46,NeurIPS,2023,DecodingTrust,DecodingTrust: A Comprehensive Assessment of Trustworthiness in GPT Models,L4,Re-examination of a claim,corpus
+P47,NeurIPS,2023,Emergent Abilities Mirage,Are Emergent Abilities of Large Language Models a Mirage?,L4,Re-examination of a claim,corpus
+P48,NeurIPS,2023,ClimSim,ClimSim: A Large Multi-Scale Dataset for Hybrid Physics-ML Climate Emulation,L7,Dataset / benchmark / resource,corpus
+P49,NeurIPS,2023,DPO,Direct Preference Optimization: Your Language Model is Secretly a Reward Model,L1,Method improvement / problem reframing,corpus
+P50,NeurIPS,2023,Data-Constrained Scaling,Scaling Data-Constrained Language Models,L3,Empirical law / practical guide,corpus
+P51,NeurIPS,2024,Autoguidance,Guiding a Diffusion Model with a Bad Version of Itself,L1,Method improvement / problem reframing,held-out
+P52,NeurIPS,2024,RHO-1,Not All Tokens Are What You Need for Pretraining,L1,Method improvement / problem reframing,corpus
+P53,NeurIPS,2024,STDE,Stochastic Taylor Derivative Estimator: Efficient Amortization for Arbitrary Differential Operators,L1,Method improvement / problem reframing,held-out
+P54,NeurIPS,2024,PRISM,"The PRISM Alignment Dataset: What Participatory, Representative and Individualised Human Feedback Reveals About the Subjective and Multicultural Alignment of Large Language Models",L7,Dataset / benchmark / resource,held-out
+P55,NeurIPS,2024,VAR,Visual Autoregressive Modeling: Scalable Image Generation via Next-Scale Prediction,L1,Method improvement / problem reframing,held-out
+P56,NeurIPS,2025,1000-Layer RL,1000 Layer Networks for Self-Supervised RL: Scaling Depth Can Enable New Goal-Reaching Capabilities,L3,Empirical law / practical guide,corpus
+P57,NeurIPS,2025,RLVR Reasoning Boundary,Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?,L4,Re-examination of a claim,corpus
+P58,NeurIPS,2025,Gated Attention,"Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free",L5,Mechanism / analysis,corpus
+P59,NeurIPS,2025,Superposition Scaling,Superposition Yields Robust Neural Scaling,L5,Mechanism / analysis,corpus
+P60,NeurIPS,2025,Why Diffusion Models Don't Memorize,Why Diffusion Models Don't Memorize: The Role of Implicit Dynamical Regularization in Training,L5,Mechanism / analysis,corpus
+P61,NeurIPS,2025,Transductive Online Learning,Optimal Mistake Bounds for Transductive Online Learning,L6,Theory,corpus

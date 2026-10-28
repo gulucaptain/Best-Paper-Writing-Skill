@@ -1,0 +1,235 @@
+function,pattern,n_papers,example,paper,venue,year
+advantage,[CLAIM] with [QUALIFICATION/COMPONENT].,14,This formulation elegantly combines globally-discriminative sparse matching with locally-accurate dense details.,Pixel-Perfect SfM,ICCV,2021
+advantage,This [RESULT/PROPERTY] [CONSEQUENCE].,10,This characteristic is advantageous in many scenarios.,EventPS,CVPR,2024
+advantage,Our [METHOD/RESULT] [PREDICATE].,7,Our approach is general.,Hard Minimal Problems,CVPR,2022
+advantage,[METHOD] allows/enables [CAPABILITY].,7,Our approach allows us to develop scaling limits for both types of phases.,SGD Limit Theorems,NeurIPS,2022
+advantage,These [RESULTS/PROPERTIES] [CONSEQUENCE].,4,"These advantages make VISPROG an easy-to-use, performant, and modular neuro-symbolic system.",VISPROG,CVPR,2023
+advantage,"[CLAIM A], but [CLAIM B].",4,This complements human scoring [78] that is precise but more expensive.,MineDojo,NeurIPS,2022
+advantage,[CLAIM] without [REQUIREMENT].,3,This has the benefit of matching the quality and depth resolution of the focus stacking without requiring a large image set.,Spatially-Varying Autofocus,ICCV,2025
+advantage,"[CLAIM], such as [EXAMPLES].",2,"Similar to Gaussians, t-distribution also enjoys good properties such as analytical forms under affine transformation.",Student Splatting and Scooping,CVPR,2025
+benefit,[CLAIM] with [QUALIFICATION/COMPONENT].,8,"Unlike supervised navigation policies with fixed behavior, NWM can dynamically incorporate constraints during planning.",Navigation World Models,CVPR,2025
+benefit,Our [METHOD/RESULT] [PREDICATE].,6,Our approach avoids computing large numbers of spurious solutions.,Hard Minimal Problems,CVPR,2022
+benefit,This [RESULT/PROPERTY] [CONSEQUENCE].,4,"This modification also enhances training stability, tolerates larger learning rates, and improves scaling properties.",Gated Attention,NeurIPS,2025
+benefit,[METHOD] allows/enables [CAPABILITY].,3,"Our approach allows one to choose the summary statistics that are tracked, the initialization, and the step-size.",SGD Limit Theorems,NeurIPS,2022
+benefit,The [TASK/PROPERTY] is [DEFINITION/CLAIM].,3,"The dataset is global in coverage, spans multiple years at high sampling frequency, and is designed such that resulting emulators are compatible with downstream coupling into operational climate simulators.",ClimSim,NeurIPS,2023
+benefit,[CLAIM] by [OPERATION].,2,"Using our efficient model in a data collection loop, we built the largest segmentation dataset to date (by far), with over 1 billion masks on 11M licensed and privacy respecting images.",Segment Anything,ICCV,2023
+benefit,[APPROACH] requires [CONDITION/COST].,2,Our control variates can be adapted online to minimize variance and do not require extra evaluations of the target function.,RODEO,NeurIPS,2022
+benefit,"In this work/paper, we [ACTION].",1,"In this paper, we propose a novel method for sensing vibrations at high speeds (up to 63kHz), for multiple scene sources at once, using sensors rated for only 130Hz operation.",Dual-Shutter Vibration Sensing,CVPR,2022
+context,[CLAIM] with [QUALIFICATION/COMPONENT].,11,Navigation is a fundamental skill of agents with visual-motor capabilities.,Navigation World Models,CVPR,2025
+context,[CLAIM] by [OPERATION].,7,"In the standard setting, the optimal mistake bound is characterized by the Littlestone dimension 𝑑 of the concept class  √ (Littlestone, 1987).",Transductive Online Learning,NeurIPS,2025
+context,"While [CLAIM A], [CLAIM B].",1,"While visually-observable vibrations can be captured directly with a high-speed camera, minute imperceptible object vibrations can be optically amplified by imaging the displacement of a speckle pattern, created by shining a laser beam on the vibrating surface.",Dual-Shutter Vibration Sensing,CVPR,2022
+context,"[CLAIM], e.g., [EXAMPLES].",1,"Existing approaches rely on spatial visual tokens, where image patches are encoded and arranged according to a spatial order (e.g., raster scan).",DDT-LLaMA,CVPR,2025
+context,[CLAIM] without [REQUIREMENT].,1,"Groundbreaking language-vision architectures like CLIP and DALL-E proved the utility of training on large amounts of noisy image-text data, without relying on expensive accurate labels used in standard vision unimodal supervised learning.",LAION-5B,NeurIPS,2022
+context,[CLAIM] based on [FOUNDATION].,1,State-of-the-art methods based on temporally varying Neural Radiance Fields (aka dynamic NeRFs) have shown impressive results on this task.,DynIBaR,CVPR,2023
+context,[METHOD] allows/enables [CAPABILITY].,1,"It is widely believed that, similar to how traditional RL helps agents to explore and learn new strategies, RLVR enables LLMs to continuously self-improve, thus acquiring novel reasoning abilities that exceed the capacity of the corresponding base models.",RLVR Reasoning Boundary,NeurIPS,2025
+context,[EVIDENCE] suggests [INTERPRETATION].,1,"Driven by end-to-end deep learning, recent studies suggest interpreting PnP as a differentiable layer, so that 2D-3D point correspondences can be partly learned by backpropagating the gradient w.r.t. object pose.",EPro-PnP,CVPR,2022
+contrast,"In contrast [TO X], [DISTINCTION].",8,"In contrast, VGGT uses a shared backbone to predict all 3D quantities of interest together.",VGGT,CVPR,2025
+contrast,[CLAIM] with [QUALIFICATION/COMPONENT].,8,"Our MAC method is able to mine more local information in a graph, compared with the previous maximum clique constraint.",3D Registration with Maximal Cliques,CVPR,2023
+contrast,Our [METHOD/RESULT] [PREDICATE].,7,Our work is an extension of the dataset from [26].,CO3D,ICCV,2021
+contrast,[CLAIM] by [OPERATION].,5,Programs created by VISPROG also use a higher-level of abstraction than NMNs and invoke trained state-of-the-art models and non-neural python subroutines (Fig. 2).,VISPROG,CVPR,2023
+contrast,"However, [LIMITATION/REVERSAL].",4,"However, the experiments of Galactica do not compare this setup to an alternative non-data-constrained model trained for one epoch on unique data.",Data-Constrained Scaling,NeurIPS,2023
+contrast,[CLAIM] compared to/with [BASELINE].,4,"Compared with the maximum clique, MAC is a looser constraint and is able to mine more local information in a graph.",3D Registration with Maximal Cliques,CVPR,2023
+contrast,[METHOD] uses [COMPONENT] to [PURPOSE].,4,"In contrast, VISPROG uses a powerful language model (GPT-3) and a small number of in-context examples to create complex programs without requiring any training.",VISPROG,CVPR,2023
+contrast,This [RESULT/PROPERTY] [CONSEQUENCE].,3,"This is a substantial departure from DUSt3R, MASt3R, or VGGSfM, which still require costly iterative post-optimization to obtain usable results.",VGGT,CVPR,2025
+contribution,[CLAIM] with [QUALIFICATION/COMPONENT].,19,Simulation platform with thousands of diverse open-ended tasks.,MineDojo,NeurIPS,2022
+contribution,We [ACTION] to [PURPOSE].,12,"We introduce DrawBench, a new structured suite of text prompts for text-to-image evaluation.",Imagen,NeurIPS,2022
+contribution,Our [METHOD/RESULT] [PREDICATE].,6,Our main contributions are:,Data Pruning,NeurIPS,2022
+contribution,[CLAIM] by [OPERATION].,6,"We induce never-before-seen, seemingly emergent abilities in multiple architectures across various vision tasks by intentionally changing the metrics used for evaluation.",Emergent Abilities Mirage,NeurIPS,2023
+contribution,[APPROACH] achieves [RESULT].,6,We achieve a new state-of-the-art COCO FID of 7.27.,Imagen,NeurIPS,2022
+contribution,We propose [METHOD] [PURPOSE/PROPERTY].,5,We propose EventPS integrated with both optimization-based and deep-learning-based approaches to handle Lambertian and non-Lambertian surfaces.,EventPS,CVPR,2024
+contribution,We introduce [METHOD/RESOURCE] [PURPOSE/PROPERTY].,5,We introduce a hypothesis generation method named MAC.,3D Registration with Maximal Cliques,CVPR,2023
+contribution,"To [GOAL], we [ACTION].",5,"To recover the depth map of the scene, we extend traditional ideas in contrast- and phase-based autofocus to their spatially-varying counterparts.",Spatially-Varying Autofocus,ICCV,2025
+credit,[CLAIM] by [OPERATION].,19,"In fixed dimensions, the asymptotic theory of SGD, and stochastic approximations more broadly, is by now classical.",SGD Limit Theorems,NeurIPS,2022
+credit,[CLAIM] with [QUALIFICATION/COMPONENT].,14,Computer vision methods can now produce free-viewpoint renderings of static 3D scenes with spectacular quality.,DynIBaR,CVPR,2023
+credit,"[CLAIM], such as [EXAMPLES].",8,"Such encoders also compose effectively with other modules to enable downstream tasks, such as image generation (e.g., DALL·E [81]).",Segment Anything,ICCV,2023
+credit,This [RESULT/PROPERTY] [CONSEQUENCE].,5,This framework has gained significant attention due to its simplicity and practical effectiveness.,RLVR Reasoning Boundary,NeurIPS,2025
+credit,These [RESULTS/PROPERTIES] [CONSEQUENCE].,5,These techniques significantly improve data quality and boost model performance.,RHO-1,NeurIPS,2024
+credit,[CLAIM] based on [FOUNDATION].,5,"Recent work, such as ConvNeXt [15], utilized design principles in transformer approaches to design a network based on depthwise convolutions and obtained excellent results.",Transformers vs. CNNs Explanations,CVPR,2024
+credit,"[CLAIM], e.g., [EXAMPLES].",4,"Presented initially as a neural rendering technique, 3D Gaussian Splatting (3DGS) [13] has quickly become a versatile component in various systems, e.g. geometry reconstruction, autonomous driving [3, 6].",Student Splatting and Scooping,CVPR,2025
+credit,"[CLAIM A], but [CLAIM B].",4,"Prior work [3, 17] has illustrated interesting differences between CNNs and transformers, but many questions have not been answered.",Transformers vs. CNNs Explanations,CVPR,2024
+figure,[CLAIM] as shown/illustrated in [FIGURE].,2,This effect of RLVR is illustrated in Figure 1 (left).,RLVR Reasoning Boundary,NeurIPS,2025
+figure,We highlight/showcase [RESULTS] in Figure [N].,2,We highlight our results in Figure 1 and how our approaches differ in Section 2.,Chinchilla,NeurIPS,2022
+figure,[EFFECT/PICTURE] is illustrated in Figure [N].,2,The theoretical picture built from our results and combining several findings from the recent literature is illustrated in Fig. 1.,Why Diffusion Models Don't Memorize,NeurIPS,2025
+figure,[CLAIM] (see [SECTION/FIGURE]).,1,See Fig. 1 for select samples.,Imagen,NeurIPS,2022
+figure,Figure [N] shows [EXAMPLES/RESULTS].,1,"Fig. 1 Bottom-Right showed a few examples where a set of several revealed local patches lead to even more confident predictions than the full image, which reflects a distinctly different occlusion handling mechanism than compositional networks.",Transformers vs. CNNs Explanations,CVPR,2024
+figure,Figure [N] summarizes [FINDINGS].,1,Figure 1 summarizes our main results targeting the value of repeated data (Return) and optimal allocation of resources in that regime (Allocation).,Data-Constrained Scaling,NeurIPS,2023
+figure,[EXAMPLES] are in Figure [N].,1,"Finally, the dataset from [26] did not contain any point cloud annotations, the examples of which are in fig. 1.",CO3D,ICCV,2021
+figure,"We showcase [FAILURE/BEHAVIOR] in Figure [N], and provide [EXAMPLES] in Figure [M].",1,"We showcase some unreliable responses from different trustworthiness perspectives in Figure 1, and provide some examples of benign and adversarial prompts in Figure 2.",DecodingTrust,NeurIPS,2023
+gap,"However, [LIMITATION/REVERSAL].",30,"However, exact gradient computation is often difficult.",RODEO,NeurIPS,2022
+gap,[CLAIM] with [QUALIFICATION/COMPONENT].,20,"However, creating real-world objects with existing methods remains challenging.",BrickGPT,ICCV,2025
+gap,"While [CLAIM A], [CLAIM B].",15,"While significantly faster than volume rendering, such methods are still far from real-time.",pixelSplat,CVPR,2024
+gap,"[CLAIM A], but [CLAIM B].",14,But these improvements also introduce a large computation burden.,IPG,CVPR,2024
+gap,[CLAIM] by [OPERATION].,12,"However, strong artifacts can be observed when changing the sampling rate, e.g., by changing focal length or camera distance.",Mip-Splatting,CVPR,2024
+gap,[CLAIM] due to [CAUSE].,9,"However, it does not work well due to instable training of GANs.",OpenGAN,ICCV,2021
+gap,[APPROACH] requires [CONDITION/COST].,9,"However, these improvements through scaling alone require considerable costs in compute and energy.",Data Pruning,NeurIPS,2022
+gap,[CONDITION] remains [UNRESOLVED STATE].,9,Today’s most advanced vision-language models (VLMs) remain proprietary.,Molmo and PixMo,CVPR,2025
+goal,"In this work/paper, we [ACTION].",7,In this work we make a first step towards filling this gap.,SpiderMatch,CVPR,2024
+goal,Our [METHOD/RESULT] [PREDICATE].,6,Our goal is to answer these questions.,Objects as Volumes,CVPR,2024
+goal,[CLAIM] by [OPERATION].,5,Our main goal is to facilitate advances in this field by collecting real-world data in a magnitude similar to the existing synthetic counterparts.,CO3D,ICCV,2021
+goal,[CLAIM] with [QUALIFICATION/COMPONENT].,4,"With this model, we aim to solve a range of downstream segmentation problems on new data distributions using prompt engineering.",Segment Anything,ICCV,2023
+goal,We [ACTION] to [PURPOSE].,3,We aim to design a new model that can mitigate these issues.,Navigation World Models,CVPR,2025
+goal,"To [GOAL], we [ACTION].",3,"To train our model, we need a diverse, large-scale source of data.",Segment Anything,ICCV,2023
+goal,[CLAIM] without [REQUIREMENT].,2,"However, unlike NVS approaches, our goal is to train a single model for navigation across diverse environments and model temporal dynamics from natural videos, without relying on 3D priors.",Navigation World Models,CVPR,2025
+goal,[METHOD] allows/enables [CAPABILITY].,2,"First, the environment in which the agent acts needs to enable an unlimited variety of open-ended goals [88, 55, 92, 89].",MineDojo,NeurIPS,2022
+handle,[CLAIM] with [QUALIFICATION/COMPONENT].,4,"Our solution is to build a “data engine”, i.e., we co-develop our model with model-in-the-loop dataset annotation (see Fig. 1c).",Segment Anything,ICCV,2023
+handle,[CLAIM] by [OPERATION].,3,"Inspired by mixture models with negative components [20], we propose to employ both positive and negative components to splat (adding) and scoop (subtracting) densities from the model.",Student Splatting and Scooping,CVPR,2025
+handle,We [ACTION] to [PURPOSE].,2,We optimize our representation per video to jointly solve for the motion of the entire video “All at Once”.,OmniMotion,ICCV,2023
+handle,The [TASK/PROPERTY] is [DEFINITION/CLAIM].,2,"The effect is akin to a “magic photo booth”—once a few images of the subject are taken, the booth generates photos of the subject in different conditions and scenes, as guided by simple and intuitive text prompts (Figure 1).",DreamBooth,CVPR,2023
+handle,"To [GOAL], we [ACTION].",1,"To encode a 3D position and its surrounding Gaussian region, we propose a new feature representation: an integrated positional encoding (IPE).",Mip-NeRF,ICCV,2021
+handle,"[CLAIM], e.g., [EXAMPLES].",1,"Altogether, an executed program with intermediate step results (e.g. text, bounding boxes, segmentation masks, generated images, etc.) linked together to depict the flow of information serves as a visual rationale for the prediction.",VISPROG,CVPR,2023
+handle,[METHOD] allows/enables [CAPABILITY].,1,"Thus, just like light field cameras [14] enable post-capture refocusing in space, this new imaging regime enables post-capture refocusing in time—from transient to everyday timescales.",Passive Single-Photon Imaging,ICCV,2023
+handle,[CLAIM] as shown/illustrated in [FIGURE].,1,"A key design element of Swin Transformer is its shift of the window partition between consecutive self-attention layers, as illustrated in Figure 2.",Swin Transformer,ICCV,2021
+history,[CLAIM] by [OPERATION].,26,"This can be done, e.g., by analyzing the viewing graph.",Viewing Graph Solvability,ICCV,2021
+history,[CLAIM] with [QUALIFICATION/COMPONENT].,23,The problem of 3D registration by handling correspondences with outliers has been studied for decades.,3D Registration with Maximal Cliques,CVPR,2023
+history,"[CLAIM], such as [EXAMPLES].",12,"For instance, benchmarks such as GLUE [172] and SuperGLUE [171] have been introduced to evaluate general-purpose language understanding.",DecodingTrust,NeurIPS,2023
+history,This [RESULT/PROPERTY] [CONSEQUENCE].,11,This principle persists in modern architectures.,Gated Attention,NeurIPS,2025
+history,"[CLAIM], e.g., [EXAMPLES].",8,"Also, Gaussians have analytical forms under e.g. affine transformation, enabling quick evaluation in 3D-2D projection, thus quick learning from images.",Student Splatting and Scooping,CVPR,2025
+history,These [RESULTS/PROPERTIES] [CONSEQUENCE].,6,These programmatic representations are constructed from primitive atoms using symbolic rules and procedures.,Human Inductive Biases,NeurIPS,2022
+history,[CLAIM] based on [FOUNDATION].,6,"There has been recent proposals for an end-to-end framework based on the Perspective-n-Points (PnP) approach [2, 4, 7, 10].",EPro-PnP,CVPR,2022
+history,The [TASK/PROPERTY] is [DEFINITION/CLAIM].,5,The speckle is imaged by focusing in between the surface and the sensor.,Dual-Shutter Vibration Sensing,CVPR,2022
+insight,[CLAIM] by [OPERATION].,10,"By evaluating gating variants, we uncover their ability to introduce non-linearity and sparsity, and eliminate attention sinks.",Gated Attention,NeurIPS,2025
+insight,Our [METHOD/RESULT] [PREDICATE].,8,Our findings reveal that significant loss reduction is limited to a select group of tokens.,RHO-1,NeurIPS,2024
+insight,[CLAIM] with [QUALIFICATION/COMPONENT].,8,"Crucially, we find that τ mem increases linearly with the training set size n, while τ gen remains constant.",Why Diffusion Models Don't Memorize,NeurIPS,2025
+insight,We [ACTION] to [PURPOSE].,7,We argue that three main pillars are necessary for generalist embodied agents to emerge.,MineDojo,NeurIPS,2022
+insight,The [TASK/PROPERTY] is [DEFINITION/CLAIM].,6,The second step is to recognize the importance of increasing data availability.,1000-Layer RL,NeurIPS,2025
+insight,"[CLAIM A], but [CLAIM B].",5,"The main idea is straightforward: deterministic pose is non-differentiable, but the probability density of pose is apparently differentiable, just like categorical classification scores.",EPro-PnP,CVPR,2022
+insight,This [RESULT/PROPERTY] [CONSEQUENCE].,4,"This strongly suggests the gating itself provides significant intrinsic value, separate from the routing mechanism.",Gated Attention,NeurIPS,2025
+insight,We find that [OBSERVATION].,3,We find that such a learned layer is critical for achieving accurate and efficient camera pose estimation for the more challenging case of dynamic video.,MegaSaM,CVPR,2025
+mechanism,[CLAIM] by [OPERATION].,18,"By allowing multiple attempts, pass@k reveals whether a model has the potential to solve a problem.",RLVR Reasoning Boundary,NeurIPS,2025
+mechanism,[CLAIM] with [QUALIFICATION/COMPONENT].,13,"By contrast, strong superposition allows many more features to be represented, albeit with overlap in the representation (Figure 1c).",Superposition Scaling,NeurIPS,2025
+mechanism,This [RESULT/PROPERTY] [CONSEQUENCE].,10,This helps us to achieve plenty of correct hypotheses from a graph.,3D Registration with Maximal Cliques,CVPR,2023
+mechanism,The [TASK/PROPERTY] is [DEFINITION/CLAIM].,8,"The number of patches in each window is fixed, and thus the complexity becomes linear to image size.",Swin Transformer,ICCV,2021
+mechanism,Our [METHOD/RESULT] [PREDICATE].,7,Our approach introduces a set of novel constraints that ensure a globally geometrically consistent matching.,SpiderMatch,CVPR,2024
+mechanism,[METHOD] allows/enables [CAPABILITY].,7,"This representation allows us to ensure global consistency, track through occlusions, and model any combination of camera and object motion.",OmniMotion,ICCV,2023
+mechanism,"By [ACTION], [CONSEQUENCE].",6,"By separating SAM into an image encoder and a fast prompt encoder / mask decoder, the same image embedding can be reused (and its cost amortized) with different prompts.",Segment Anything,ICCV,2023
+mechanism,"[CLAIM A], but [CLAIM B].",5,This leads to more complex mathematical forms than 3DGS but we derive their close-form gradients for learning.,Student Splatting and Scooping,CVPR,2025
+method,[CLAIM] by [OPERATION].,40,"At t, the noised image is given by x t .",DDT-LLaMA,CVPR,2025
+method,[CLAIM] with [QUALIFICATION/COMPONENT].,40,"With this observation, we make two important changes to conventional speckle-based vibration imaging.",Dual-Shutter Vibration Sensing,CVPR,2022
+method,We [ACTION] to [PURPOSE].,35,We present an algorithm to recover the unknown high-speed shifts.,Dual-Shutter Vibration Sensing,CVPR,2022
+method,"To [GOAL], we [ACTION].",27,"To further investigate this phenomenon, we analyze the accuracy distribution.",RLVR Reasoning Boundary,NeurIPS,2025
+method,"In this work/paper, we [ACTION].",24,"In this paper, we present a 3D registration method with maximal cliques (MAC).",3D Registration with Maximal Cliques,CVPR,2023
+method,[CLAIM] based on [FOUNDATION].,15,"In this paper, we propose a geometric-only 3D registration method based on maximal cliques (MAC).",3D Registration with Maximal Cliques,CVPR,2023
+method,[METHOD] uses [COMPONENT] to [PURPOSE].,13,We then use this technique to build flexible control variates for the REINFORCE leave-one-out estimator.,RODEO,NeurIPS,2022
+method,We present [METHOD/RESOURCE] [PURPOSE/PROPERTY].,12,"We present ClimSim, the largest-ever dataset designed for hybrid ML-physics research.",ClimSim,NeurIPS,2023
+other,[RESOURCE] is available at [LOCATION].,6,Our implementation and pre-trained models are available at https://github.com/NVlabs/edm,EDM,NeurIPS,2022
+other,We release/open-source [RESOURCES] [LOCATION/PURPOSE].,3,We will open-source our attention-sink-free models to advance future research.,Gated Attention,NeurIPS,2025
+other,Our [METHOD/RESULT] [PREDICATE].,2,"Our dataset, code, and models are available at the project website: https://avalovelace1.github.io/BrickGPT/ .",BrickGPT,ICCV,2025
+other,[CLAIM] with [QUALIFICATION/COMPONENT].,2,We also showcase SAM’s capabilities with an online demo.,Segment Anything,ICCV,2023
+other,"[CLAIM A], but [CLAIM B].",1,"Hence we do not only release our dataset, but also our software stack we built for assembling LAION-5B.",LAION-5B,NeurIPS,2022
+other,[CLAIM] based on [FOUNDATION].,1,"We will also release a 100% fully open Molmo model, based on a MetaCLIP [118] vision encoder and OLMo LLM, for which every bit of training data is publicly available.",Molmo and PixMo,CVPR,2025
+other,We provide [DETAILS/RESOURCES] in/at/on [LOCATION].,1,"We provide interactive visualizations, open-source code, and a supplement with all appendices on the project website.",Objects as Volumes,CVPR,2024
+other,We make [RESOURCES] publicly available [LOCATION].,1,We make our dataset and evaluation protocol publicly available on the project webpage,DreamBooth,CVPR,2023
+outline,Section [N] presents/describes [CONTENT].,3,Section 3 presents the detailed results.,Superposition Scaling,NeurIPS,2025
+outline,"To [GOAL], we [ACTION].",2,"To validate LAION-5B, we reproduce and evaluate different image-text models in Section 5.",LAION-5B,NeurIPS,2022
+outline,The remainder/rest of the paper [ORGANIZATION].,2,The remainder of the paper proceeds as follows.,LAION-5B,NeurIPS,2022
+outline,"Before [NEXT STEP], we [ACTION].",2,"Before concluding, we discuss the technical limitations of LAION-5B in Section 6 and safety and ethics concerns in Section 7.",LAION-5B,NeurIPS,2022
+outline,We introduce [METHOD/RESOURCE] [PURPOSE/PROPERTY].,1,"We introduce each interconnected component next, followed by the dataset we created and the experiments that demonstrate the effectiveness of our approach.",Segment Anything,ICCV,2023
+outline,This [RESULT/PROPERTY] [CONSEQUENCE].,1,This result is stated in considerably greater detail in Theorems 6.1 and 8.1.,Transductive Online Learning,NeurIPS,2025
+outline,The [TASK/PROPERTY] is [DEFINITION/CLAIM].,1,The paper is organized as follows.,Viewing Graph Solvability,ICCV,2021
+outline,"In Section [N], we [ACTION].",1,"In Section 4, we compare our findings to related works.",Superposition Scaling,NeurIPS,2025
+question,This [RESULT/PROPERTY] [CONSEQUENCE].,5,This gap leads us to study,Superposition Scaling,NeurIPS,2025
+question,"[CLAIM A], but [CLAIM B].",3,Does that indicate that the important contributing factor is not the attention itself but those design principles?,Transformers vs. CNNs Explanations,CVPR,2024
+question,[CLAIM] by [OPERATION].,3,Can we break this precept by enabling a “lens” that can change its depth of field arbitrarily?,Spatially-Varying Autofocus,ICCV,2025
+question,[CLAIM] with [QUALIFICATION/COMPONENT].,3,Question: How will superposition influence the loss scaling with model dimension (width)?,Superposition Scaling,NeurIPS,2025
+question,These [RESULTS/PROPERTIES] [CONSEQUENCE].,2,"These emergent abilities have garnered significant interest, raising questions such as: What controls which abilities will emerge?",Emergent Abilities Mirage,NeurIPS,2023
+question,"[CLAIM], such as [EXAMPLES].",2,The tremendous success of volumetric representations for scenes without subsurface or volumetric scattering motivates questions such as: Why can we use volumetric light transport to simulate scenes with only light-surface interactions?,Objects as Volumes,CVPR,2024
+question,[CLAIM] without [REQUIREMENT].,2,"But how do we image highly dynamic scenes—both slow and ultrafast—passively, without any light sources under our control, no synchronization, and not much light?",Passive Single-Photon Imaging,ICCV,2023
+question,[METHOD] allows/enables [CAPABILITY].,2,What task will enable zero-shot generalization?,Segment Anything,ICCV,2023
+reason,[CLAIM] by [OPERATION].,13,"However, scenes that are in motion violate the epipolar constraints assumed by those methods.",DynIBaR,CVPR,2023
+reason,[CLAIM] due to [CAUSE].,10,"However, detecting keypoints from a single view is inherently inaccurate due to appearance changes and discrete image sampling [30].",Pixel-Perfect SfM,ICCV,2021
+reason,[CLAIM] with [QUALIFICATION/COMPONENT].,10,"Insufficient understanding hinders assessing gating’s true contribution, especially when confounded with other architectural factors.",Gated Attention,NeurIPS,2025
+reason,"However, [LIMITATION/REVERSAL].",9,"However, the captured speckle is distorted by the rolling shutter with unknown shifts at each image row.",Dual-Shutter Vibration Sensing,CVPR,2022
+reason,[APPROACH] requires [CONDITION/COST].,9,These questions are entangled and require a comprehensive solution.,Segment Anything,ICCV,2023
+reason,[CLAIM] because [REASON].,8,Very little is known about this problem because existing models for passive low-light imaging [9–13] break down at timescales much shorter than the timespan between photon arrivals.,Passive Single-Photon Imaging,ICCV,2023
+reason,"[CLAIM], e.g., [EXAMPLES].",6,"Comprehension pursues a many-to-one mapping that abstracts visual details (e.g., many photos of corgi dogs result in recognition of “corgi”).",DDT-LLaMA,CVPR,2025
+reason,The [TASK/PROPERTY] is [DEFINITION/CLAIM].,6,The latter is primarily a consequence of a lack of relevant real-world datasets with 3D ground truth.,CO3D,ICCV,2021
+release,[RESOURCE] is available at [LOCATION].,8,Codes are available at this link.,IPG,CVPR,2024
+release,Our [METHOD/RESULT] [PREDICATE].,3,Our benchmark is publicly available at https://decodingtrust.github.io/.,DecodingTrust,NeurIPS,2023
+release,We release/open-source [RESOURCES] [LOCATION/PURPOSE].,3,"We open-source the simulation suite, knowledge bases, algorithm implementation, and pretrained models (https://minedojo.org) to promote research towards the goal of generally capable embodied agents.",MineDojo,NeurIPS,2022
+release,We [ACTION] to [PURPOSE].,2,We are releasing the Segment Anything Model (SAM) and corresponding dataset (SA-1B) of 1B masks and 11M images at segment-anything.com to foster research into foundation models for computer vision.,Segment Anything,ICCV,2023
+release,[CLAIM] (see [SECTION/FIGURE]).,2,See interactive results on our project page: mega-sam.github.io.,MegaSaM,CVPR,2025
+release,Project page: [URL].,2,Project page: https://dreambooth.github.io/,DreamBooth,CVPR,2023
+release,See [RESULTS] on our project page: [URL].,2,See our project page for more results: omnimotion.github.io.,OmniMotion,ICCV,2023
+release,[MATERIALS] can be found [LOCATION].,2,Additional materials can be found on the project website.,pixelSplat,CVPR,2024
+result,[CLAIM] with [QUALIFICATION/COMPONENT].,36,extend solvability testing up to graphs with 90 nodes;,Viewing Graph Solvability,ICCV,2021
+result,[CLAIM] by [OPERATION].,29,Reasoning paths generated by current RLVR model already exist in its base model.,RLVR Reasoning Boundary,NeurIPS,2025
+result,[APPROACH] achieves [RESULT].,20,We achieve a new state-of-the-art COCO FID of 7.27.,Imagen,NeurIPS,2022
+result,[APPROACH] outperforms [BASELINE].,19,"Remarkably, it often outperforms optimization-based alternatives even without further processing.",VGGT,CVPR,2025
+result,We demonstrate [CLAIM/EVIDENCE].,16,We demonstrate drastic improvements for multiple hand-crafted and learned local features using off-the-shelf CNNs.,Pixel-Perfect SfM,ICCV,2021
+result,We [ACTION] to [PURPOSE].,15,We thus achieve more than ten times speedup compared to [50].,Hard Minimal Problems,CVPR,2022
+result,Our [METHOD/RESULT] [PREDICATE].,14,Our NWM achieves state-of-the-art standalone performance and competitive results when combined with existing methods.,Navigation World Models,CVPR,2025
+result,[CLAIM] compared to/with [BASELINE].,12,Extensive experiments validate the effectiveness and efficiency of EventPS compared to frame-based counterparts.,EventPS,CVPR,2024
+scene,[CLAIM] by [OPERATION].,9,"Vibrations are all around us, caused by sources ranging from heartbeats to engines, to music, speech, and ultrasonics.",Dual-Shutter Vibration Sensing,CVPR,2022
+scene,"For example/instance, [CONCRETE CASE].",7,"For example, one can extend “a man” by recursively embedding phrases to get “a man [[walking] in the park]”.",DDT-LLaMA,CVPR,2025
+scene,"[CLAIM], e.g., [EXAMPLES].",5,"Comprehension pursues a many-to-one mapping that abstracts visual details (e.g., many photos of corgi dogs result in recognition of “corgi”).",DDT-LLaMA,CVPR,2025
+scene,[CLAIM] with [QUALIFICATION/COMPONENT].,4,"Such a prior learns, for instance, to bind the word “dog” with various instances of dogs that can appear in different poses and contexts in an image.",DreamBooth,CVPR,2023
+scene,[CLAIM] as shown/illustrated in [FIGURE].,3,"As illustrated in Figure 1a, the first three of six features are represented in the three-dimensional space without interference, and the remaining three are omitted.",Superposition Scaling,NeurIPS,2025
+scene,"When [CONDITION], [CLAIM].",2,"When human agents plan, they often imagine their future trajectories considering constraints and counterfactuals.",Navigation World Models,CVPR,2025
+scene,[CLAIM] without [REQUIREMENT].,2,"Without proper support, parts of the design could collapse, float, or be disconnected.",BrickGPT,ICCV,2025
+scene,[APPROACH] requires [CONDITION/COST].,2,"For example, a drop in error from 3% to 2% might require an order of magnitude more data, compute, or energy.",Data Pruning,NeurIPS,2022
+scope,[CLAIM] with [QUALIFICATION/COMPONENT].,11,SSS is evaluated on multiple datasets and compared with existing methods.,Student Splatting and Scooping,CVPR,2025
+scope,[CLAIM] by [OPERATION].,7,Buildable: Compatible with standard toy brick pieces and able to be assembled brick-by-brick by humans or robots.,BrickGPT,ICCV,2025
+scope,Our [METHOD/RESULT] [PREDICATE].,5,Our research is among these attempts.,Student Splatting and Scooping,CVPR,2025
+scope,"To [GOAL], we [ACTION].",5,"To validate that LAION-5B is indeed suitable for training large image-text models, we conduct multiple experiments.",LAION-5B,NeurIPS,2022
+scope,We [ACTION] to [PURPOSE].,4,We evaluate the Molmo family of models on 11 academic benchmarks and with a human evaluation that allows us to rank models by user preference.,Molmo and PixMo,CVPR,2025
+scope,[CLAIM] without [REQUIREMENT].,3,Our approach works without markers when the vibrating surfaces are near and not dark.,Dual-Shutter Vibration Sensing,CVPR,2022
+scope,[CLAIM] due to [CAUSE].,3,"Due to the immense size of current image-text pre-training datasets, curating LAION-5B for widespread use goes beyond the scope of a single research paper.",LAION-5B,NeurIPS,2022
+scope,[WORK] focuses on [SCOPE].,3,"Here we focus on the uncalibrated scenario, which has been much less understood.",Viewing Graph Solvability,ICCV,2021
+secondary,We [ACTION] to [PURPOSE].,4,We also develop a text-based brick texturing method to generate colored and textured designs.,BrickGPT,ICCV,2025
+secondary,"[CLAIM], such as [EXAMPLES].",2,"We also show that using pretrained VGGT as a feature backbone significantly enhances downstream tasks, such as non-rigid point tracking and feed-forward novel view synthesis.",VGGT,CVPR,2025
+secondary,We demonstrate [CLAIM/EVIDENCE].,1,We demonstrate our approach on popular examples including estimation for spiked matrix and tensor models and classification via two-layer networks for binary and XOR-type Gaussian mixture models.,SGD Limit Theorems,NeurIPS,2022
+secondary,"To [GOAL], we [ACTION].",1,"To assess text-to-image models in greater depth, we introduce DrawBench, a comprehensive and challenging benchmark for text-to-image models.",Imagen,NeurIPS,2022
+secondary,"In contrast [TO X], [DISTINCTION].",1,"In contrast, we find that distillation can introduce new reasoning patterns from the teacher and genuinely expand the model’s reasoning capabilities.",RLVR Reasoning Boundary,NeurIPS,2025
+secondary,[CLAIM] by [OPERATION].,1,"Finally, we also analyze the features shared by different backbones and plot a landscape of different models based on their feature-use similarity.",Transformers vs. CNNs Explanations,CVPR,2024
+secondary,[APPROACH] achieves [RESULT].,1,"Furthermore, when continual pretraining on 80B general tokens, RHO-1 achieves 6.8% average enhancement across 15 diverse tasks, increasing both data efficiency and performance of the language model pre-training.",RHO-1,NeurIPS,2024
+secondary,[RESULT] highlights [IMPLICATION].,1,We implement a range of deterministic and stochastic regression baselines to highlight the ML challenges and their scoring.,ClimSim,NeurIPS,2023
+stance,Our [METHOD/RESULT] [PREDICATE].,7,"Our work ties together several lines of prior research on “extreme” imaging, both passive and active.",Passive Single-Photon Imaging,ICCV,2023
+stance,[CLAIM] by [OPERATION].,7,We anticipate that future research may build on this foundation by uncovering additional building blocks.,1000-Layer RL,NeurIPS,2025
+stance,We [ACTION] to [PURPOSE].,6,We also show that it is unnecessary to design a special network for 3D reconstruction.,VGGT,CVPR,2025
+stance,This [RESULT/PROPERTY] [CONSEQUENCE].,5,"This contrasts with the PAC setting, where transductive and standard learning exhibit similar sample complexities.",Transductive Online Learning,NeurIPS,2025
+stance,These [RESULTS/PROPERTIES] [CONSEQUENCE].,5,These findings deepen our understanding of the mechanisms of gated attention.,Gated Attention,NeurIPS,2025
+stance,"[CLAIM], e.g., [EXAMPLES].",3,"Most importantly, our approach is general and opens the door to solving other hard minimal problems, e.g., from [15, 16].",Hard Minimal Problems,CVPR,2022
+stance,[METHOD] allows/enables [CAPABILITY].,3,"These findings reveal a form of implicit dynamical regularization in the training dynamics, which allow to avoid memorization even in highly overparameterized settings.",Why Diffusion Models Don't Memorize,NeurIPS,2025
+stance,[EVIDENCE] suggests [INTERPRETATION].,3,"This suggests that current RLVR training does not expand, and even reduce the scope of reasoning over solvable problems.",RLVR Reasoning Boundary,NeurIPS,2025
+task,[CLAIM] with [QUALIFICATION/COMPONENT].,7,"The frequency of extreme precipitation events increases with warming [32–34], with corresponding societal impacts [35].",ClimSim,NeurIPS,2023
+task,"[CLAIM], e.g., [EXAMPLES].",6,"This field is often subdivided into specific tasks, e.g., 6DoF pose estimation for robot manipulation and 3D object detection for autonomous driving.",EPro-PnP,CVPR,2022
+task,[CLAIM] by [OPERATION].,6,"In practice, a single model conditioned on the diffusion time t is trained by integrating (4) over time [26].",Why Diffusion Models Don't Memorize,NeurIPS,2025
+task,"[CLAIM], such as [EXAMPLES].",5,"The loss in (4) can be minimized with standard optimizers, such as stochastic gradient descent [SGD, 44] or Adam [28].",Why Diffusion Models Don't Memorize,NeurIPS,2025
+task,These [RESULTS/PROPERTIES] [CONSEQUENCE].,4,"These are widely used in education, artistic creation, and manufacturing prototyping.",BrickGPT,ICCV,2025
+task,[CLAIM] without [REQUIREMENT].,4,Humans are able to rapidly perform a variety of tasks without extensive experience [1].,Human Inductive Biases,NeurIPS,2022
+task,The [TASK/PROPERTY] is [DEFINITION/CLAIM].,4,The basic problem in structure-from-motion is to determine which image sets can be reconstructed.,Viewing Graph Solvability,ICCV,2021
+task,[APPROACH] requires [CONDITION/COST].,3,Accurately modeling indirect light transport requires solving the rendering equation [29].,Propagating Light Inverse Rendering,CVPR,2025
+tension,"However, [LIMITATION/REVERSAL].",6,"However, power law scaling is extremely weak and unsustainable.",Data Pruning,NeurIPS,2022
+tension,[APPROACH] requires [CONDITION/COST].,6,"However, accurately representing cloud formation requires a resolution of 100 m or finer, demanding six orders of magnitude increase in computational intensity.",ClimSim,NeurIPS,2023
+tension,"[CLAIM A], but [CLAIM B].",5,"This improves the accuracy of the host simulations, but comes at a high computational cost [30, 31].",ClimSim,NeurIPS,2023
+tension,[CLAIM] with [QUALIFICATION/COMPONENT].,4,"However, this setup requires a high data throughput capability in cameras and experimental facilities, which becomes a barrier to their practical implementation in real-time applications, especially with limited power and cost.",EventPS,CVPR,2024
+tension,"[CLAIM], such as [EXAMPLES].",3,"But this is prohibitively expensive for neural volumetric representations such as NeRF, which require hundreds of MLP evaluations to render a single ray and several hours to reconstruct a single scene.",Mip-NeRF,ICCV,2021
+tension,This [RESULT/PROPERTY] [CONSEQUENCE].,2,This raises a fundamental question: Does current RLVR genuinely enable LLMs to acquire novel reasoning abilities–similar to how traditional RL discovers new strategies through exploration–or does it simply utilize reasoning patterns already in the base model?,RLVR Reasoning Boundary,NeurIPS,2025
+tension,"While [CLAIM A], [CLAIM B].",2,"While the latter can be collected with specialized hardware (turn-table 3D scanner, dome [29]), it is challenging to reach the scale of synthetic datasets [6] comprising thousands of instances of diverse categories.",CO3D,ICCV,2021
+tension,"In contrast [TO X], [DISTINCTION].",1,"In contrast, in the generalizable case, we need to back-propagate gradients through the representation and thus cannot rely on non-differentiable operations.",pixelSplat,CVPR,2024
+theory-result,[CLAIM] with [QUALIFICATION/COMPONENT].,8,"Our theory delivers volumetric representations equipped with properties necessary for physical plausibility (e.g., reciprocity and reversibility).",Objects as Volumes,CVPR,2024
+theory-result,We [ACTION] to [PURPOSE].,5,"We first derive the multi-view frequency bounds of each Gaussian primitive based on the training views according to the Nyquist-Shannon Sampling Theorem [33, 45].",Mip-Splatting,CVPR,2024
+theory-result,[CLAIM] by [OPERATION].,5,"Using this algorithm, we provide a complete characterization of all the minimal graphs up to nine nodes, including those that were left undecided by [37].",Viewing Graph Solvability,ICCV,2021
+theory-result,Our [METHOD/RESULT] [PREDICATE].,3,Our main result closes this gap:,Transductive Online Learning,NeurIPS,2025
+theory-result,"When [CONDITION], [CLAIM].",3,"When superposition is weak, the loss follows a power law only if data feature frequencies are power-law distributed.",Superposition Scaling,NeurIPS,2025
+theory-result,"[CLAIM A], but [CLAIM B].",3,"Finally, thanks to our algorithm, it is possible to exhibit concrete examples of graphs that are finite solvable but not solvable, thereby answering the open research question from [37].",Viewing Graph Solvability,ICCV,2021
+theory-result,This [RESULT/PROPERTY] [CONSEQUENCE].,2,"This analysis reveals, in a fully tractable way, how the theoretical picture of Fig. 1 emerges within the random feature framework.",Why Diffusion Models Don't Memorize,NeurIPS,2025
+theory-result,"[CLAIM], e.g., [EXAMPLES].",2,"These examples exhibit surprising phenomena including multimodal timescales to convergence as well as convergence to sub-optimal solutions with probability bounded away from zero from random (e.g., Gaussian) initializations.",SGD Limit Theorems,NeurIPS,2022
+transition,Repeat end-to-end from the previous paragraph: There has been recent [X].,1,"There has been recent proposals for an end-to-end framework based on the Perspective-n-Points (PnP) approach [2, 4, 7, 10].",EPro-PnP,CVPR,2022
+transition,Repeat end-to-end from the previous paragraph: To overcome the above [X].,1,"To overcome the above limitations, we propose a generalized end-to-end probabilistic PnP (EPro-PnP) approach that enables learning the weighted 2D-3D point correspondences entirely from scratch (Figure 1).",EPro-PnP,CVPR,2022
+transition,"Repeat approach from the previous paragraph: As a general approach, [X].",1,"As a general approach, EPro-PnP inherently unifies existing correspondence learning techniques (Section 3.1).",EPro-PnP,CVPR,2022
+transition,Repeat geometrical from the previous paragraph: Many geometrical problems are [X].,1,Many geometrical problems are optimization problems that have only one optimal solution.,Hard Minimal Problems,CVPR,2022
+transition,"Repeat optimal from the previous paragraph: RANSAC [23, 53] approximates [X].",1,"RANSAC [23, 53] approximates the optimal solution to a geometrical problem by computing candidate solutions from data samples and picking a solution with maximal data support.",Hard Minimal Problems,CVPR,2022
+transition,"Repeat there from the previous paragraph: Recent results [15,16] show [X].",1,"Recent results [15,16] show that there are many minimal problems in multiview geometry with many spurious solutions which the state-of-the-art polynomial solvers cannot solve efficiently.",Hard Minimal Problems,CVPR,2022
+transition,Repeat method from the previous paragraph: To demonstrate our method [X].,1,"To demonstrate our method on a hard problem, we develop an efficient solver for the “Scranton” minimal problem obtained by relaxing the overconstrained problem of four points in three views (4pt) [50].",Hard Minimal Problems,CVPR,2022
+transition,Repeat approach from the previous paragraph: We benchmark (Sec. 9) [X].,1,We benchmark (Sec. 9) our approach on the classical 5point problem (5pt) [48] using standard benchmarks [31].,Hard Minimal Problems,CVPR,2022
+transition,Repeat recover from the previous paragraph: Our dual-shutter system can [X].,1,Our dual-shutter system can recover vibrations with a range of amplitudes and frequencies (up to 63 kHz) using two ‘slow’ cameras (60 and 134 Hz).,Dual-Shutter Vibration Sensing,CVPR,2022
+transition,Repeat VISPROG from the previous paragraph: VISPROG improves upon previous [X].,1,VISPROG improves upon previous methods for generating and executing programs for vision applications.,VISPROG,CVPR,2023
+transition,"Repeat VISPROG from the previous paragraph: To demonstrate its flexibility, [X].",1,"To demonstrate its flexibility, we use VISPROG for 4 different tasks that share some common skills (e.g. for image parsing) while also requiring some degree of specialized reasoning and visual manipulation capabilities.",VISPROG,CVPR,2023
+transition,Repeat recent from the previous paragraph: We take inspiration from [X].,1,"We take inspiration from recent methods for rendering static scenes that synthesize novel images by aggregating local image features from nearby views along epipolar lines [39, 64, 70].",DynIBaR,CVPR,2023
+transition,"Repeat text-to-image from the previous paragraph: In this work, we [X].",1,"In this work, we present a new approach for “personalization” of text-to-image diffusion models (adapting them to user-specific image generation needs).",DreamBooth,CVPR,2023
+transition,"Repeat images from the previous paragraph: More formally, given a [X].",1,"More formally, given a few images of a subject (∼3-5), our objective is to implant the subject into the output domain of the model such that it can be synthesized with a unique identifier.",DreamBooth,CVPR,2023
+transition,Repeat fine-tune from the previous paragraph: We fine-tune the text-to-image [X].,1,"We fine-tune the text-to-image model with the input images and text prompts containing a unique identifier followed by the class name of the subject (e.g., “A [V] dog”).",DreamBooth,CVPR,2023
+transition,Repeat problem from the previous paragraph: The problem of 3D [X].,1,The problem of 3D registration by handling correspondences with outliers has been studied for decades.,3D Registration with Maximal Cliques,CVPR,2023
+transition,"Repeat geometric-only from the previous paragraph: In this paper, we [X].",1,"In this paper, we propose a geometric-only 3D registration method based on maximal cliques (MAC).",3D Registration with Maximal Cliques,CVPR,2023
+transition,Refer back to the preceding claim: This has motivated light-field [X].,1,"This has motivated light-field transformers [10, 37, 43, 47], where a ray is rendered by embedding it into a query token and a color is obtained via cross-attention over image tokens.",pixelSplat,CVPR,2024

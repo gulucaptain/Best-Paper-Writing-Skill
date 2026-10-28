@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.DS_Store
+# Never commit paper PDFs or full texts (copyright)
+*.pdf
+corpus_fulltext/

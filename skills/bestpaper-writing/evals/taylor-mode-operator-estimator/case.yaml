@@ -1,0 +1,9 @@
+schema_version: "1.1"
+name: taylor-mode-operator-estimator
+expected_outcome: |
+  Source paper (hidden from the tester): Stochastic Taylor Derivative Estimator (NeurIPS 2024 Best
+  Paper). A submission-ready abstract and introduction in the CVPR author kit that uses only the given
+  facts and references, states a clear stance and core idea, respects the number budget, contains no
+  limitations, and matches the original award paper in persuasiveness.
+context:
+  scaffold_script: place-files.sh

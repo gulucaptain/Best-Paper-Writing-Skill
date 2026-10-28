@@ -1,0 +1,1216 @@
+{
+ "source": "55 CVPR/ICCV/NeurIPS award papers 2021-2025 (held-out test set excluded)",
+ "style": {
+  "abstract": {
+   "words": {
+    "p10": 131.6,
+    "p25": 144.5,
+    "p50": 174.0,
+    "p75": 194.5,
+    "p90": 218.8,
+    "n": 55
+   },
+   "sentences": {
+    "p10": 6.0,
+    "p25": 6.0,
+    "p50": 7.0,
+    "p75": 8.0,
+    "p90": 9.0,
+    "n": 55
+   },
+   "prose_paragraphs": {
+    "p10": 1.0,
+    "p25": 1.0,
+    "p50": 1.0,
+    "p75": 1.0,
+    "p90": 1.0,
+    "n": 55
+   },
+   "sent_len_mean": {
+    "p10": 20.057,
+    "p25": 21.683,
+    "p50": 23.75,
+    "p75": 27.583,
+    "p90": 30.782,
+    "n": 55
+   },
+   "short_sent_ratio": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 0.143,
+    "p90": 0.167,
+    "n": 55
+   },
+   "numbers": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 1.0,
+    "p75": 3.0,
+    "p90": 5.6,
+    "n": 55
+   },
+   "connector_per_100w": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.645,
+    "p75": 1.163,
+    "p90": 1.555,
+    "n": 55
+   },
+   "connector_sentence_start_ratio": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.125,
+    "p75": 0.167,
+    "p90": 0.264,
+    "n": 55
+   },
+   "colon_or_dash_sentences": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.111,
+    "p75": 0.167,
+    "p90": 0.286,
+    "n": 55
+   },
+   "hedge_count": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 0.0,
+    "p90": 1.0,
+    "n": 55
+   },
+   "booster_count": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 1.0,
+    "p90": 1.0,
+    "n": 55
+   },
+   "self_praise_count": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 1.0,
+    "p75": 2.0,
+    "p90": 3.0,
+    "n": 55
+   },
+   "insight_formula_count": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 0.0,
+    "p90": 0.0,
+    "n": 55
+   },
+   "we_sentence_ratio": {
+    "p10": 0.099,
+    "p25": 0.143,
+    "p50": 0.286,
+    "p75": 0.402,
+    "p90": 0.65,
+    "n": 55
+   },
+   "question_sentences": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 0.0,
+    "p90": 0.0,
+    "n": 55
+   },
+   "participle_tail_ratio": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.083,
+    "p75": 0.167,
+    "p90": 0.25,
+    "n": 55
+   },
+   "short_run_max": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 1.0,
+    "p75": 1.0,
+    "p90": 1.6,
+    "n": 55
+   },
+   "colon_dash_count": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 0.0,
+    "p90": 1.0,
+    "n": 55
+   },
+   "antithesis_ratio": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 0.0,
+    "p90": 0.13,
+    "n": 55
+   },
+   "late_figure_refs": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 0.0,
+    "p90": 0.0,
+    "n": 55
+   }
+  },
+  "intro": {
+   "words": {
+    "p10": 427.8,
+    "p25": 531.5,
+    "p50": 613.0,
+    "p75": 743.5,
+    "p90": 897.8,
+    "n": 55
+   },
+   "sentences": {
+    "p10": 17.4,
+    "p25": 22.0,
+    "p50": 26.0,
+    "p75": 32.0,
+    "p90": 37.8,
+    "n": 55
+   },
+   "prose_paragraphs": {
+    "p10": 3.4,
+    "p25": 5.0,
+    "p50": 6.0,
+    "p75": 7.0,
+    "p90": 8.0,
+    "n": 55
+   },
+   "sent_len_mean": {
+    "p10": 20.204,
+    "p25": 21.182,
+    "p50": 23.258,
+    "p75": 26.094,
+    "p90": 28.969,
+    "n": 55
+   },
+   "short_sent_ratio": {
+    "p10": 0.023,
+    "p25": 0.047,
+    "p50": 0.111,
+    "p75": 0.164,
+    "p90": 0.222,
+    "n": 55
+   },
+   "numbers": {
+    "p10": 0.0,
+    "p25": 1.5,
+    "p50": 4.0,
+    "p75": 7.0,
+    "p90": 14.6,
+    "n": 55
+   },
+   "connector_per_100w": {
+    "p10": 0.374,
+    "p25": 0.58,
+    "p50": 0.942,
+    "p75": 1.107,
+    "p90": 1.368,
+    "n": 55
+   },
+   "connector_sentence_start_ratio": {
+    "p10": 0.049,
+    "p25": 0.083,
+    "p50": 0.136,
+    "p75": 0.182,
+    "p90": 0.217,
+    "n": 55
+   },
+   "colon_or_dash_sentences": {
+    "p10": 0.032,
+    "p25": 0.049,
+    "p50": 0.095,
+    "p75": 0.152,
+    "p90": 0.234,
+    "n": 55
+   },
+   "hedge_count": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 1.0,
+    "p75": 2.0,
+    "p90": 3.6,
+    "n": 55
+   },
+   "booster_count": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 1.0,
+    "p75": 1.0,
+    "p90": 3.0,
+    "n": 55
+   },
+   "self_praise_count": {
+    "p10": 1.0,
+    "p25": 1.0,
+    "p50": 3.0,
+    "p75": 5.0,
+    "p90": 7.6,
+    "n": 55
+   },
+   "insight_formula_count": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 0.0,
+    "p90": 0.0,
+    "n": 55
+   },
+   "we_sentence_ratio": {
+    "p10": 0.075,
+    "p25": 0.117,
+    "p50": 0.179,
+    "p75": 0.224,
+    "p90": 0.268,
+    "n": 55
+   },
+   "question_sentences": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 1.0,
+    "p90": 3.0,
+    "n": 55
+   },
+   "participle_tail_ratio": {
+    "p10": 0.011,
+    "p25": 0.036,
+    "p50": 0.077,
+    "p75": 0.146,
+    "p90": 0.2,
+    "n": 55
+   },
+   "short_run_max": {
+    "p10": 1.0,
+    "p25": 1.0,
+    "p50": 1.0,
+    "p75": 2.0,
+    "p90": 2.0,
+    "n": 55
+   },
+   "colon_dash_count": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 2.0,
+    "p90": 2.6,
+    "n": 55
+   },
+   "antithesis_ratio": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.034,
+    "p75": 0.073,
+    "p90": 0.083,
+    "n": 55
+   },
+   "late_figure_refs": {
+    "p10": 0.0,
+    "p25": 0.0,
+    "p50": 0.0,
+    "p75": 0.5,
+    "p90": 1.6,
+    "n": 55
+   }
+  }
+ },
+ "style_by_type": {
+  "L1": {
+   "abstract": {
+    "words": {
+     "p10": 136.2,
+     "p25": 141.5,
+     "p50": 172.0,
+     "p75": 192.0,
+     "p90": 206.8,
+     "n": 23
+    },
+    "numbers": {
+     "p10": 0.0,
+     "p25": 0.0,
+     "p50": 0.0,
+     "p75": 2.0,
+     "p90": 5.8,
+     "n": 23
+    }
+   },
+   "intro": {
+    "words": {
+     "p10": 365.8,
+     "p25": 430.5,
+     "p50": 529.0,
+     "p75": 597.0,
+     "p90": 666.8,
+     "n": 23
+    },
+    "numbers": {
+     "p10": 0.0,
+     "p25": 0.0,
+     "p50": 3.0,
+     "p75": 6.0,
+     "p90": 13.0,
+     "n": 23
+    }
+   }
+  },
+  "L2": {
+   "abstract": {
+    "words": {
+     "p10": 135.5,
+     "p25": 142.5,
+     "p50": 149.5,
+     "p75": 163.25,
+     "p90": 186.5,
+     "n": 6
+    },
+    "numbers": {
+     "p10": 0.0,
+     "p25": 0.25,
+     "p50": 1.0,
+     "p75": 1.75,
+     "p90": 3.5,
+     "n": 6
+    }
+   },
+   "intro": {
+    "words": {
+     "p10": 540.0,
+     "p25": 614.75,
+     "p50": 665.0,
+     "p75": 784.25,
+     "p90": 1024.0,
+     "n": 6
+    },
+    "numbers": {
+     "p10": 1.0,
+     "p25": 2.25,
+     "p50": 3.0,
+     "p75": 3.75,
+     "p90": 5.5,
+     "n": 6
+    }
+   }
+  },
+  "L3": {
+   "abstract": {
+    "words": {
+     "p10": 166.0,
+     "p25": 175.0,
+     "p50": 187.0,
+     "p75": 203.5,
+     "p90": 220.6,
+     "n": 4
+    },
+    "numbers": {
+     "p10": 1.2,
+     "p25": 3.0,
+     "p50": 4.5,
+     "p75": 7.0,
+     "p90": 10.6,
+     "n": 4
+    }
+   },
+   "intro": {
+    "words": {
+     "p10": 571.4,
+     "p25": 575.0,
+     "p50": 613.0,
+     "p75": 667.0,
+     "p90": 699.4,
+     "n": 4
+    },
+    "numbers": {
+     "p10": 7.5,
+     "p25": 9.75,
+     "p50": 12.0,
+     "p75": 13.25,
+     "p90": 13.7,
+     "n": 4
+    }
+   }
+  },
+  "L4": {
+   "abstract": {
+    "words": {
+     "p10": 199.0,
+     "p25": 209.5,
+     "p50": 227.0,
+     "p75": 275.5,
+     "p90": 304.6,
+     "n": 3
+    },
+    "numbers": {
+     "p10": 1.2,
+     "p25": 1.5,
+     "p50": 2.0,
+     "p75": 2.5,
+     "p90": 2.8,
+     "n": 3
+    }
+   },
+   "intro": {
+    "words": {
+     "p10": 649.8,
+     "p25": 748.5,
+     "p50": 913.0,
+     "p75": 916.0,
+     "p90": 917.8,
+     "n": 3
+    },
+    "numbers": {
+     "p10": 4.2,
+     "p25": 4.5,
+     "p50": 5.0,
+     "p75": 23.0,
+     "p90": 33.8,
+     "n": 3
+    }
+   }
+  },
+  "L5": {
+   "abstract": {
+    "words": {
+     "p10": 144.0,
+     "p25": 171.0,
+     "p50": 176.0,
+     "p75": 196.0,
+     "p90": 196.6,
+     "n": 5
+    },
+    "numbers": {
+     "p10": 0.0,
+     "p25": 0.0,
+     "p50": 0.0,
+     "p75": 0.0,
+     "p90": 3.6,
+     "n": 5
+    }
+   },
+   "intro": {
+    "words": {
+     "p10": 589.6,
+     "p25": 637.0,
+     "p50": 766.0,
+     "p75": 875.0,
+     "p90": 1205.6,
+     "n": 5
+    },
+    "numbers": {
+     "p10": 0.0,
+     "p25": 0.0,
+     "p50": 2.0,
+     "p75": 13.0,
+     "p90": 24.4,
+     "n": 5
+    }
+   }
+  },
+  "L6": {
+   "abstract": {
+    "words": {
+     "p10": 145.4,
+     "p25": 162.5,
+     "p50": 174.0,
+     "p75": 177.25,
+     "p90": 179.5,
+     "n": 4
+    },
+    "numbers": {
+     "p10": 0.0,
+     "p25": 0.0,
+     "p50": 1.0,
+     "p75": 2.0,
+     "p90": 2.0,
+     "n": 4
+    }
+   },
+   "intro": {
+    "words": {
+     "p10": 601.9,
+     "p25": 625.75,
+     "p50": 898.0,
+     "p75": 1159.0,
+     "p90": 1162.6,
+     "n": 4
+    },
+    "numbers": {
+     "p10": 0.6,
+     "p25": 1.5,
+     "p50": 3.5,
+     "p75": 11.75,
+     "p90": 23.9,
+     "n": 4
+    }
+   }
+  },
+  "L7": {
+   "abstract": {
+    "words": {
+     "p10": 175.6,
+     "p25": 190.0,
+     "p50": 194.0,
+     "p75": 195.0,
+     "p90": 208.2,
+     "n": 5
+    },
+    "numbers": {
+     "p10": 1.4,
+     "p25": 2.0,
+     "p50": 3.0,
+     "p75": 3.0,
+     "p90": 3.0,
+     "n": 5
+    }
+   },
+   "intro": {
+    "words": {
+     "p10": 521.4,
+     "p25": 660.0,
+     "p50": 831.0,
+     "p75": 852.0,
+     "p90": 862.8,
+     "n": 5
+    },
+    "numbers": {
+     "p10": 3.0,
+     "p25": 3.0,
+     "p50": 7.0,
+     "p75": 10.0,
+     "p90": 13.0,
+     "n": 5
+    }
+   }
+  },
+  "L8": {
+   "abstract": {
+    "words": {
+     "p10": 118.0,
+     "p25": 130.0,
+     "p50": 155.0,
+     "p75": 170.0,
+     "p90": 200.0,
+     "n": 5
+    },
+    "numbers": {
+     "p10": 0.0,
+     "p25": 0.0,
+     "p50": 1.0,
+     "p75": 2.0,
+     "p90": 5.0,
+     "n": 5
+    }
+   },
+   "intro": {
+    "words": {
+     "p10": 589.4,
+     "p25": 659.0,
+     "p50": 700.0,
+     "p75": 717.0,
+     "p90": 718.8,
+     "n": 5
+    },
+    "numbers": {
+     "p10": 0.4,
+     "p25": 1.0,
+     "p50": 3.0,
+     "p75": 5.0,
+     "p90": 5.6,
+     "n": 5
+    }
+   }
+  }
+ },
+ "structure": {
+  "n_papers": 55,
+  "intro_function_presence": {
+   "S": 47,
+   "C": 55,
+   "G": 54,
+   "I": 43,
+   "M": 54,
+   "P": 32,
+   "R": 51,
+   "X": 28,
+   "K": 33
+  },
+  "intro_function_first_position_median": {
+   "S": 0.0,
+   "C": 0.03,
+   "G": 0.1,
+   "I": 0.38,
+   "M": 0.41,
+   "P": 0.58,
+   "R": 0.67,
+   "X": 0.88,
+   "K": 0.83
+  },
+  "abstract_coarse_sequences_top": [
+   [
+    "SGMR",
+    8
+   ],
+   [
+    "SMR",
+    3
+   ],
+   [
+    "SGMRD",
+    3
+   ],
+   [
+    "MRD",
+    3
+   ],
+   [
+    "GMR",
+    2
+   ],
+   [
+    "GSGMRD",
+    2
+   ],
+   [
+    "MGMRD",
+    2
+   ],
+   [
+    "MR",
+    2
+   ]
+  ],
+  "abstract_first_sentence": [
+   [
+    "context",
+    32
+   ],
+   [
+    "method",
+    13
+   ],
+   [
+    "gap",
+    7
+   ],
+   [
+    "goal",
+    2
+   ],
+   [
+    "theory-result",
+    1
+   ]
+  ],
+  "abstract_last_sentence": [
+   [
+    "result",
+    21
+   ],
+   [
+    "release",
+    18
+   ],
+   [
+    "secondary",
+    8
+   ],
+   [
+    "stance",
+    5
+   ],
+   [
+    "method",
+    1
+   ],
+   [
+    "theory-result",
+    1
+   ],
+   [
+    "benefit",
+    1
+   ]
+  ],
+  "abstract_has_stance": 10,
+  "abstract_has_insight": 14,
+  "intro_last_paragraph": [
+   [
+    "contribution",
+    18
+   ],
+   [
+    "result",
+    15
+   ],
+   [
+    "stance",
+    7
+   ],
+   [
+    "outline",
+    4
+   ],
+   [
+    "contrast",
+    3
+   ],
+   [
+    "method",
+    2
+   ],
+   [
+    "tension",
+    1
+   ],
+   [
+    "other",
+    1
+   ],
+   [
+    "task",
+    1
+   ],
+   [
+    "insight",
+    1
+   ],
+   [
+    "theory-result",
+    1
+   ],
+   [
+    "scope",
+    1
+   ]
+  ],
+  "tension_type": [
+   [
+    "tradeoff",
+    21
+   ],
+   [
+    "capability-missing",
+    13
+   ],
+   [
+    "obvious-fix-too-costly",
+    8
+   ],
+   [
+    "unexplained-phenomenon",
+    6
+   ],
+   [
+    "open-question",
+    4
+   ],
+   [
+    "belief-overturned",
+    2
+   ],
+   [
+    "none",
+    1
+   ]
+  ],
+  "title_pattern": [
+   [
+    "descriptive",
+    25
+   ],
+   [
+    "name-colon-desc",
+    23
+   ],
+   [
+    "claim",
+    4
+   ],
+   [
+    "question",
+    2
+   ],
+   [
+    "metaphor",
+    1
+   ]
+  ],
+  "contributions_form": [
+   [
+    "none",
+    22
+   ],
+   [
+    "prose",
+    17
+   ],
+   [
+    "bullets",
+    16
+   ]
+  ],
+  "idea_handle_present": 27,
+  "positioning_any_item": 53,
+  "closest_work_named_explicitly": 24,
+  "coarse_legend": "S setting/task/scene, C credit/history, G gap/reason/tension/question, I insight/goal/handle, M method/mechanism/benefit, P contrast with prior work, R result, X stance, K contributions, D release",
+  "sequences_by_type": {
+   "L1": [
+    {
+     "paper": "EPro-PnP",
+     "motivation": "failure",
+     "intro": "GCGMXK",
+     "abstract": "SGMXR"
+    },
+    {
+     "paper": "Hard Minimal Problems",
+     "motivation": "cost",
+     "intro": "SGMRMP",
+     "abstract": "MGMR"
+    },
+    {
+     "paper": "DynIBaR",
+     "motivation": "failure",
+     "intro": "SGMR",
+     "abstract": "SGMR"
+    },
+    {
+     "paper": "3D Registration with Maximal Cliques",
+     "motivation": "failure",
+     "intro": "GMK",
+     "abstract": "SMIMR"
+    },
+    {
+     "paper": "pixelSplat",
+     "motivation": "cost",
+     "intro": "GCMR",
+     "abstract": "MRD"
+    },
+    {
+     "paper": "SpiderMatch",
+     "motivation": "capability-gap",
+     "intro": "GMK",
+     "abstract": "SGMR"
+    },
+    {
+     "paper": "IPG",
+     "motivation": "insight",
+     "intro": "SGCIM",
+     "abstract": "SGMIMIMRD"
+    },
+    {
+     "paper": "Mip-Splatting",
+     "motivation": "failure",
+     "intro": "CGMPK",
+     "abstract": "SGMR"
+    },
+    {
+     "paper": "MegaSaM",
+     "motivation": "failure",
+     "intro": "GMR",
+     "abstract": "MSGIRD"
+    },
+    {
+     "paper": "DDT-LLaMA",
+     "motivation": "insight",
+     "intro": "SGIMK",
+     "abstract": "SGMRD"
+    },
+    {
+     "paper": "Student Splatting and Scooping",
+     "motivation": "insight",
+     "intro": "CIMRK",
+     "abstract": "SIMGMR"
+    },
+    {
+     "paper": "Mip-NeRF",
+     "motivation": "failure",
+     "intro": "GMR",
+     "abstract": "GMR"
+    },
+    {
+     "paper": "OpenGAN",
+     "motivation": "failure",
+     "intro": "SMP",
+     "abstract": "SGMRMR"
+    },
+    {
+     "paper": "Pixel-Perfect SfM",
+     "motivation": "failure",
+     "intro": "SGMRX",
+     "abstract": "SGMRMD"
+    },
+    {
+     "paper": "Swin Transformer",
+     "motivation": "capability-gap",
+     "intro": "CMRX",
+     "abstract": "MGMRD"
+    },
+    {
+     "paper": "OmniMotion",
+     "motivation": "capability-gap",
+     "intro": "GMK",
+     "abstract": "MGMRD"
+    },
+    {
+     "paper": "FlowEdit",
+     "motivation": "failure",
+     "intro": "CGMI",
+     "abstract": "SGMRD"
+    },
+    {
+     "paper": "EDM",
+     "motivation": "mechanism",
+     "intro": "CGKR",
+     "abstract": "GMR"
+    },
+    {
+     "paper": "RODEO",
+     "motivation": "cost",
+     "intro": "SGMR",
+     "abstract": "SGMR"
+    },
+    {
+     "paper": "Imagen",
+     "motivation": "insight",
+     "intro": "IMRK",
+     "abstract": "MIR"
+    },
+    {
+     "paper": "Riemannian SGM",
+     "motivation": "theory",
+     "intro": "CGM",
+     "abstract": "SGMR"
+    },
+    {
+     "paper": "DPO",
+     "motivation": "cost",
+     "intro": "GMK",
+     "abstract": "GSGMR"
+    },
+    {
+     "paper": "RHO-1",
+     "motivation": "insight",
+     "intro": "CGIMR",
+     "abstract": "SIMR"
+    }
+   ],
+   "L8": [
+    {
+     "paper": "Dual-Shutter Vibration Sensing",
+     "motivation": "measurement",
+     "intro": "SGMR",
+     "abstract": "SMR"
+    },
+    {
+     "paper": "EventPS",
+     "motivation": "measurement",
+     "intro": "SGMRK",
+     "abstract": "SGMR"
+    },
+    {
+     "paper": "Propagating Light Inverse Rendering",
+     "motivation": "measurement",
+     "intro": "SIPGMK",
+     "abstract": "MR"
+    },
+    {
+     "paper": "Passive Single-Photon Imaging",
+     "motivation": "measurement",
+     "intro": "SGMIMP",
+     "abstract": "IGR"
+    },
+    {
+     "paper": "Spatially-Varying Autofocus",
+     "motivation": "measurement",
+     "intro": "SGMK",
+     "abstract": "SGM"
+    }
+   ],
+   "L2": [
+    {
+     "paper": "VISPROG",
+     "motivation": "capability-gap",
+     "intro": "GSMPMRK",
+     "abstract": "MRX"
+    },
+    {
+     "paper": "DreamBooth",
+     "motivation": "capability-gap",
+     "intro": "SGMIMRXK",
+     "abstract": "SGMRD"
+    },
+    {
+     "paper": "Navigation World Models",
+     "motivation": "capability-gap",
+     "intro": "SGMPMRK",
+     "abstract": "SMR"
+    },
+    {
+     "paper": "VGGT",
+     "motivation": "cost",
+     "intro": "GMXPK",
+     "abstract": "MXMRD"
+    },
+    {
+     "paper": "Segment Anything",
+     "motivation": "resource",
+     "intro": "CGIGMRK",
+     "abstract": "MRD"
+    },
+    {
+     "paper": "BrickGPT",
+     "motivation": "capability-gap",
+     "intro": "CGIMR",
+     "abstract": "MRD"
+    }
+   ],
+   "L5": [
+    {
+     "paper": "Transformers vs. CNNs Explanations",
+     "motivation": "mechanism",
+     "intro": "GCGMRMK",
+     "abstract": "MR"
+    },
+    {
+     "paper": "Human Inductive Biases",
+     "motivation": "mechanism",
+     "intro": "SGR",
+     "abstract": "SGMR"
+    },
+    {
+     "paper": "Gated Attention",
+     "motivation": "mechanism",
+     "intro": "CIMX",
+     "abstract": "SGMIMR"
+    },
+    {
+     "paper": "Superposition Scaling",
+     "motivation": "mechanism",
+     "intro": "CGIGMK",
+     "abstract": "SGIMRX"
+    },
+    {
+     "paper": "Why Diffusion Models Don't Memorize",
+     "motivation": "mechanism",
+     "intro": "CIMSG",
+     "abstract": "SGMRIMRXM"
+    }
+   ],
+   "L6": [
+    {
+     "paper": "Objects as Volumes",
+     "motivation": "theory",
+     "intro": "GICRPR",
+     "abstract": "MRMR"
+    },
+    {
+     "paper": "Viewing Graph Solvability",
+     "motivation": "theory",
+     "intro": "SGMRK",
+     "abstract": "SMGMR"
+    },
+    {
+     "paper": "SGD Limit Theorems",
+     "motivation": "theory",
+     "intro": "SCGCKIR",
+     "abstract": "SMR"
+    },
+    {
+     "paper": "Transductive Online Learning",
+     "motivation": "theory",
+     "intro": "SGSGSGRSGCGR",
+     "abstract": "RSRX"
+    }
+   ],
+   "L7": [
+    {
+     "paper": "Molmo and PixMo",
+     "motivation": "resource",
+     "intro": "GMGMR",
+     "abstract": "GSGMRD"
+    },
+    {
+     "paper": "CO3D",
+     "motivation": "resource",
+     "intro": "GMKPMR",
+     "abstract": "GIMR"
+    },
+    {
+     "paper": "LAION-5B",
+     "motivation": "resource",
+     "intro": "CGMR",
+     "abstract": "SGMR"
+    },
+    {
+     "paper": "MineDojo",
+     "motivation": "resource",
+     "intro": "GIMK",
+     "abstract": "SGIMRD"
+    },
+    {
+     "paper": "ClimSim",
+     "motivation": "resource",
+     "intro": "GMSCS",
+     "abstract": "GSGMRD"
+    }
+   ],
+   "L3": [
+    {
+     "paper": "Chinchilla",
+     "motivation": "cost",
+     "intro": "GIMR",
+     "abstract": "IMRMR"
+    },
+    {
+     "paper": "Data Pruning",
+     "motivation": "cost",
+     "intro": "GIKX",
+     "abstract": "SGRGMX"
+    },
+    {
+     "paper": "Data-Constrained Scaling",
+     "motivation": "scaling",
+     "intro": "GR",
+     "abstract": "SGMRMRD"
+    },
+    {
+     "paper": "1000-Layer RL",
+     "motivation": "scaling",
+     "intro": "GMKX",
+     "abstract": "GMRMRD"
+    }
+   ],
+   "L4": [
+    {
+     "paper": "DecodingTrust",
+     "motivation": "measurement",
+     "intro": "CMGRX",
+     "abstract": "SGMRXD"
+    },
+    {
+     "paper": "Emergent Abilities Mirage",
+     "motivation": "mechanism",
+     "intro": "CSGIMK",
+     "abstract": "SIGMR"
+    },
+    {
+     "paper": "RLVR Reasoning Boundary",
+     "motivation": "re-examination",
+     "intro": "CGMKRPX",
+     "abstract": "SMRX"
+    }
+   ]
+  }
+ }
+}
