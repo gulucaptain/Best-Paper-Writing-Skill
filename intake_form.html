@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>论文信息表 · bestpaper-writing</title>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--ink:#1d1d1f;--muted:#6b6b70;--line:#e2e2e0;--accent:#2f5bd3;--req:#c4352b;--ok:#2e7d4f;--soft:#eef2fc}
+@media (prefers-color-scheme:dark){:root{--bg:#141416;--card:#1d1d20;--ink:#ececee;--muted:#9a9aa2;--line:#33333a;--accent:#7a9cff;--req:#ff7b6e;--ok:#6fcf97;--soft:#22283a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px}
+header .wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:0}
+h1{font-size:18px;margin:0}
+.bars{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.bar{display:flex;align-items:center;gap:6px}
+.bar i{display:block;width:70px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i b{display:block;height:100%;background:var(--accent);width:0}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+button,.btn{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button:hover{border-color:var(--accent)}
+.intro{margin:20px 0 8px;color:var(--muted)}
+section.tier{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0}
+section.tier>h2{font-size:17px;margin:0 0 4px}
+section.tier>p{margin:0 0 12px;color:var(--muted);font-size:14px}
+.field{margin:14px 0}
+.field label{display:block;font-weight:600}
+.field .hint{color:var(--muted);font-size:13px;margin:2px 0 6px}
+.field .eg{color:var(--muted);font-size:13px;background:var(--soft);border-radius:6px;padding:4px 8px;margin:4px 0 6px}
+.req::after{content:" 必填";color:var(--req);font-size:12px;font-weight:500}
+input[type=text],textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
+textarea{min-height:64px;resize:vertical}
+.missing input,.missing textarea,.missing select{border-color:var(--req)}
+.group{border:1px dashed var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;position:relative}
+.group .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.group .row>div{min-width:0}
+.group small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.group .del{position:absolute;top:6px;right:8px;font-size:12px;padding:2px 8px}
+.add{font-size:13px}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:14px;display:none}
+#report{white-space:pre-wrap;font-size:14px}
+footer{color:var(--muted);font-size:13px;margin:24px 0 40px}
+@media (max-width:640px){.group .row{grid-template-columns:1fr}.bar i{width:44px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>论文信息表</h1>
+  <div class="bars" id="bars"></div>
+  <div class="actions">
+    <button id="btnImport">导入 JSON</button>
+    <button id="btnCheck">检查缺项</button>
+    <button class="primary" id="btnExport">导出 JSON</button>
+  </div>
+  <input type="file" id="file" accept=".json,application/json" hidden>
+</div></header>
+
+<div class="wrap">
+<p class="intro">填写你的工作信息，导出 JSON 后交给 <b>bestpaper-writing</b> skill 生成标题、摘要和引言。可以用中文写，也可以直接粘贴幻灯片文字、实验表格和组会笔记。<b>第一档</b>缺项时 skill 会先追问；<b>第二档</b>决定写出来有没有 best paper 的“韵味”；<b>第三档</b>是辅助信息。内容会自动保存在本浏览器中。</p>
+<div id="form"></div>
+<section class="tier" id="reportBox" hidden><h2>缺项检查</h2><div id="report"></div></section>
+<footer>导出的文件可用 <code>python3 scripts/intake_to_brief.py 文件.json</code> 转成写作简报，或直接把 JSON 交给 agent：“用 bestpaper-writing 根据这个 JSON 写摘要和引言”。</footer>
+</div>
+<div id="toast"></div>
+
+<script>
+const SCHEMA = "bestpaper-intake/v1";
+const DIFF_TYPES = ["机制 mechanism","适用范围 scope","代价 cost","假设 assumption","输入 input","输出 output","评测 evaluation","理论 theory"];
+const TYPES = ["不确定","L1 方法改进","L2 新能力/新任务","L3 规模规律/配方","L4 重新审视已有结论","L5 机理分析","L6 理论","L7 数据集/基准/平台","L8 测量/传感/物理系统"];
+const TENSIONS = ["不确定","两头取舍 tradeoff","能力缺失 capability-missing","显而易见的做法代价太高 obvious-fix-too-costly","现象无法解释 unexplained-phenomenon","开放问题 open-question","推翻常见看法 belief-overturned"];
+
+const TIERS = [
+ {id:"meta", title:"基本信息", desc:"用于选模板和论证路线。", fields:[
+  {k:"working_name", label:"方法/工作名称", type:"text", eg:"Mip-NeRF；DreamBooth"},
+  {k:"venue", label:"目标会议与页数", type:"text", eg:"CVPR 2027，8 页"},
+  {k:"paper_type", label:"论文类型", type:"select", options:TYPES},
+  {k:"one_line", label:"一句话说清这篇工作", type:"textarea", req:true, hint:"我们做了什么，达到了什么，为什么能做到。", eg:"用锥台上的积分位置编码代替点采样的位置编码，使 NeRF 在不同分辨率和远近距离下渲染都不出现锯齿。"}
+ ]},
+ {id:"required", title:"第一档 · 必需信息", desc:"缺了它们，只能写出合格但平淡的稿子。skill 遇到缺项会先追问。", fields:[
+  {k:"task", label:"任务与应用", type:"textarea", req:true, hint:"输入是什么，输出是什么，用在哪 1–2 个场景。", eg:"输入多视角图像和相机位姿，输出新视角图像；用于 VR 漫游和三维内容制作。"},
+  {k:"prior_best", label:"现有最强方法是怎么做的", type:"textarea", req:true, hint:"写机制，不只写名字。它们的核心假设是什么。", eg:"NeRF 沿每条光线采样若干点，对点坐标做位置编码，再由 MLP 预测颜色和密度。"},
+  {k:"failure", label:"它们在什么条件下失败（看得到的现象）", type:"textarea", req:true, eg:"训练图像分辨率不同，或相机拉远渲染时，画面出现锯齿，拉近时则过度模糊。"},
+  {k:"failure_reason", label:"失败的技术原因", type:"textarea", req:true, hint:"它们计算或假设了什么，导致这个现象。这一句通常会成为引言的支点：“The main reason is that …”", eg:"光线被当作一条线，点的位置编码看不到像素覆盖的范围，MLP 无法区分近处的小像素和远处的大像素。"},
+  {k:"insight", label:"核心观察：关于问题本身的判断", type:"textarea", req:true, hint:"不是复述架构，而是“问题的什么性质让我们的设计能成立”。", eg:"一个像素对应的是一个锥体而不是一条线，位置编码应该描述这个区域。"},
+  {k:"method", label:"方法的关键组成（2–3 个）", type:"group", req:true, item:"组成", sub:[
+    {k:"name", label:"名称", type:"text", eg:"积分位置编码"},
+    {k:"mechanism", label:"一句话原理", type:"text", eg:"对锥台内的高斯近似求位置编码的期望"}]},
+  {k:"results", label:"头条结果（最能撑起主张的 1–3 个）", type:"group", req:true, item:"结果", hint:"没有数字也请写出对比设置，数字可以先空着。", sub:[
+    {k:"benchmark", label:"数据集/场景", type:"text", eg:"多尺度 Blender 数据集"},
+    {k:"metric", label:"指标（越高/越低越好）", type:"text", eg:"PSNR，越高越好"},
+    {k:"baseline", label:"对比方法与其数值", type:"text", eg:"NeRF：[数值]"},
+    {k:"ours", label:"我们的数值", type:"text", eg:"[数值]"},
+    {k:"where", label:"表/图编号", type:"text", eg:"Tab. 1"}]},
+  {k:"closest", label:"最相近的工作（1–3 个）与可核对的差异", type:"group", req:true, item:"相近工作", hint:"审稿人一定会问“这和 X 有什么不同”。", sub:[
+    {k:"name", label:"工作名称", type:"text", eg:"NeRF"},
+    {k:"bibkey", label:"bib key（如有）", type:"text", eg:"mildenhall2020nerf"},
+    {k:"diff_type", label:"差异类型", type:"select", options:DIFF_TYPES},
+    {k:"difference", label:"具体差异", type:"text", eg:"它对光线上的点编码，我们对锥台区域编码"}]}
+ ]},
+ {id:"enhancers", title:"第二档 · 决定“韵味”的信息", desc:"best paper 与普通论文的差距主要在这里。能写多少写多少。", fields:[
+  {k:"benefits_efficiency", label:"效率优势", type:"textarea", hint:"内存、速度、参数量、数据量，最好有数字。", eg:"比超采样基线快 [X] 倍。"},
+  {k:"benefits_integration", label:"能接入哪些现有管线/系统", type:"textarea", eg:"可直接替换现有 NeRF 实现中的位置编码。"},
+  {k:"benefits_inputs", label:"支持哪些输入或使用方式", type:"textarea", eg:"一个模型同时处理多个分辨率的训练图像。"},
+  {k:"applications", label:"新能力与应用", type:"textarea", eg:"零样本 inpainting / outpainting；交互式拖拽场景。"},
+  {k:"example", label:"一个具体画面", type:"textarea", hint:"失败案例、场景，或一个惊人的数字（应用领域列表不算）。", eg:"同一场景拉近和拉远渲染：远处出现锯齿，近处过度模糊。"},
+  {k:"surprising", label:"意外或反直觉之处", type:"textarea", eg:"模型参数减半，渲染误差反而更低。"},
+  {k:"trend", label:"受哪项热门工作启发 / 属于哪条发展线", type:"textarea", hint:"有的话，开头可以顺势写。", eg:"受图形学中 mip-mapping 的启发。"},
+  {k:"tension", label:"矛盾类型", type:"select", options:TENSIONS},
+  {k:"stance", label:"立场：读者读完应改变什么看法", type:"textarea", eg:"神经场也需要像传统渲染一样处理抗锯齿。"},
+  {k:"handle", label:"团队内部对核心想法的叫法", type:"text", hint:"区别于方法名；可能会进标题。", eg:"像素是锥体而不是光线 / pick & solve"}
+ ]},
+ {id:"support", title:"第三档 · 辅助信息", desc:"让措辞更准确、引用更完整。", fields:[
+  {k:"figure1", label:"Figure 1 画什么", type:"textarea", eg:"左：NeRF 的锯齿；右：我们的结果。"},
+  {k:"data_scale", label:"数据/模型规模", type:"text", eg:"[N] 个场景，每个场景 [M] 张图像"},
+  {k:"secondary", label:"次要结果与消融发现", type:"textarea"},
+  {k:"release", label:"是否开源（代码/数据/项目页）", type:"text"},
+  {k:"limitations", label:"局限与失败案例", type:"textarea", hint:"不会写进摘要和引言，只用于把握措辞，并整理进 Limitations 一节。"},
+  {k:"materials", label:"其他材料路径或粘贴内容", type:"textarea", hint:"幻灯片、实验表格、组会笔记的路径，或直接粘贴文字。"},
+  {k:"bib", label:"refs.bib 内容", type:"textarea", hint:"粘贴 BibTeX；没有的话引用会以 [TODO: cite …] 标出。"},
+  {k:"notes", label:"其他要求", type:"textarea", eg:"不用破折号；突出效率优势。"}
+ ]},
+ {id:"methodexp", title:"第四档 · 方法与实验", desc:"只在需要写 Method 和 Experiments 时填写。机制、公式和数字没有给出时，skill 会标 TODO，不会自行编造。", fields:[
+  {k:"setting", label:"问题设定与符号", type:"textarea", hint:"输入、输出、关键变量的符号定义。", eg:"输入 N 张 RGB 图像 I_i，输出相机参数 g_i、深度图 D_i …"},
+  {k:"base_model", label:"基于或修改的已有模型，以及保持不变的部分", type:"textarea", eg:"基于 3DGS 代码；损失函数、密度控制策略保持不变，只改滤波。"},
+  {k:"overview", label:"整体流程与 Figure 2", type:"textarea", hint:"输入 → 各组件 → 输出；方法总览图画什么。"},
+  {k:"components", label:"方法组件（每个组件一条）", type:"group", item:"组件", hint:"需要什么 → 怎么做 → 为什么有效。可以直接粘贴公式或伪代码。", sub:[
+    {k:"name", label:"名称", type:"text", eg:"3D smoothing filter"},
+    {k:"need", label:"它解决什么问题", type:"text", eg:"放大时出现高频伪影"},
+    {k:"mechanism", label:"怎么做（公式、伪代码）", type:"text", eg:"按训练视角的最大采样率限制每个高斯的频率"},
+    {k:"property", label:"为什么有效 / 保证什么性质", type:"text", eg:"训练后成为表示的一部分，与视角无关"}]},
+  {k:"objective", label:"训练目标、优化与推理流程", type:"textarea", eg:"损失 = 光度损失 + λ·正则；推理时 …"},
+  {k:"implementation", label:"实现细节", type:"textarea", hint:"代码基础、迭代次数、超参、硬件、耗时。会放进实验设置或附录。"},
+  {k:"datasets", label:"数据集", type:"group", item:"数据集", sub:[
+    {k:"name", label:"名称", type:"text"}, {k:"size", label:"规模与划分", type:"text"}, {k:"why", label:"为什么选它", type:"text"}]},
+  {k:"metrics", label:"评价指标及方向", type:"textarea", eg:"PSNR ↑，SSIM ↑，LPIPS ↓"},
+  {k:"baselines", label:"对比方法", type:"group", item:"对比方法", sub:[
+    {k:"name", label:"名称", type:"text"}, {k:"bibkey", label:"bib key", type:"text"}, {k:"how", label:"如何运行", type:"text", eg:"官方代码、同样的训练数据"}]},
+  {k:"main_tables", label:"主结果表", type:"textarea", hint:"直接粘贴表格（CSV、Markdown 或 LaTeX 都可以），并注明表号。"},
+  {k:"ablations", label:"消融实验", type:"group", item:"消融", sub:[
+    {k:"variant", label:"变体（去掉或替换了什么）", type:"text", eg:"w/o 3D filter"},
+    {k:"claim", label:"验证哪个设计主张", type:"text"},
+    {k:"result", label:"结果", type:"text"}]},
+  {k:"analysis", label:"其他分析", type:"textarea", hint:"泛化、效率、规模、用户研究、应用。"},
+  {k:"qualitative", label:"定性结果与图", type:"textarea", hint:"每张图想说明什么。"},
+  {k:"failure_cases", label:"失败案例", type:"textarea", hint:"写进 Limitations，并配图说明。"}
+ ]}
+];
+
+const STORE="bestpaper-intake-draft";
+const $=s=>document.querySelector(s);
+const formEl=$("#form");
+let data={};
+function initData(){for(const t of TIERS)if(!data[t.id]||typeof data[t.id]!=="object")data[t.id]={};}
+
+function el(tag,attrs={},html=""){const e=document.createElement(tag);for(const[k,v] of Object.entries(attrs))e.setAttribute(k,v);if(html)e.innerHTML=html;return e;}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+
+function input(f,val,on){
+  let e;
+  if(f.type==="textarea"){e=el("textarea");e.value=val||"";}
+  else if(f.type==="select"){e=el("select");for(const o of f.options){const op=el("option",{value:o},esc(o));e.appendChild(op);}e.value=val||f.options[0];}
+  else{e=el("input",{type:"text"});e.value=val||"";}
+  if(f.eg&&f.type==="text")e.placeholder="例："+f.eg;
+  e.addEventListener("input",()=>on(e.value));
+  if(f.type==="select")on(e.value);
+  return e;
+}
+
+function render(){
+  initData();
+  formEl.innerHTML="";
+  for(const t of TIERS){
+    data[t.id]=data[t.id]||{};
+    const s=el("section",{class:"tier",id:"tier-"+t.id});
+    s.appendChild(el("h2",{},esc(t.title)));s.appendChild(el("p",{},esc(t.desc)));
+    for(const f of t.fields){
+      const box=el("div",{class:"field",id:"f-"+t.id+"-"+f.k});
+      box.appendChild(el("label",{class:f.req?"req":""},esc(f.label)));
+      if(f.hint)box.appendChild(el("div",{class:"hint"},esc(f.hint)));
+      if(f.type==="group"){
+        if(f.eg)box.appendChild(el("div",{class:"eg"},"例："+esc(f.eg)));
+        const list=el("div");box.appendChild(list);
+        let arr=Array.isArray(data[t.id][f.k])?data[t.id][f.k]:[];
+        if(!arr.length)arr=[{}];data[t.id][f.k]=arr;
+        const draw=()=>{list.innerHTML="";arr.forEach((it,i)=>{
+          const g=el("div",{class:"group"});
+          const del=el("button",{class:"del",type:"button"},"删除");del.onclick=()=>{arr.splice(i,1);if(!arr.length)arr.push({});draw();save();};
+          g.appendChild(del);g.appendChild(el("b",{},esc(f.item)+" "+(i+1)));
+          const row=el("div",{class:"row"});
+          for(const sf of f.sub){const c=el("div");c.appendChild(el("small",{},esc(sf.label)));c.appendChild(input(sf,it[sf.k],v=>{it[sf.k]=v;save();}));row.appendChild(c);}
+          g.appendChild(row);list.appendChild(g);});};
+        draw();
+        const add=el("button",{class:"add",type:"button"},"+ 添加"+esc(f.item));add.onclick=()=>{arr.push({});draw();save();};
+        box.appendChild(add);
+      }else{
+        if(f.eg&&f.type==="textarea")box.appendChild(el("div",{class:"eg"},"例："+esc(f.eg)));
+        box.appendChild(input(f,data[t.id][f.k],v=>{data[t.id][f.k]=v;save();}));
+      }
+      s.appendChild(box);
+    }
+    formEl.appendChild(s);
+  }
+  progress();
+}
+
+function filled(f,v){
+  if(f.type==="group")return Array.isArray(v)&&v.some(it=>Object.entries(it).some(([k,x])=>x&&String(x).trim()&&!(f.sub.find(s=>s.k===k)||{}).options));
+  if(f.type==="select")return !!v&&v!=="不确定";
+  return v&&String(v).trim().length>0;
+}
+function progress(){
+  const bars=$("#bars");bars.innerHTML="";
+  for(const t of TIERS.slice(1)){
+    const n=t.fields.length,k=t.fields.filter(f=>filled(f,data[t.id][f.k])).length;
+    const b=el("span",{class:"bar"},esc(t.title.split(" · ")[0])+" <i><b style='width:"+(100*k/n)+"%'></b></i> "+k+"/"+n);
+    bars.appendChild(b);
+  }
+}
+let timer;
+function save(){progress();clearTimeout(timer);timer=setTimeout(()=>{try{localStorage.setItem(STORE,JSON.stringify(data));}catch(e){}},300);}
+function toast(m){const t=$("#toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2200);}
+
+function missing(){
+  const out=[];document.querySelectorAll(".missing").forEach(e=>e.classList.remove("missing"));
+  for(const t of TIERS)for(const f of t.fields){
+    if(!filled(f,data[t.id][f.k])){out.push({tier:t.id,field:f.k,label:f.label,req:!!f.req});
+      if(f.req)$("#f-"+t.id+"-"+f.k).classList.add("missing");}
+  }
+  return out;
+}
+function exportObj(){
+  const clean=JSON.parse(JSON.stringify(data));
+  for(const t of TIERS)for(const f of t.fields)if(f.type==="group"){
+    clean[t.id][f.k]=(clean[t.id][f.k]||[]).filter(it=>f.sub.some(s=>s.type!=="select"&&it[s.k]&&String(it[s.k]).trim()));
+  }
+  const miss=missing();
+  return {schema:SCHEMA,exported_at:new Date().toISOString(),...clean,
+    _missing:{required:miss.filter(m=>m.req).map(m=>m.tier+"."+m.field),optional:miss.filter(m=>!m.req).map(m=>m.tier+"."+m.field)}};
+}
+$("#btnExport").onclick=()=>{
+  const obj=exportObj();
+  const name=((data.meta&&data.meta.working_name)||"paper").replace(/[^\w一-龥-]+/g,"_").slice(0,40);
+  const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"});
+  const a=el("a",{href:URL.createObjectURL(blob),download:name+"_intake.json"});document.body.appendChild(a);a.click();a.remove();
+  toast(obj._missing.required.length?"已导出；还有 "+obj._missing.required.length+" 个必填项未填":"已导出");
+};
+$("#btnCheck").onclick=()=>{
+  const m=missing(),r=m.filter(x=>x.req),o=m.filter(x=>!x.req&&x.tier==="enhancers");
+  $("#reportBox").hidden=false;
+  $("#report").textContent=(r.length?"必填未填（skill 会先追问这些）：\n· "+r.map(x=>x.label).join("\n· "):"必填项已全部填写。")+
+    (o.length?"\n\n第二档尚缺（填得越多，写出来越有亮点）：\n· "+o.map(x=>x.label).join("\n· "):"");
+  $("#reportBox").scrollIntoView({behavior:"smooth"});
+};
+$("#btnImport").onclick=()=>$("#file").click();
+$("#file").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{
+  try{const o=JSON.parse(r.result);if(o.schema&&!/^bestpaper-intake\/v1$/.test(o.schema))toast("版本不同，已尽量导入");
+    data={};for(const t of TIERS)data[t.id]=o[t.id]||{};render();save();toast("已导入");}
+  catch(err){toast("无法读取这个文件");}};r.readAsText(f);e.target.value="";};
+
+try{const s=localStorage.getItem(STORE);if(s)data=JSON.parse(s)||{};}catch(e){data={};}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Best-Paper-Writing-Skill · 最佳论文风格的论文底稿</title>
+<meta name="description" content="A Claude / Codex skill that generates high-quality paper drafts (abstract, introduction, method, experiments) in the style of CVPR/ICCV/NeurIPS best papers, distilled from 60 award-winning papers.">
+<meta property="og:title" content="Best-Paper-Writing-Skill">
+<meta property="og:description" content="生成最佳论文风格的高质量论文底稿：摘要、引言、方法、实验。同时支持 Claude 与 Codex。">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233b5bdb'/%3E%3Cpath d='M16 6l3 6.5 7 .8-5.2 4.8 1.5 7-6.3-3.6-6.3 3.6 1.5-7L6 13.3l7-.8z' fill='%23ffd166'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#fbfaf7; --bg2:#f3f1ea; --card:#ffffff; --ink:#1c1d22; --muted:#5d6068; --line:#e4e1d8;
+  --accent:#3b5bdb; --accent-ink:#ffffff; --accent-soft:#e8edff; --gold:#d98e04; --gold-soft:#fff2cf;
+  --good:#1f7a4d; --good-soft:#e2f4ea; --bad:#b4362b; --bad-soft:#fde8e4; --code:#16181d; --code-ink:#e8e9ee;
+  --shadow:0 1px 2px rgba(20,20,30,.05),0 8px 24px rgba(20,20,30,.06);
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC","Noto Serif CJK SC",SimSun,serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#101116; --bg2:#15171e; --card:#1a1c24; --ink:#ecedf1; --muted:#a2a6b2; --line:#2a2d38;
+    --accent:#7c93ff; --accent-ink:#0e1020; --accent-soft:#222a52; --gold:#ffc24a; --gold-soft:#3a2f10;
+    --good:#58d19a; --good-soft:#143324; --bad:#ff8c80; --bad-soft:#3b1a17; --code:#0b0c10; --code-ink:#e8e9ee;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+html[lang="zh"] .en{display:none!important}
+html[lang="en"] .zh{display:none!important}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:72px 0;scroll-margin-top:64px}
+section.alt{background:var(--bg2);border-block:1px solid var(--line)}
+h1,h2,h3{line-height:1.25;margin:0}
+h2{font-size:clamp(26px,3.4vw,34px);letter-spacing:-.01em;margin-bottom:10px}
+.eyebrow{font:600 13px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.lead{color:var(--muted);max-width:720px;margin:0 0 32px;font-size:17px}
+code,.mono{font-family:var(--mono)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:18px;height:56px}
+.brand{font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.brand svg{width:22px;height:22px}
+.links{display:flex;gap:16px;margin-left:auto;font-size:14px}
+.links a{color:var(--muted)}
+.links a:hover{color:var(--ink);text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 14px/1 var(--sans);cursor:pointer;transition:transform .08s,box-shadow .15s}
+.btn:hover{text-decoration:none;box-shadow:var(--shadow)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.sm{padding:6px 11px;font-size:13px;border-radius:8px}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.lang button{border:0;background:transparent;color:var(--muted);padding:6px 10px;font:600 13px var(--sans);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+@media(max-width:820px){.links{display:none}nav .wrap{justify-content:space-between}}
+
+/* hero */
+.hero{padding:72px 0 56px;background:
+  radial-gradient(900px 380px at 85% -10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%),
+  radial-gradient(700px 320px at 0% 0%,color-mix(in srgb,var(--gold) 14%,transparent),transparent 70%)}
+.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+@media(max-width:900px){.hero .grid{grid-template-columns:1fr}}
+.pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:5px 12px;font-size:13px;color:var(--muted)}
+.pill b{color:var(--gold)}
+.hero h1{font-family:var(--serif);font-size:clamp(34px,5.6vw,58px);letter-spacing:-.02em;margin:18px 0 14px}
+.hero h1 .gold{background:linear-gradient(90deg,var(--gold),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{font-size:clamp(18px,2.2vw,22px);margin:0 0 10px;font-weight:600}
+.sub{color:var(--muted);margin:0 0 26px;max-width:560px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.stats{display:flex;flex-wrap:wrap;gap:26px;margin-top:34px}
+.stat b{display:block;font:700 28px/1.1 var(--serif)}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* terminal */
+.term{background:var(--code);color:var(--code-ink);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;border:1px solid #2b2e39}
+.term .bar{display:flex;gap:7px;align-items:center;padding:11px 14px;border-bottom:1px solid #2b2e39}
+.term .bar i{width:11px;height:11px;border-radius:50%;background:#444857}
+.term .bar i:nth-child(1){background:#ff6058}.term .bar i:nth-child(2){background:#ffbd2e}.term .bar i:nth-child(3){background:#28c940}
+.term .tabs{display:flex;gap:4px;margin-left:auto}
+.tabs button{border:0;background:transparent;color:#9aa0b0;font:600 12px var(--sans);padding:5px 9px;border-radius:7px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:#2a2e3c;color:#fff}
+.term pre{margin:0;padding:16px 18px 18px;font:13.5px/1.75 var(--mono);white-space:pre-wrap;word-break:break-all}
+.term .c{color:#7e8597}
+.term .k{color:#8fd1ff}
+.copy{position:absolute;top:10px;right:10px;border:1px solid #3a3e4d;background:#232634;color:#cfd3de;border-radius:7px;font:600 12px var(--sans);padding:4px 9px;cursor:pointer}
+.copy:hover{background:#2d3142}
+.relpos{position:relative}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:860px){.cards{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+.card .ic{font-size:26px;margin-bottom:10px}
+.card h3{font-size:18px;margin-bottom:6px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+
+/* compare */
+.cmp{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.cmp th,.cmp td{padding:14px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:15px}
+.cmp tr:last-child td{border-bottom:0}
+.cmp th{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg2)}
+.cmp td:first-child{font-weight:600;width:24%}
+.cmp .bad{color:var(--bad)}.cmp .good{color:var(--good)}
+.barrow{display:flex;align-items:center;gap:10px;margin:2px 0}
+.bar2{height:10px;border-radius:99px;background:var(--bad);display:inline-block}
+.bar2.g{background:var(--good)}
+@media(max-width:700px){.cmp th:nth-child(1),.cmp td:nth-child(1){width:auto}.cmp th,.cmp td{padding:10px 12px;font-size:14px}}
+
+/* example */
+.ex-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:transparent;color:var(--muted);padding:8px 14px;font:600 14px var(--sans);cursor:pointer}
+.seg button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.switch{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);cursor:pointer;user-select:none}
+.switch input{accent-color:var(--accent);width:16px;height:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:860px){.two{grid-template-columns:1fr}}
+.col{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.col header{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.col header b{font-size:15px}
+.tag{font:600 12px var(--sans);padding:3px 9px;border-radius:99px}
+.tag.bad{background:var(--bad-soft);color:var(--bad)}
+.tag.good{background:var(--good-soft);color:var(--good)}
+.col .body{padding:18px 20px;font:16px/1.75 var(--serif);flex:1}
+.col .body p{margin:0 0 .9em}
+.col .body p:last-child{margin:0}
+.col footer{padding:12px 18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-block;padding:2px 9px;border-radius:99px;background:var(--bg2);border:1px solid var(--line);font:600 12px var(--mono);color:var(--muted)}
+.chip.ok{background:var(--good-soft);color:var(--good);border-color:transparent}
+.chip.warn{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.annot .m-bad{background:var(--bad-soft);box-shadow:inset 0 -2px 0 var(--bad);border-radius:3px;padding:0 1px}
+.annot .m-good{background:var(--good-soft);box-shadow:inset 0 -2px 0 var(--good);border-radius:3px;padding:0 1px}
+.legend{display:none;gap:16px;font-size:13px;color:var(--muted);margin:0 0 12px;flex-wrap:wrap}
+.annot-on .legend{display:flex}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 18px;margin-top:16px}
+summary{cursor:pointer;padding:12px 0;font-weight:600}
+details ul{margin:0 0 14px;padding-left:20px;color:var(--muted);font-size:15px}
+.fine{font-size:13px;color:var(--muted);margin-top:14px}
+
+/* usage */
+.tabbar{margin-bottom:18px}
+.panel[hidden]{display:none}
+.prompt{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:14px 18px;position:relative;font-size:15px;margin:12px 0}
+.prompt .copy{background:var(--bg2);border-color:var(--line);color:var(--muted)}
+.prompt p{margin:0;padding-right:70px}
+.list{margin:0;padding-left:20px;color:var(--muted)}
+.list li{margin:6px 0}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+@media(max-width:860px){.tiers{grid-template-columns:1fr 1fr}}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.tier b{display:block;margin-bottom:4px}
+.tier span{font-size:14px;color:var(--muted)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 20px 20px 64px;position:relative;box-shadow:var(--shadow)}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:18px;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font:700 15px/32px var(--sans);text-align:center}
+.step h3{font-size:17px;margin-bottom:4px}
+.step p{margin:0;color:var(--muted);font-size:14.5px}
+
+/* form */
+.frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.frame iframe{display:block;width:100%;height:760px;border:0}
+
+/* corpus */
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.filters input[type=search]{flex:1;min-width:200px;padding:9px 13px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:15px var(--sans)}
+.fchip{border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:99px;padding:6px 12px;font:600 13px var(--sans);cursor:pointer}
+.fchip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.fgroup{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.fgroup .lbl{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-right:2px}
+.tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.tblwrap{border-radius:14px;overflow:auto;max-height:560px;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--card)}
+.tbl th,.tbl td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+.tbl th{position:sticky;top:0;background:var(--bg2);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tbl td.id{font:13px var(--mono);color:var(--muted);white-space:nowrap}
+.tbl .venue{white-space:nowrap;font-weight:600}
+.tb{display:inline-block;font:600 12px var(--mono);padding:2px 8px;border-radius:6px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.hold{display:inline-block;font:600 11px var(--sans);padding:2px 7px;border-radius:99px;background:var(--gold-soft);color:var(--gold);margin-left:6px;white-space:nowrap}
+.count{font-size:13px;color:var(--muted);margin:10px 2px}
+
+/* install & cite */
+.cite{background:var(--code);color:var(--code-ink);border-radius:12px;padding:16px 18px;position:relative;font:13px/1.7 var(--mono);white-space:pre-wrap;overflow:auto}
+footer.site{padding:36px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer.site .row{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
+footer.site p{margin:4px 0}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:.2s}
+.toast.show{opacity:1;transform:translateX(-50%)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#3b5bdb"/><path d="M16 6l3 6.5 7 .8-5.2 4.8 1.5 7-6.3-3.6-6.3 3.6 1.5-7L6 13.3l7-.8z" fill="#ffd166"/></svg>Best-Paper-Writing</a>
+    <div class="links">
+      <a href="#example"><span class="zh">示例</span><span class="en">Example</span></a>
+      <a href="#usage"><span class="zh">用法</span><span class="en">Usage</span></a>
+      <a href="#form"><span class="zh">在线信息表</span><span class="en">Online form</span></a>
+      <a href="#corpus"><span class="zh">语料</span><span class="en">Corpus</span></a>
+      <a href="#install"><span class="zh">安装</span><span class="en">Install</span></a>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="zh" aria-pressed="true">中</button><button data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn sm" href="https://github.com/gulucaptain/Best-Paper-Writing-Skill" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap grid">
+    <div>
+      <span class="pill"><b>★</b> v1.0 · Claude + Codex</span>
+      <h1>Best-Paper<br><span class="gold">Writing Skill</span></h1>
+      <p class="tagline zh">生成最佳论文风格的高质量论文底稿：摘要、引言、方法、实验</p>
+      <p class="tagline en">Best-paper-style drafts: abstract, introduction, method, experiments</p>
+      <p class="sub zh">写作规律提炼自 60 篇 CVPR / ICCV / NeurIPS 获奖论文。填一张表，或贴上一段摘要，得到一份有论证、有证据、不编造的底稿。</p>
+      <p class="sub en">Writing patterns distilled from 60 CVPR / ICCV / NeurIPS award papers. Fill in a form or paste an abstract, and get a draft that argues, cites evidence and never invents results.</p>
+      <div class="cta">
+        <a class="btn primary" href="#install"><span class="zh">安装使用</span><span class="en">Get started</span></a>
+        <a class="btn" href="#example"><span class="zh">看前后对比 ↓</span><span class="en">See before / after ↓</span></a>
+        <a class="btn" href="https://github.com/gulucaptain/Best-Paper-Writing-Skill" target="_blank" rel="noopener">★ Star</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>60</b><span class="zh">篇获奖论文</span><span class="en">award papers</span></div>
+        <div class="stat"><b>3</b><span class="zh">个顶会</span><span class="en">venues</span></div>
+        <div class="stat"><b>8</b><span class="zh">类论证路线</span><span class="en">paper types</span></div>
+        <div class="stat"><b>2</b><span class="zh">种输入方式</span><span class="en">input modes</span></div>
+      </div>
+    </div>
+    <div class="term relpos" aria-label="install">
+      <div class="bar"><i></i><i></i><i></i>
+        <div class="tabs" role="tablist" data-group="hero">
+          <button role="tab" aria-selected="true" data-tab="claude">Claude</button>
+          <button role="tab" aria-selected="false" data-tab="codex">Codex</button>
+        </div>
+      </div>
+      <button class="copy" data-copy-from="#hero-cmd-claude" id="hero-copy">Copy</button>
+      <pre class="panel" data-group="hero" data-panel="claude" id="hero-cmd-claude"><span class="c"># install</span>
+git clone https://github.com/gulucaptain/Best-Paper-Writing-Skill.git
+cd Best-Paper-Writing-Skill
+./install.sh claude
+
+<span class="c"># then, in Claude</span>
+<span class="k">&gt;</span> Use bestpaper-writing to write my abstract and introduction</pre>
+      <pre class="panel" data-group="hero" data-panel="codex" id="hero-cmd-codex" hidden><span class="c"># install</span>
+git clone https://github.com/gulucaptain/Best-Paper-Writing-Skill.git
+cd Best-Paper-Writing-Skill
+./install.sh codex
+
+<span class="c"># then, in Codex</span>
+<span class="k">&gt;</span> $bestpaper-writing write my abstract and introduction</pre>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap">
+    <div class="eyebrow">Why</div>
+    <h2><span class="zh">为什么不直接让 AI 写？</span><span class="en">Why not just ask an AI?</span></h2>
+    <p class="lead zh">通用 AI 的稿子彼此相似：先铺背景，用形容词代替机制，并排罗列组件。获奖论文不是这样写的。skill 把这些差别量化成规则，并逐条检查你的草稿。</p>
+    <p class="lead en">Generic AI drafts look alike: background first, adjectives instead of mechanisms, parallel component lists. Award papers do not read that way. The skill turns the differences into measurable rules and checks every draft against them.</p>
+    <table class="cmp">
+      <thead><tr><th></th><th><span class="zh">通用 AI 草稿</span><span class="en">Typical AI draft</span></th><th><span class="zh">获奖论文</span><span class="en">Award papers</span></th></tr></thead>
+      <tbody>
+        <tr><td><span class="zh">句尾分词短语<br>（", making …"）</span><span class="en">Participial tails<br>(", making …")</span></td>
+          <td class="bad"><div class="barrow"><span class="bar2" style="width:128px"></span><b>≈ 32%</b></div><span class="zh">的句子</span><span class="en">of sentences</span></td>
+          <td class="good"><div class="barrow"><span class="bar2 g" style="width:32px"></span><b>≈ 8%</b></div><span class="zh">的句子</span><span class="en">of sentences</span></td></tr>
+        <tr><td><span class="zh">开头</span><span class="en">Opening</span></td>
+          <td class="bad"><span class="zh">泛泛的背景："has attracted increasing attention"</span><span class="en">Generic background: "has attracted increasing attention"</span></td>
+          <td class="good"><span class="zh">具体的场景，或对具体前人工作的肯定</span><span class="en">A concrete scene, or credit to specific prior work</span></td></tr>
+        <tr><td><span class="zh">缺口</span><span class="en">The gap</span></td>
+          <td class="bad"><span class="zh">"现有方法有若干局限"</span><span class="en">"Existing methods have several limitations"</span></td>
+          <td class="good"><span class="zh">什么条件下失败，为什么失败</span><span class="en">When they fail, and why</span></td></tr>
+        <tr><td><span class="zh">组件介绍</span><span class="en">Components</span></td>
+          <td class="bad"><span class="zh">A 做…… B 做…… C 做……（并排）</span><span class="en">A does … B does … C does … (in parallel)</span></td>
+          <td class="good"><span class="zh">第二个组件解决第一个留下的问题</span><span class="en">The second fixes what the first leaves open</span></td></tr>
+        <tr><td><span class="zh">节奏</span><span class="en">Rhythm</span></td>
+          <td class="bad"><span class="zh">要么全是短句，要么全是长句</span><span class="en">All short sentences, or all long ones</span></td>
+          <td class="good"><span class="zh">平均 23 词一句，转折处用 3–4 个短句</span><span class="en">About 23 words per sentence, with 3–4 short pivots</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="example" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Before / after</div>
+    <h2><span class="zh">同一份事实，两种写法</span><span class="en">Same facts, two drafts</span></h2>
+    <p class="lead zh">以 <a href="https://arxiv.org/abs/2106.09685" target="_blank" rel="noopener">LoRA</a>（arXiv 2106.09685，不在 60 篇语料中）的公开信息为输入，分别用普通提示词和 bestpaper-writing 写摘要与引言。</p>
+    <p class="lead en">Public facts of <a href="https://arxiv.org/abs/2106.09685" target="_blank" rel="noopener">LoRA</a> (arXiv 2106.09685, not in the 60-paper corpus) are given to a plain prompt and to bestpaper-writing, to write the abstract and introduction.</p>
+
+    <div class="ex-top">
+      <div class="seg" role="tablist" data-group="ex">
+        <button role="tab" aria-selected="true" data-tab="abs"><span class="zh">摘要</span><span class="en">Abstract</span></button>
+        <button role="tab" aria-selected="false" data-tab="intro"><span class="zh">引言（前三段）</span><span class="en">Introduction (first 3 paragraphs)</span></button>
+      </div>
+      <label class="switch"><input type="checkbox" id="annot"> <span class="zh">标注差异</span><span class="en">Highlight differences</span></label>
+    </div>
+    <div class="legend"><span><i style="background:var(--bad-soft);box-shadow:inset 0 -2px 0 var(--bad)"></i><span class="zh">AI 腔</span><span class="en">AI habit</span></span><span><i style="background:var(--good-soft);box-shadow:inset 0 -2px 0 var(--good)"></i><span class="zh">获奖论文式写法</span><span class="en">Award-paper move</span></span></div>
+
+    <div id="exbox">
+    <div class="panel" data-group="ex" data-panel="abs">
+      <div class="two">
+        <div class="col">
+          <header><span class="tag bad"><span class="zh">普通提示词</span><span class="en">Plain prompt</span></span><b class="zh">不使用 skill</b><b class="en">No skill</b></header>
+          <div class="body">
+            <p>Large language models have achieved <span class="m-bad">remarkable success across a wide range of natural language processing tasks</span>. However, as models continue to grow in size, fully fine-tuning all model parameters for each downstream task becomes increasingly impractical<span class="m-bad">, making it prohibitively expensive to deploy multiple fine-tuned instances</span>. In this paper, we propose Low-Rank Adaptation (LoRA), <span class="m-bad">a novel and efficient approach</span> that freezes the pre-trained model weights and injects trainable low-rank decomposition matrices into each layer of the Transformer architecture, significantly reducing the number of trainable parameters. <span class="m-bad">Extensive experiments demonstrate</span> that LoRA achieves comparable or even better performance than full fine-tuning on RoBERTa, DeBERTa, GPT-2, and GPT-3, while reducing trainable parameters by 10,000 times and GPU memory by 3 times, and introducing no additional inference latency. We also provide an empirical investigation into rank-deficiency in language model adaptation<span class="m-bad">, providing insights into the effectiveness of LoRA</span>. Our code and models are publicly available.</p>
+          </div>
+          <footer><span class="chip warn">check_draft · 2 warnings</span><span class="chip">8 notes</span><span class="zh">句尾分词短语 33%（获奖论文 90% 不超过 25%）；连接词偏多</span><span class="en">participial tails 33% (90% of award papers ≤ 25%); too many connectors</span></footer>
+        </div>
+        <div class="col">
+          <header><span class="tag good"><span class="zh">bestpaper-writing</span><span class="en">bestpaper-writing</span></span><b class="zh">使用 skill</b><b class="en">With the skill</b></header>
+          <div class="body">
+            <p><span class="m-good">Serving one language model on many tasks means keeping one adapted copy per task, and at the scale of GPT-3 175B each copy is as large as the model itself.</span> Adapter layers shrink the copy but run in sequence with the model, which adds inference latency, while prefix tuning pays for its trainable prefix with part of the input sequence. <span class="m-good">We observe that the weight change during adaptation has a low intrinsic rank, so a pair of small matrices can represent it.</span> LoRA freezes the pre-trained weights, trains one such pair for each layer, and merges their product into the original weights at deployment. <span class="m-good">On GPT-3 175B, this efficient recipe cuts trainable parameters by 10,000 times and GPU memory by 3 times relative to fine-tuning with Adam,</span> and it matches or exceeds fine-tuning quality on RoBERTa, DeBERTa, GPT-2 and GPT-3 with no added inference latency. A study of rank deficiency in adaptation explains why such small matrices are enough.</p>
+          </div>
+          <footer><span class="chip ok">check_draft · 0 warnings</span><span class="chip">1 note</span><span class="zh">具体的开头；洞察直接陈述；主张与证据在同一句</span><span class="en">concrete opening; insight stated directly; claim and evidence in one sentence</span></footer>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" data-group="ex" data-panel="intro" hidden>
+      <div class="two">
+        <div class="col">
+          <header><span class="tag bad"><span class="zh">普通提示词</span><span class="en">Plain prompt</span></span><b class="zh">不使用 skill</b><b class="en">No skill</b></header>
+          <div class="body">
+            <p><span class="m-bad">In recent years, large pre-trained language models have achieved remarkable success across a wide range of natural language processing tasks.</span> Many real-world applications rely on adapting a single pre-trained model to multiple downstream tasks, which is typically done through fine-tuning. However, as models become larger and larger, fine-tuning all of the parameters has become increasingly challenging. For example, GPT-3 175B requires storing and deploying a separate copy of 175 billion parameters for each task<span class="m-bad">, making it prohibitively expensive</span>.</p>
+            <p>To tackle this challenge, many researchers have proposed parameter-efficient adaptation methods, such as adapter layers and prefix tuning. While these methods are effective in reducing the number of trainable parameters, <span class="m-bad">they still suffer from several limitations</span>. Adapter layers introduce additional inference latency, whereas prefix tuning is difficult to optimize and reduces the sequence length available for downstream tasks, which significantly limits their practicality in real-world scenarios.</p>
+            <p>In this paper, we propose Low-Rank Adaptation (LoRA), <span class="m-bad">a novel and efficient method</span> that addresses these limitations. Inspired by the finding that over-parameterized models have a low intrinsic dimension, <span class="m-bad">we hypothesize that</span> the weight updates during adaptation also have a low intrinsic rank. Specifically, LoRA freezes the pre-trained weights and injects trainable low-rank matrices into each layer<span class="m-bad">, thereby greatly reducing the number of trainable parameters, making it possible to switch between tasks efficiently while introducing no additional inference latency</span>.</p>
+          </div>
+          <footer><span class="chip warn">check_draft · 2 warnings</span><span class="chip">8 notes</span><span class="zh">泛泛的开头；缺口只说"若干局限"；洞察被降格为假设</span><span class="en">generic opening; "several limitations"; the insight is downgraded to a hypothesis</span></footer>
+        </div>
+        <div class="col">
+          <header><span class="tag good"><span class="zh">bestpaper-writing</span><span class="en">bestpaper-writing</span></span><b class="zh">使用 skill</b><b class="en">With the skill</b></header>
+          <div class="body">
+            <p>Many applications adapt one large pre-trained language model to several downstream tasks, and full fine-tuning is the standard recipe. It updates every parameter, so each task ends up with its own copy of the model. <span class="m-good">The cost grows with the model.</span> For GPT-3 175B, deploying many independent fine-tuned instances, each with 175B parameters, is prohibitively expensive.</p>
+            <p>Prior work reduces this cost in two ways, and each pays for it elsewhere. <span class="m-good">Adapter layers (Houlsby et al., 2019) insert small trainable modules between Transformer blocks, but the modules must be processed one after another, so every query pays extra latency that is hard to hide when the batch is small.</span> Prefix tuning (Li and Liang, 2021) instead trains a prefix of the input, which is difficult to optimize and occupies part of the sequence length that the task could otherwise use.</p>
+            <p><span class="m-good">Our approach starts from a property of the problem.</span> <span class="m-good">Over-parameterized models reside on a low intrinsic dimension (Aghajanyan et al., 2020), so the change in weights during adaptation should also have a low intrinsic rank.</span> LoRA turns this into an efficient method: we freeze the pre-trained weights and represent the update of each weight matrix by the product of two small matrices of rank r, trained directly. At deployment the product is added to the frozen weights, so inference runs on the same architecture as the original model and adds no latency, and switching tasks means swapping the two small matrices.</p>
+          </div>
+          <footer><span class="chip ok">check_draft · 0 warnings</span><span class="chip">1 note</span><span class="zh">每个缺口带原因；两个转折短句；洞察直接陈述，随后是方法</span><span class="en">each gap comes with its reason; two short pivots; the insight is stated directly, then the method</span></footer>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <details>
+      <summary><span class="zh">两份草稿用到的输入信息（全部来自 LoRA 的公开信息）</span><span class="en">Facts given to both drafts (all from LoRA's public information)</span></summary>
+      <ul class="zh">
+        <li>任务：把一个大型预训练语言模型适配到多个下游任务。</li>
+        <li>现有方法：全量微调（每个任务一份完整副本，GPT-3 175B 的部署代价极高）；Adapter（串行计算，增加推理延迟）；Prefix tuning（难优化，占用序列长度）。</li>
+        <li>核心观察：过参数化模型位于低本征维度，适配时的权重变化也应有低本征秩。</li>
+        <li>方法：冻结预训练权重，为每层训练一对低秩矩阵，部署时合并进原权重。</li>
+        <li>结果：相对 GPT-3 175B + Adam 微调，可训练参数约少 10,000 倍，GPU 显存约少 3 倍；在 RoBERTa、DeBERTa、GPT-2、GPT-3 上持平或更好；无额外推理延迟。</li>
+        <li>分析：对适配中的秩亏现象做了研究；开源代码与模型。</li>
+      </ul>
+      <ul class="en">
+        <li>Task: adapt one large pre-trained language model to several downstream tasks.</li>
+        <li>Prior approaches: full fine-tuning (a full copy per task, prohibitive for GPT-3 175B); adapters (sequential, add inference latency); prefix tuning (hard to optimize, takes sequence length).</li>
+        <li>Key observation: over-parameterized models sit on a low intrinsic dimension, so the weight change in adaptation should have a low intrinsic rank.</li>
+        <li>Method: freeze the pre-trained weights, train a pair of low-rank matrices per layer, merge at deployment.</li>
+        <li>Results: about 10,000× fewer trainable parameters and about 3× less GPU memory than fine-tuning GPT-3 175B with Adam; on par or better on RoBERTa, DeBERTa, GPT-2 and GPT-3; no added inference latency.</li>
+        <li>Analysis: a study of rank deficiency in adaptation; code and checkpoints released.</li>
+      </ul>
+    </details>
+    <p class="fine zh">说明：这是单次示例，不是统计结论。"普通提示词"一栏是不使用 skill 时的一次典型写法；"使用 skill"一栏按 SKILL.md 流程写成，并通过 skill 自带的 check_draft.py 检查。检查器是 skill 自己的自检工具，不是独立评测。两段文字均由公开信息改写，不复制原文，引用以作者-年份形式示意。</p>
+    <p class="fine en">Note: a single example, not a statistical claim. The left column is one typical output without the skill; the right column follows the SKILL.md workflow and passes the skill's own check_draft.py. The checker is the skill's self-check, not an independent evaluation. Both texts are written from public facts, not copied from the paper; citations are shown author-year for illustration.</p>
+  </div>
+</section>
+
+<section id="usage">
+  <div class="wrap">
+    <div class="eyebrow">Usage</div>
+    <h2><span class="zh">两种使用方式</span><span class="en">Two ways to use it</span></h2>
+    <p class="lead zh">缺的信息只问一次；没给的数字、基线和引用，一律保留为 [TODO]。</p>
+    <p class="lead en">Missing information is asked once; numbers, baselines and references you did not give stay as [TODO].</p>
+
+    <div class="seg tabbar" role="tablist" data-group="use">
+      <button role="tab" aria-selected="true" data-tab="form"><span class="zh">📝 填写表单</span><span class="en">📝 Fill the form</span></button>
+      <button role="tab" aria-selected="false" data-tab="abs"><span class="zh">📄 粘贴完整摘要</span><span class="en">📄 Paste an abstract</span></button>
+    </div>
+
+    <div class="panel" data-group="use" data-panel="form">
+      <p class="zh" style="margin-top:0">打开<a href="#form">下方的在线信息表</a>（离线可用，自动保存草稿），填写后导出 JSON，发给 agent。表单分四档：</p>
+      <p class="en" style="margin-top:0">Fill in the <a href="#form">online form below</a> (works offline, autosaves), export the JSON and send it to your agent. Four tiers:</p>
+      <div class="tiers">
+        <div class="tier"><b>🔴 <span class="zh">必需</span><span class="en">Required</span></b><span class="zh">任务、现有最强方法、失败现象与原因、核心观察、方法组成、头条结果、最相近工作</span><span class="en">task, strongest prior approach, failure and its reason, key insight, components, headline results, closest work</span></div>
+        <div class="tier"><b>🟡 <span class="zh">韵味</span><span class="en">Memorability</span></b><span class="zh">效率、可接入的管线、具体画面、反直觉之处、立场、团队内部的叫法</span><span class="en">efficiency, integrations, a concrete example, what is surprising, stance, the team's name for the idea</span></div>
+        <div class="tier"><b>🟢 <span class="zh">辅助</span><span class="en">Support</span></b><span class="zh">Figure 1、数据规模、局限、refs.bib</span><span class="en">Figure 1, data scale, limitations, refs.bib</span></div>
+        <div class="tier"><b>🔵 <span class="zh">方法与实验</span><span class="en">Method &amp; experiments</span></b><span class="zh">符号、组件、目标、数据集、指标、对比方法、结果表、消融</span><span class="en">notation, components, objective, datasets, metrics, baselines, tables, ablations</span></div>
+      </div>
+      <div class="prompt relpos"><button class="copy" data-copy-text="用 bestpaper-writing，根据这份信息表 JSON 写摘要和引言。">Copy</button>
+        <p class="zh">用 bestpaper-writing，根据这份信息表 JSON 写摘要和引言。</p>
+        <p class="en">Use bestpaper-writing to write the abstract and introduction from this intake JSON.</p></div>
+    </div>
+
+    <div class="panel" data-group="use" data-panel="abs" hidden>
+      <p class="zh" style="margin-top:0">skill 不会盲目重写。它先把摘要拆回同样的字段：</p>
+      <p class="en" style="margin-top:0">The skill does not rewrite blindly. It first breaks the abstract back into the same fields:</p>
+      <ul class="list zh"><li>告诉你<b>哪些已有、哪些模糊、哪些缺失</b>；</li><li>一次性追问缺项；</li><li>改写后附<b>修改对照表</b>（原句 → 改后句 → 理由），可逐条接受或拒绝；</li><li>你的数字和术语原样保留，不添加摘要里没有的结果。</li></ul>
+      <ul class="list en"><li>shows which fields are <b>present, vague or missing</b>;</li><li>asks for the gaps once;</li><li>rewrites and returns a <b>change table</b> (original → revised → reason) you can accept or reject line by line;</li><li>keeps your numbers and terminology and adds no result the abstract does not contain.</li></ul>
+      <div class="prompt relpos"><button class="copy" data-copy-text="用 bestpaper-writing 改写这篇摘要，让它更接近最佳论文的写法：">Copy</button>
+        <p class="zh">用 bestpaper-writing 改写这篇摘要，让它更接近最佳论文的写法：……</p>
+        <p class="en">Use bestpaper-writing to rewrite this abstract so it reads like a best paper: …</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Workflow</div>
+    <h2><span class="zh">它是怎么写的</span><span class="en">How it writes</span></h2>
+    <p class="lead zh">不是一条"写得像论文"的提示词，而是一套先想清楚、再动笔、最后自检的流程。</p>
+    <p class="lead en">Not a "sound like a paper" prompt, but a process: think first, write second, check last.</p>
+    <div class="steps">
+      <div class="step"><h3><span class="zh">补全缺项</span><span class="en">Fill the gaps</span></h3><p class="zh">必需信息缺了就先问，只问一次；问不到的写成 [TODO]，不编造。</p><p class="en">Ask once for missing required fields; what cannot be answered becomes [TODO], never an invention.</p></div>
+      <div class="step"><h3><span class="zh">提炼主张</span><span class="en">Distil the claim</span></h3><p class="zh">一句话主张、矛盾类型、关于问题本身的洞察、最相近工作、头条数字。</p><p class="en">One-line claim, tension type, the insight about the problem, closest work, headline numbers.</p></div>
+      <div class="step"><h3><span class="zh">选论证路线</span><span class="en">Pick the route</span></h3><p class="zh">八类论文（方法改进、新能力、规模规律、再检验、机理、理论、数据集、测量）各有一条路线。</p><p class="en">Eight paper types, each with its own line of argument.</p></div>
+      <div class="step"><h3><span class="zh">骨架与范例</span><span class="en">Skeleton and exemplars</span></h3><p class="zh">每段先写一句要点；按段落功能检索获奖论文的同类段落，学顺序和节奏，不抄句子。</p><p class="en">One line per paragraph; retrieve award-paper paragraphs with the same function to learn order and rhythm, never to copy.</p></div>
+      <div class="step"><h3><span class="zh">起草</span><span class="en">Draft</span></h3><p class="zh">摘要和引言先写；方法按"需要 → 机制 → 性质"，实验的消融与主张一一对应。</p><p class="en">Abstract and introduction first; methods as need, mechanism, property; ablations that mirror the claims.</p></div>
+      <div class="step"><h3><span class="zh">自检与报告</span><span class="en">Check and report</span></h3><p class="zh">check_draft.py 对照语料统计检查；同时给出 report.md：主张-证据表、待补清单、留给 Limitations 的要点。</p><p class="en">check_draft.py compares against corpus statistics; report.md lists the claim-evidence map, TODOs and notes for the Limitations section.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="form">
+  <div class="wrap">
+    <div class="eyebrow">Online form</div>
+    <h2><span class="zh">在线信息表</span><span class="en">Online intake form</span></h2>
+    <p class="lead zh">直接在这里填写，数据只保存在你的浏览器里，不会上传。填完点"导出 JSON"，把文件发给 agent。界面为中文。</p>
+    <p class="lead en">Fill it in right here. Data stays in your browser and is never uploaded. Export the JSON and send it to your agent. The interface is in Chinese.</p>
+    <p><a class="btn sm" href="intake_form.html" target="_blank" rel="noopener"><span class="zh">在新窗口打开 ↗</span><span class="en">Open in a new tab ↗</span></a></p>
+    <div class="frame"><iframe src="intake_form.html" title="Intake form" loading="lazy"></iframe></div>
+  </div>
+</section>
+
+<section id="corpus" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Corpus</div>
+    <h2><span class="zh">语料：60 篇获奖论文</span><span class="en">The corpus: 60 award papers</span></h2>
+    <p class="lead zh">2021 至 2025 年 CVPR、ICCV、NeurIPS 的最佳论文、最佳学生论文与荣誉提名。风格规则由其中 55 篇拟合；另外 5 篇（均为 2024 年，标记为"留出"）从范例库中移除，只用于测试。本站和仓库都不含论文 PDF 或全文，标题链接到谷歌学术检索。</p>
+    <p class="lead en">Best papers, best student papers and honorable mentions of CVPR, ICCV and NeurIPS, 2021 to 2025. The style rules were fitted on 55 of them; the other 5 (all from 2024, marked "held-out") were removed from the exemplar bank and used only for testing. Neither this site nor the repository contains paper PDFs or full texts; titles link to a Google Scholar search.</p>
+    <div class="filters">
+      <input type="search" id="q" placeholder="搜索标题或简称 / Search title or short name" aria-label="search">
+      <div class="fgroup" id="fv"><span class="lbl">Venue</span></div>
+      <div class="fgroup" id="ft"><span class="lbl">Type</span></div>
+    </div>
+    <div class="count" id="count"></div>
+    <div class="tblwrap"><table class="tbl"><thead><tr><th>ID</th><th>Venue</th><th>Paper</th><th>Type</th></tr></thead><tbody id="rows"></tbody></table></div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <div class="eyebrow">Install</div>
+    <h2><span class="zh">安装</span><span class="en">Install</span></h2>
+    <p class="lead zh">Claude 和 Codex 使用同一种 SKILL.md 格式。装好后若看不到，重启 agent。</p>
+    <p class="lead en">Claude and Codex share the same SKILL.md format. Restart the agent if the skill does not appear.</p>
+    <div class="term relpos">
+      <div class="bar"><i></i><i></i><i></i>
+        <div class="tabs" role="tablist" data-group="inst">
+          <button role="tab" aria-selected="true" data-tab="claude">Claude Code</button>
+          <button role="tab" aria-selected="false" data-tab="codex">Codex</button>
+          <button role="tab" aria-selected="false" data-tab="web">Claude.ai / Cowork</button>
+        </div>
+      </div>
+      <button class="copy" data-copy-from="#inst-claude" id="inst-copy">Copy</button>
+      <pre class="panel" data-group="inst" data-panel="claude" id="inst-claude">git clone https://github.com/gulucaptain/Best-Paper-Writing-Skill.git
+cd Best-Paper-Writing-Skill
+./install.sh claude        <span class="c"># → ~/.claude/skills/bestpaper-writing</span>
+./install.sh claude --project   <span class="c"># → ./.claude/skills/ (this project only)</span></pre>
+      <pre class="panel" data-group="inst" data-panel="codex" id="inst-codex" hidden>git clone https://github.com/gulucaptain/Best-Paper-Writing-Skill.git
+cd Best-Paper-Writing-Skill
+./install.sh codex         <span class="c"># → ~/.agents/skills/bestpaper-writing</span>
+<span class="c"># invoke explicitly with $bestpaper-writing</span></pre>
+      <pre class="panel" data-group="inst" data-panel="web" id="inst-web" hidden><span class="c"># 1. zip the skill folder</span>
+cd Best-Paper-Writing-Skill/skills &amp;&amp; zip -r bestpaper-writing.zip bestpaper-writing
+<span class="c"># 2. upload the zip on the Skills page of Claude.ai / Cowork</span></pre>
+    </div>
+    <p class="fine zh">辅助脚本需要 Python 3。<code>./install.sh all</code> 一次装到两个平台。</p>
+    <p class="fine en">The helper scripts need Python 3. <code>./install.sh all</code> installs to both platforms.</p>
+  </div>
+</section>
+
+<section class="alt" id="cite">
+  <div class="wrap">
+    <div class="eyebrow">Cite</div>
+    <h2><span class="zh">引用</span><span class="en">Cite</span></h2>
+    <p class="lead zh">如果它帮到了你的写作，欢迎引用，或者点一个 Star。</p>
+    <p class="lead en">If it helped your writing, please cite it, or leave a star.</p>
+    <div class="cite relpos" id="bib"><button class="copy" data-copy-from="#bib" style="background:#232634">Copy</button>@misc{zhao2026bestpaperwriting,
+  title        = {Best-Paper-Writing-Skill: Generating Best-Paper-Style Paper Drafts with Claude and Codex},
+  author       = {Zhao, Haoyu},
+  year         = {2026},
+  howpublished = {\url{https://github.com/gulucaptain/Best-Paper-Writing-Skill}}
+}</div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <p><b>Best-Paper-Writing-Skill</b> · v1.0</p>
+        <p class="zh">原创内容采用 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>。仓库中的论文短句仅作教学评论引用，版权归原作者；如需调整或移除，请提 Issue。</p>
+        <p class="en">Original content is <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. Short excerpts in the repository are quoted for commentary and education and remain the authors' copyright; open an issue to change or remove them.</p>
+      </div>
+      <div>
+        <p><a href="https://github.com/gulucaptain/Best-Paper-Writing-Skill" target="_blank" rel="noopener">GitHub</a> · <a href="https://github.com/gulucaptain/Best-Paper-Writing-Skill/issues" target="_blank" rel="noopener">Issues</a> · <a href="https://github.com/gulucaptain/Best-Paper-Writing-Skill/blob/main/PAPER_LIST.md" target="_blank" rel="noopener">Paper list</a></p>
+        <p class="zh">工作流与模板基于 <a href="https://github.com/Master-cai/Research-Paper-Writing-Skills" target="_blank" rel="noopener">Master-cai/Research-Paper-Writing-Skills</a>（MIT）。</p>
+        <p class="en">Workflow and templates build on <a href="https://github.com/Master-cai/Research-Paper-Writing-Skills" target="_blank" rel="noopener">Master-cai/Research-Paper-Writing-Skills</a> (MIT).</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const PAPERS = [{"id": "P01", "venue": "CVPR", "year": "2022", "short_name": "EPro-PnP", "title": "EPro-PnP: Generalized End-to-End Probabilistic Perspective-N-Points for Monocular Object Pose Estimation", "type": "L1", "role": "corpus"}, {"id": "P02", "venue": "CVPR", "year": "2022", "short_name": "Hard Minimal Problems", "title": "Learning To Solve Hard Minimal Problems", "type": "L1", "role": "corpus"}, {"id": "P03", "venue": "CVPR", "year": "2022", "short_name": "Dual-Shutter Vibration Sensing", "title": "Dual-Shutter Optical Vibration Sensing", "type": "L8", "role": "corpus"}, {"id": "P04", "venue": "CVPR", "year": "2023", "short_name": "VISPROG", "title": "Visual Programming: Compositional Visual Reasoning Without Training", "type": "L2", "role": "corpus"}, {"id": "P05", "venue": "CVPR", "year": "2023", "short_name": "DynIBaR", "title": "DynIBaR: Neural Dynamic Image-Based Rendering", "type": "L1", "role": "corpus"}, {"id": "P06", "venue": "CVPR", "year": "2023", "short_name": "DreamBooth", "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation", "type": "L2", "role": "corpus"}, {"id": "P07", "venue": "CVPR", "year": "2023", "short_name": "3D Registration with Maximal Cliques", "title": "3D Registration With Maximal Cliques", "type": "L1", "role": "corpus"}, {"id": "P08", "venue": "CVPR", "year": "2024", "short_name": "pixelSplat", "title": "pixelSplat: 3D Gaussian Splats from Image Pairs for Scalable Generalizable 3D Reconstruction", "type": "L1", "role": "corpus"}, {"id": "P09", "venue": "CVPR", "year": "2024", "short_name": "Transformers vs. CNNs Explanations", "title": "Comparing the Decision-Making Mechanisms by Transformers and CNNs via Explanation Methods", "type": "L5", "role": "corpus"}, {"id": "P10", "venue": "CVPR", "year": "2024", "short_name": "Generative Image Dynamics", "title": "Generative Image Dynamics", "type": "L2", "role": "held-out"}, {"id": "P11", "venue": "CVPR", "year": "2024", "short_name": "Objects as Volumes", "title": "Objects as Volumes: A Stochastic Geometry View of Opaque Solids", "type": "L6", "role": "corpus"}, {"id": "P12", "venue": "CVPR", "year": "2024", "short_name": "SpiderMatch", "title": "SpiderMatch: 3D Shape Matching with Global Optimality and Geometric Consistency", "type": "L1", "role": "corpus"}, {"id": "P13", "venue": "CVPR", "year": "2024", "short_name": "IPG", "title": "Image Processing GNN: Breaking Rigidity in Super-Resolution", "type": "L1", "role": "corpus"}, {"id": "P14", "venue": "CVPR", "year": "2024", "short_name": "EventPS", "title": "EventPS: Real-Time Photometric Stereo Using an Event Camera", "type": "L8", "role": "corpus"}, {"id": "P15", "venue": "CVPR", "year": "2024", "short_name": "Mip-Splatting", "title": "Mip-Splatting: Alias-free 3D Gaussian Splatting", "type": "L1", "role": "corpus"}, {"id": "P16", "venue": "CVPR", "year": "2025", "short_name": "Navigation World Models", "title": "Navigation World Models", "type": "L2", "role": "corpus"}, {"id": "P17", "venue": "CVPR", "year": "2025", "short_name": "Molmo and PixMo", "title": "Molmo and PixMo: Open Weights and Open Data for State-of-the-Art Vision-Language Models", "type": "L7", "role": "corpus"}, {"id": "P18", "venue": "CVPR", "year": "2025", "short_name": "MegaSaM", "title": "MegaSaM: Accurate, Fast and Robust Structure and Motion from Casual Dynamic Videos", "type": "L1", "role": "corpus"}, {"id": "P19", "venue": "CVPR", "year": "2025", "short_name": "Propagating Light Inverse Rendering", "title": "Neural Inverse Rendering from Propagating Light", "type": "L8", "role": "corpus"}, {"id": "P20", "venue": "CVPR", "year": "2025", "short_name": "DDT-LLaMA", "title": "Generative Multimodal Pretraining with Discrete Diffusion Timestep Tokens", "type": "L1", "role": "corpus"}, {"id": "P21", "venue": "CVPR", "year": "2025", "short_name": "VGGT", "title": "VGGT: Visual Geometry Grounded Transformer", "type": "L2", "role": "corpus"}, {"id": "P22", "venue": "CVPR", "year": "2025", "short_name": "Student Splatting and Scooping", "title": "3D Student Splatting and Scooping", "type": "L1", "role": "corpus"}, {"id": "P23", "venue": "ICCV", "year": "2021", "short_name": "Viewing Graph Solvability", "title": "Viewing Graph Solvability via Cycle Consistency", "type": "L6", "role": "corpus"}, {"id": "P24", "venue": "ICCV", "year": "2021", "short_name": "Mip-NeRF", "title": "Mip-NeRF: A Multiscale Representation for Anti-Aliasing Neural Radiance Fields", "type": "L1", "role": "corpus"}, {"id": "P25", "venue": "ICCV", "year": "2021", "short_name": "OpenGAN", "title": "OpenGAN: Open-Set Recognition via Open Data Generation", "type": "L1", "role": "corpus"}, {"id": "P26", "venue": "ICCV", "year": "2021", "short_name": "Pixel-Perfect SfM", "title": "Pixel-Perfect Structure-From-Motion With Featuremetric Refinement", "type": "L1", "role": "corpus"}, {"id": "P27", "venue": "ICCV", "year": "2021", "short_name": "Swin Transformer", "title": "Swin Transformer: Hierarchical Vision Transformer Using Shifted Windows", "type": "L1", "role": "corpus"}, {"id": "P28", "venue": "ICCV", "year": "2021", "short_name": "CO3D", "title": "Common Objects in 3D: Large-Scale Learning and Evaluation of Real-Life 3D Category Reconstruction", "type": "L7", "role": "corpus"}, {"id": "P29", "venue": "ICCV", "year": "2023", "short_name": "Segment Anything", "title": "Segment Anything", "type": "L2", "role": "corpus"}, {"id": "P30", "venue": "ICCV", "year": "2023", "short_name": "OmniMotion", "title": "Tracking Everything Everywhere All at Once", "type": "L1", "role": "corpus"}, {"id": "P31", "venue": "ICCV", "year": "2023", "short_name": "Passive Single-Photon Imaging", "title": "Passive Ultra-Wideband Single-Photon Imaging", "type": "L8", "role": "corpus"}, {"id": "P32", "venue": "ICCV", "year": "2025", "short_name": "FlowEdit", "title": "FlowEdit: Inversion-Free Text-Based Editing Using Pre-Trained Flow Models", "type": "L1", "role": "corpus"}, {"id": "P33", "venue": "ICCV", "year": "2025", "short_name": "BrickGPT", "title": "Generating Physically Stable and Buildable Brick Structures from Text", "type": "L2", "role": "corpus"}, {"id": "P34", "venue": "ICCV", "year": "2025", "short_name": "Spatially-Varying Autofocus", "title": "Spatially-Varying Autofocus", "type": "L8", "role": "corpus"}, {"id": "P35", "venue": "NeurIPS", "year": "2022", "short_name": "Chinchilla", "title": "An Empirical Analysis of Compute-Optimal Large Language Model Training", "type": "L3", "role": "corpus"}, {"id": "P36", "venue": "NeurIPS", "year": "2022", "short_name": "Data Pruning", "title": "Beyond Neural Scaling Laws: Beating Power Law Scaling via Data Pruning", "type": "L3", "role": "corpus"}, {"id": "P37", "venue": "NeurIPS", "year": "2022", "short_name": "EDM", "title": "Elucidating the Design Space of Diffusion-Based Generative Models", "type": "L1", "role": "corpus"}, {"id": "P38", "venue": "NeurIPS", "year": "2022", "short_name": "RODEO", "title": "Gradient Estimation with Discrete Stein Operators", "type": "L1", "role": "corpus"}, {"id": "P39", "venue": "NeurIPS", "year": "2022", "short_name": "SGD Limit Theorems", "title": "High-Dimensional Limit Theorems for SGD: Effective Dynamics and Critical Scaling", "type": "L6", "role": "corpus"}, {"id": "P40", "venue": "NeurIPS", "year": "2022", "short_name": "LAION-5B", "title": "LAION-5B: An Open Large-Scale Dataset for Training Next Generation Image-Text Models", "type": "L7", "role": "corpus"}, {"id": "P41", "venue": "NeurIPS", "year": "2022", "short_name": "MineDojo", "title": "MineDojo: Building Open-Ended Embodied Agents with Internet-Scale Knowledge", "type": "L7", "role": "corpus"}, {"id": "P42", "venue": "NeurIPS", "year": "2022", "short_name": "Imagen", "title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding", "type": "L1", "role": "corpus"}, {"id": "P44", "venue": "NeurIPS", "year": "2022", "short_name": "Riemannian SGM", "title": "Riemannian Score-Based Generative Modelling", "type": "L1", "role": "corpus"}, {"id": "P45", "venue": "NeurIPS", "year": "2022", "short_name": "Human Inductive Biases", "title": "Using Natural Language and Program Abstractions to Instill Human Inductive Biases in Machines", "type": "L5", "role": "corpus"}, {"id": "P46", "venue": "NeurIPS", "year": "2023", "short_name": "DecodingTrust", "title": "DecodingTrust: A Comprehensive Assessment of Trustworthiness in GPT Models", "type": "L4", "role": "corpus"}, {"id": "P47", "venue": "NeurIPS", "year": "2023", "short_name": "Emergent Abilities Mirage", "title": "Are Emergent Abilities of Large Language Models a Mirage?", "type": "L4", "role": "corpus"}, {"id": "P48", "venue": "NeurIPS", "year": "2023", "short_name": "ClimSim", "title": "ClimSim: A Large Multi-Scale Dataset for Hybrid Physics-ML Climate Emulation", "type": "L7", "role": "corpus"}, {"id": "P49", "venue": "NeurIPS", "year": "2023", "short_name": "DPO", "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model", "type": "L1", "role": "corpus"}, {"id": "P50", "venue": "NeurIPS", "year": "2023", "short_name": "Data-Constrained Scaling", "title": "Scaling Data-Constrained Language Models", "type": "L3", "role": "corpus"}, {"id": "P51", "venue": "NeurIPS", "year": "2024", "short_name": "Autoguidance", "title": "Guiding a Diffusion Model with a Bad Version of Itself", "type": "L1", "role": "held-out"}, {"id": "P52", "venue": "NeurIPS", "year": "2024", "short_name": "RHO-1", "title": "Not All Tokens Are What You Need for Pretraining", "type": "L1", "role": "corpus"}, {"id": "P53", "venue": "NeurIPS", "year": "2024", "short_name": "STDE", "title": "Stochastic Taylor Derivative Estimator: Efficient Amortization for Arbitrary Differential Operators", "type": "L1", "role": "held-out"}, {"id": "P54", "venue": "NeurIPS", "year": "2024", "short_name": "PRISM", "title": "The PRISM Alignment Dataset: What Participatory, Representative and Individualised Human Feedback Reveals About the Subjective and Multicultural Alignment of Large Language Models", "type": "L7", "role": "held-out"}, {"id": "P55", "venue": "NeurIPS", "year": "2024", "short_name": "VAR", "title": "Visual Autoregressive Modeling: Scalable Image Generation via Next-Scale Prediction", "type": "L1", "role": "held-out"}, {"id": "P56", "venue": "NeurIPS", "year": "2025", "short_name": "1000-Layer RL", "title": "1000 Layer Networks for Self-Supervised RL: Scaling Depth Can Enable New Goal-Reaching Capabilities", "type": "L3", "role": "corpus"}, {"id": "P57", "venue": "NeurIPS", "year": "2025", "short_name": "RLVR Reasoning Boundary", "title": "Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?", "type": "L4", "role": "corpus"}, {"id": "P58", "venue": "NeurIPS", "year": "2025", "short_name": "Gated Attention", "title": "Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free", "type": "L5", "role": "corpus"}, {"id": "P59", "venue": "NeurIPS", "year": "2025", "short_name": "Superposition Scaling", "title": "Superposition Yields Robust Neural Scaling", "type": "L5", "role": "corpus"}, {"id": "P60", "venue": "NeurIPS", "year": "2025", "short_name": "Why Diffusion Models Don't Memorize", "title": "Why Diffusion Models Don't Memorize: The Role of Implicit Dynamical Regularization in Training", "type": "L5", "role": "corpus"}, {"id": "P61", "venue": "NeurIPS", "year": "2025", "short_name": "Transductive Online Learning", "title": "Optimal Mistake Bounds for Transductive Online Learning", "type": "L6", "role": "corpus"}];
+const TYPE = {L1:["方法改进","Method"],L2:["新能力","New capability"],L3:["规模规律","Empirical law"],L4:["再检验","Re-examination"],L5:["机理分析","Mechanism"],L6:["理论","Theory"],L7:["数据集","Dataset"],L8:["测量/系统","Measurement"]};
+const root = document.documentElement;
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+
+/* language */
+function setLang(l){
+  root.lang=l;
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));
+  document.title = l==='zh' ? 'Best-Paper-Writing-Skill · 最佳论文风格的论文底稿' : 'Best-Paper-Writing-Skill · best-paper-style drafts';
+  store('bpw-lang',l); renderRows();
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+(function(){let l=store('bpw-lang'); if(!l){l=(navigator.language||'zh').toLowerCase().startsWith('zh')?'zh':'en'} root.lang=l;})();
+
+/* tabs */
+document.querySelectorAll('[role=tablist]').forEach(list=>{
+  const g=list.dataset.group;
+  list.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{
+    list.querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',b===btn));
+    document.querySelectorAll('.panel[data-group="'+g+'"]').forEach(p=>p.hidden=p.dataset.panel!==btn.dataset.tab);
+    if(g==='hero'){document.getElementById('hero-copy').dataset.copyFrom='#hero-cmd-'+btn.dataset.tab}
+    if(g==='inst'){document.getElementById('inst-copy').dataset.copyFrom='#inst-'+btn.dataset.tab}
+  }));
+});
+
+/* annotate */
+const annot=document.getElementById('annot'), exbox=document.getElementById('exbox');
+annot.addEventListener('change',()=>{exbox.classList.toggle('annot',annot.checked);document.querySelector('.ex-top').parentElement.classList.toggle('annot-on',annot.checked)});
+
+/* copy */
+const toast=document.getElementById('toast');
+function say(t){toast.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400)}
+async function copyText(t){
+  try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(_){}a.remove()}
+  say(root.lang==='zh'?'已复制':'Copied');
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.copy'); if(!b)return;
+  if(b.dataset.copyText){copyText(b.dataset.copyText);return}
+  const el=document.querySelector(b.dataset.copyFrom); if(!el)return;
+  const clone=el.cloneNode(true); clone.querySelectorAll('.copy').forEach(n=>n.remove());
+  const txt=clone.innerText.split('\n').filter(l=>l.trim()&&!/^\s*[#>]/.test(l)).map(l=>l.replace(/\s+#.*$/,'')).join('\n');
+  copyText(el.id==='bib'?clone.innerText.trim():txt);
+});
+
+/* corpus */
+const state={v:new Set(),t:new Set(),q:''};
+function chip(group,label,key,set){
+  const b=document.createElement('button');b.className='fchip';b.textContent=label;b.setAttribute('aria-pressed','false');
+  b.addEventListener('click',()=>{set.has(key)?set.delete(key):set.add(key);b.setAttribute('aria-pressed',set.has(key));renderRows()});
+  group.appendChild(b);
+}
+['CVPR','ICCV','NeurIPS'].forEach(v=>chip(document.getElementById('fv'),v,v,state.v));
+Object.keys(TYPE).forEach(k=>{chip(document.getElementById('ft'),k,k,state.t);const bt=document.getElementById('ft').lastChild;bt.title=TYPE[k][0]+' / '+TYPE[k][1]});
+document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value.trim().toLowerCase();renderRows()});
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function renderRows(){
+  const zh=root.lang==='zh', tb=document.getElementById('rows');
+  const rows=PAPERS.filter(p=>(!state.v.size||state.v.has(p.venue))&&(!state.t.size||state.t.has(p.type))&&(!state.q||(p.title+' '+p.short_name).toLowerCase().includes(state.q)));
+  tb.innerHTML=rows.map(p=>`<tr><td class="id">${p.id}</td><td class="venue">${p.venue} ${p.year}</td><td><a href="https://scholar.google.com/scholar?q=${encodeURIComponent(p.title)}" target="_blank" rel="noopener">${esc(p.title)}</a>${p.role==='held-out'?`<span class="hold">${zh?'留出':'held-out'}</span>`:''}</td><td><span class="tb">${p.type} ${TYPE[p.type][zh?0:1]}</span></td></tr>`).join('');
+  document.getElementById('count').textContent=(zh?'显示 ':'Showing ')+rows.length+' / '+PAPERS.length;
+}
+setLang(root.lang);
+</script>
+</body>
+</html>
