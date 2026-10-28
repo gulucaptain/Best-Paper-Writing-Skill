@@ -3,7 +3,7 @@
 Typical case: the CVPR/ICCV author kit (`main.tex`, `preamble.tex`, `sec/0_abstract.tex`, `sec/1_intro.tex`, `sec/2_formatting.tex`, `sec/3_finalcopy.tex`, `main.bib`, `cvpr.sty`, `ieeenat_fullname.bst`).
 
 ## Steps
-1. **Copy** the template to the working folder (e.g., `paper/`). Never edit the original template.
+1. **Copy** the template to the working folder (e.g., `paper/`). Never edit the original template. If the user has no template, the repository ships the official CVPR 2027 kit in `template/CVPR2027/` (repository root, outside this skill folder).
 2. **Title**: replace the `\title{…}` in `main.tex`, without a dash (author preference); a colon is fine, and the handle should be in the title when there is one (“Describe, Don't Name: …”). Keep the review mode and anonymous authors unless told otherwise.
 3. **Sections**: keep `\input{sec/0_abstract}` and `\input{sec/1_intro}`; remove the `\input` lines of the template’s example sections (`2_formatting`, `3_finalcopy`) and do not leave their text in the paper.
 4. **Abstract**: `sec/0_abstract.tex` contains only `\begin{abstract} … \end{abstract}`; one paragraph, no citations unless essential.
