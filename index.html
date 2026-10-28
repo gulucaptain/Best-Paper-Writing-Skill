@@ -114,6 +114,9 @@ nav .wrap{display:flex;align-items:center;gap:18px;height:56px}
 .bar2.g{background:var(--good)}
 @media(max-width:700px){.cmp th:nth-child(1),.cmp td:nth-child(1){width:auto}.cmp th,.cmp td{padding:10px 12px;font-size:14px}}
 
+#results .two>div{min-width:0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:700px){#results .bar2{width:60px!important}#results .cmp td:first-child{width:auto}#results .cmp th,#results .cmp td{padding:8px 8px;font-size:13px}}
 /* example */
 .ex-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
@@ -207,6 +210,7 @@ footer.site p{margin:4px 0}
     <div class="links">
       <a href="#example"><span class="zh">示例</span><span class="en">Example</span></a>
       <a href="#usage"><span class="zh">用法</span><span class="en">Usage</span></a>
+      <a href="#results"><span class="zh">实测</span><span class="en">Results</span></a>
       <a href="#form"><span class="zh">在线信息表</span><span class="en">Online form</span></a>
       <a href="#corpus"><span class="zh">语料</span><span class="en">Corpus</span></a>
       <a href="#install"><span class="zh">安装</span><span class="en">Install</span></a>
@@ -429,6 +433,47 @@ cd Best-Paper-Writing-Skill
       <div class="step"><h3><span class="zh">骨架与范例</span><span class="en">Skeleton and exemplars</span></h3><p class="zh">每段先写一句要点；按段落功能检索获奖论文的同类段落，学顺序和节奏，不抄句子。</p><p class="en">One line per paragraph; retrieve award-paper paragraphs with the same function to learn order and rhythm, never to copy.</p></div>
       <div class="step"><h3><span class="zh">起草</span><span class="en">Draft</span></h3><p class="zh">摘要和引言先写；方法按"需要 → 机制 → 性质"，实验的消融与主张一一对应。</p><p class="en">Abstract and introduction first; methods as need, mechanism, property; ablations that mirror the claims.</p></div>
       <div class="step"><h3><span class="zh">自检与报告</span><span class="en">Check and report</span></h3><p class="zh">check_draft.py 对照语料统计检查；同时给出 report.md：主张-证据表、待补清单、留给 Limitations 的要点。</p><p class="en">check_draft.py compares against corpus statistics; report.md lists the claim-evidence map, TODOs and notes for the Limitations section.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="eyebrow">Evaluation</div>
+    <h2><span class="zh">实测：同样的输入，用与不用 skill</span><span class="en">Tested: same input, with and without the skill</span></h2>
+    <p class="lead zh">只给模型三篇公开论文的摘要（不给任何其他信息），让 4 个模型各用"普通提示"和"使用 skill"分别写出标题、摘要、引言、方法、实验，直接写进 CVPR 作者模板，共 24 份草稿；再匿名打乱，由 3 位评委（Sonnet、Opus、GPT-Astra）按同一量表打分。</p>
+    <p class="lead en">Each model received only the abstract of three public papers (nothing else) and wrote the title, abstract, introduction, method and experiments straight into the CVPR author kit, once with a plain prompt and once with the skill: 24 drafts. They were anonymised, shuffled and scored by three judges (Sonnet, Opus, GPT-Astra) on one rubric.</p>
+    <p class="zh" style="color:var(--muted);font-size:14px">论文（仅链接）：<a href="https://arxiv.org/abs/2609.07557">arXiv 2609.07557</a> · <a href="https://arxiv.org/abs/2603.27891">arXiv 2603.27891</a> · <a href="https://arxiv.org/abs/2604.05182">arXiv 2604.05182</a>。量表 D1–D8 来自仓库的 evals/rubric.md；D9 评方法与实验是否给出可填写的精确结构；F 是评委统计的"摘要中没有、也没标 [TODO] 的具体数字、数据集、基线、机制或引用"。</p>
+    <p class="en" style="color:var(--muted);font-size:14px">Papers (links only): <a href="https://arxiv.org/abs/2609.07557">arXiv 2609.07557</a> · <a href="https://arxiv.org/abs/2603.27891">arXiv 2603.27891</a> · <a href="https://arxiv.org/abs/2604.05182">arXiv 2604.05182</a>. D1–D8 come from the repo's evals/rubric.md; D9 scores whether method and experiments give a precise structure the authors can fill in; F counts concrete numbers, datasets, baselines, mechanisms or citations that are neither in the abstract nor marked [TODO].</p>
+
+    <h3 style="margin:28px 0 12px"><span class="zh">总体（3 位评委合并，各 36 份）</span><span class="en">Overall (3 judges pooled, 36 drafts each)</span></h3>
+    <div class="tw"><table class="cmp"><thead><tr><th></th><th><span class="zh">不用 skill</span><span class="en">Plain prompt</span></th><th><span class="zh">使用 skill</span><span class="en">With skill</span></th></tr></thead><tbody><tr><td><span class="zh">D1–D8 均值（摘要+引言）</span><span class="en">D1–D8 mean (abstract + intro)</span></td><td><div class="barrow"><span class="bar2 " style="width:69px"></span><span>2.88</span></div></td><td><div class="barrow"><span class="bar2 g" style="width:80px"></span><span>3.33</span></div></td></tr><tr><td><span class="zh">D9（方法+实验）</span><span class="en">D9 (method + experiments)</span></td><td><div class="barrow"><span class="bar2 " style="width:43px"></span><span>1.81</span></div></td><td><div class="barrow"><span class="bar2 g" style="width:94px"></span><span>3.92</span></div></td></tr><tr><td><span class="zh">编造事实数 F（越低越好）</span><span class="en">Fabricated facts F (lower is better)</span></td><td>0.44</td><td>1.06</td></tr><tr><td><span class="zh">排名均值（1–8，越小越好）</span><span class="en">Mean rank (1–8, lower is better)</span></td><td>5.72</td><td>3.28</td></tr></tbody></table></div>
+
+    <div class="two" style="margin-top:24px">
+      <div>
+        <h3 style="margin:0 0 12px;font-size:17px"><span class="zh">每位评委的 D1–D8 均值</span><span class="en">D1–D8 mean by judge</span></h3>
+        <div class="tw"><table class="cmp"><thead><tr><th><span class="zh">评委</span><span class="en">Judge</span></th><th><span class="zh">不用</span><span class="en">Plain</span></th><th><span class="zh">使用</span><span class="en">Skill</span></th><th>Δ</th></tr></thead><tbody><tr><td>Sonnet</td><td>2.79</td><td>3.06</td><td>+0.27</td></tr><tr><td>Opus</td><td>2.36</td><td>3.21</td><td>+0.84</td></tr><tr><td>GPT-Astra</td><td>3.48</td><td>3.72</td><td>+0.24</td></tr></tbody></table></div>
+      </div>
+      <div>
+        <h3 style="margin:0 0 12px;font-size:17px"><span class="zh">按模型</span><span class="en">By model</span></h3>
+        <div class="tw"><table class="cmp"><thead><tr><th><span class="zh">模型</span><span class="en">Model</span></th><th><span class="zh">D1–8 不用</span><span class="en">D1–8 plain</span></th><th><span class="zh">D1–8 使用</span><span class="en">D1–8 skill</span></th><th>Δ</th><th>D9</th><th>F</th></tr></thead><tbody><tr><td>Opus</td><td>3.10</td><td>3.69</td><td>+0.60</td><td><span style="white-space:nowrap">1.89 → 3.00</span></td><td><span style="white-space:nowrap">1.11 → 2.56</span></td></tr><tr><td>Sonnet</td><td>3.21</td><td>3.57</td><td>+0.36</td><td><span style="white-space:nowrap">2.22 → 3.44</span></td><td><span style="white-space:nowrap">0.67 → 1.44</span></td></tr><tr><td>GPT-Astra</td><td>2.51</td><td>2.94</td><td>+0.43</td><td><span style="white-space:nowrap">1.56 → 4.44</span></td><td><span style="white-space:nowrap">0.00 → 0.00</span></td></tr><tr><td>GPT-Sol</td><td>2.69</td><td>3.11</td><td>+0.42</td><td><span style="white-space:nowrap">1.56 → 4.78</span></td><td><span style="white-space:nowrap">0.00 → 0.22</span></td></tr></tbody></table></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:24px">
+      <h3><span class="zh">怎么读这些数字</span><span class="en">How to read this</span></h3>
+      <ul class="list zh">
+        <li><b>可以说：</b>3 位评委合并后，使用 skill 的草稿在 D1–D8 上更高，4 个模型都是如此（单个评委、单个模型的格子里并非处处如此，见左表）；方法与实验（D9）的提升最大，因为缺失信息被写成 [TODO]，而不是编造的细节。</li>
+        <li><b>不能说：</b>skill 保证不编造。编造量随模型而异：GPT-Astra、GPT-Sol 接近 0，Opus、Sonnet 在使用 skill 后反而更多。</li>
+        <li><b>不给模型排名：</b>评委之间并不一致（Sonnet 与 GPT-Astra 的排名几乎不相关，Opus 评委把 Opus 的 skill 稿排得最高，可能有自我偏好），模型的先后取决于谁来评。</li>
+      </ul>
+      <ul class="list en">
+        <li><b>What holds:</b> pooled over the three judges, skill drafts score higher on D1–D8 for all four models (not every single judge-by-model cell, see the tables). The largest gain is in method and experiments (D9), because missing information becomes [TODO] rather than invented detail.</li>
+        <li><b>What does not:</b> the skill does not guarantee zero fabrication. It varies by model: GPT-Astra and GPT-Sol stay near 0, while Opus and Sonnet fabricate more with the skill than without.</li>
+        <li><b>No model ranking:</b> the judges disagree (Sonnet and GPT-Astra rankings are nearly uncorrelated, and the Opus judge ranks Opus skill drafts highest, a possible self-preference), so the order of models depends on who judges.</li>
+      </ul>
+      <p class="zh" style="color:var(--muted);font-size:14px;margin:12px 0 0">局限：只有 3 篇论文、每格一次生成，属探索性比较而非统计结论；使用 skill 的草稿带有 [TODO]，评委能认出，并非严格盲评；F 由评委自行统计，未逐条人工核对。</p>
+      <p class="en" style="color:var(--muted);font-size:14px;margin:12px 0 0">Caveats: three papers and one generation per cell, so this is an exploratory comparison, not a statistical result; skill drafts carry [TODO] markers the judges can recognise, so scoring was not strictly blind; F was counted by the judges and not hand-verified.</p>
     </div>
   </div>
 </section>
