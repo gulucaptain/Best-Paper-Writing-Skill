@@ -2,11 +2,11 @@
 
 # <img src="assets/logo.svg" height="44" align="top" alt="logo"> Best-Paper-Writing-Skill
 
-**Generate high-quality paper drafts: abstract, introduction, method and experiments, written the way best papers are written**
+**Generate high-quality paper drafts: abstract, introduction, method, experiments and figures, written and drawn the way best papers are**
 
 🏆 Writing patterns distilled from 60 CVPR / ICCV / NeurIPS award papers, packaged as a skill for both Claude and Codex
 
-![version](https://img.shields.io/badge/version-v1.0-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
+![version](https://img.shields.io/badge/version-v1.1-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
 
 [中文](README.md) · [English](README_en.md) · [Paper list](PAPER_LIST.md) · [Changelog](CHANGELOG.md)
 
@@ -20,8 +20,9 @@ Give it your research (an intake form or a complete abstract) and get a draft th
 
 - 📝 **Abstract and introduction**: credit specific prior work, name a concrete gap and its reason, state one insight about the problem, let a few numbers carry the claim
 - 🧩 **Method and experiments**: each component told as need, mechanism, property; ablations that mirror the claims
+- 🖼️ **Figure planning and drawing** (v1.1): a figure plan (the claim each figure carries, where it goes, the material it needs), Figure 1 chosen by line of argument, schematics and method overviews drawn in one consistent style; figures that need results stay as placeholders with their plan in the caption. Layout and style rules come from the figures of 44 award papers
 - 🧭 **Routing by paper type**: eight types (method improvement, new capability, empirical law, re-examination, mechanism, theory, dataset, measurement), each with its own line of argument
-- ✅ **Built-in checker**: compares a draft with corpus statistics and flags AI habits, dashes, piled-up aphorisms and invented numbers
+- ✅ **Built-in checkers**: compares a draft with corpus statistics and flags AI habits, dashes, piled-up aphorisms and invented numbers; `check_figures.py` checks caption length and first sentence, references, vector plots and remaining placeholders
 - 📋 **Author report `report.md`**: claim, claim-evidence map, TODO list, and notes for the Limitations section
 - 🔒 **No fabrication**: missing numbers, baselines and references stay as `[TODO]`
 
@@ -97,14 +98,16 @@ Both platforms use the same `SKILL.md` format. Restart the agent if the skill do
 Best-Paper-Writing-Skill/
 ├── README.md / README_en.md
 ├── PAPER_LIST.md              # the 60 analysed papers
-├── data/papers.csv            # machine-readable version
+├── data/                      # papers.csv · figure_stats.json · figure1_types.csv
+├── template/CVPR2027/         # official CVPR 2027 LaTeX kit
+├── tools/                     # corpus figure statistics
 ├── install.sh                 # one-step install
 └── skills/bestpaper-writing/
     ├── SKILL.md               # entry point: workflow and hard rules
-    ├── references/            # abstract, introduction, method, experiments, routing, style rules, corpus statistics
+    ├── references/            # abstract, introduction, method, experiments, figures, routing, style rules, corpus statistics
     │   └── exemplars/         # paragraph and sentence exemplars
-    ├── scripts/               # check_draft.py · find_exemplars.py · intake_to_brief.py · style_metrics.py
-    ├── assets/intake_form.html
+    ├── scripts/               # check_draft.py · check_figures.py · find_exemplars.py · intake_to_brief.py · style_metrics.py
+    ├── assets/                # intake_form.html · figures/ (TikZ styles, teaser/overview/grid templates, matplotlib style)
     ├── evals/                 # held-out test cases and blind-comparison rubric
     └── agents/openai.yaml     # Codex UI metadata
 ```

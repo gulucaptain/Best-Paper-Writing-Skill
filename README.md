@@ -2,11 +2,11 @@
 
 # <img src="assets/logo.svg" height="44" align="top" alt="logo"> Best-Paper-Writing-Skill
 
-**生成最佳论文风格的高质量论文底稿：摘要、引言、方法、实验**
+**生成最佳论文风格的高质量论文底稿：摘要、引言、方法、实验与配图**
 
 🏆 写作规律提炼自 60 篇 CVPR / ICCV / NeurIPS 获奖论文，一个 Skill 同时支持 Claude 与 Codex
 
-![version](https://img.shields.io/badge/version-v1.0-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
+![version](https://img.shields.io/badge/version-v1.1-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
 
 [中文](README.md) · [English](README_en.md) · [论文清单](PAPER_LIST.md) · [更新日志](CHANGELOG.md)
 
@@ -20,8 +20,9 @@
 
 - 📝 **摘要与引言**：具体肯定前人，点明缺口及其原因，给出关于问题本身的洞察，让少数几个数字撑起主张
 - 🧩 **方法与实验**：每个组件按"需要 → 机制 → 性质"展开；消融与主张一一对应
+- 🖼️ **配图规划与绘制**（v1.1）：先做图像规划表（每张图承载哪个主张、放哪、需要什么素材），按论证路线选 Figure 1 类型，用统一的配色与样式直接画出示意图和方法总览图；需要实验结果的图留白，规划写进图注。排版与风格规则来自 44 篇获奖论文的配图统计
 - 🧭 **按论文类型路由**：八类论文（方法改进、新能力、规模规律、再检验、机理分析、理论、数据集、测量）各有论证路线
-- ✅ **自带检查器**：对照语料统计检查草稿，揪出 AI 腔、破折号、堆砌的警句和凭空的数字
+- ✅ **自带检查器**：对照语料统计检查草稿，揪出 AI 腔、破折号、堆砌的警句和凭空的数字；`check_figures.py` 检查图注长度、首句、引用、矢量图与占位图
 - 📋 **附带作者报告 `report.md`**：核心主张、主张-证据表、待补充清单，以及留给 Limitations 的要点
 - 🔒 **不编造**：没给的数字、基线、引用，一律保留为 `[TODO]`
 
@@ -97,14 +98,16 @@ cd Best-Paper-Writing-Skill
 Best-Paper-Writing-Skill/
 ├── README.md / README_en.md
 ├── PAPER_LIST.md              # 60 篇论文清单
-├── data/papers.csv            # 机器可读版
+├── data/                      # papers.csv · figure_stats.json · figure1_types.csv
+├── template/CVPR2027/         # 官方 CVPR 2027 LaTeX 模板
+├── tools/                     # 语料配图统计脚本
 ├── install.sh                 # 一键安装
 └── skills/bestpaper-writing/
     ├── SKILL.md               # 入口：工作流与硬性规则
-    ├── references/            # 摘要、引言、方法、实验、路由、风格规则、语料统计
+    ├── references/            # 摘要、引言、方法、实验、配图、路由、风格规则、语料统计
     │   └── exemplars/         # 段落与句式范例库
-    ├── scripts/               # check_draft.py · find_exemplars.py · intake_to_brief.py · style_metrics.py
-    ├── assets/intake_form.html
+    ├── scripts/               # check_draft.py · check_figures.py · find_exemplars.py · intake_to_brief.py · style_metrics.py
+    ├── assets/                # intake_form.html · figures/（TikZ 样式、teaser/总览/对比网格模板、matplotlib 样式）
     ├── evals/                 # 留出测试集与盲评标准
     └── agents/openai.yaml     # Codex 界面配置
 ```

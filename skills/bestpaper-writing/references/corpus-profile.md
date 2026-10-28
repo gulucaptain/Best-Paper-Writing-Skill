@@ -55,3 +55,13 @@ These are descriptive statistics of award papers, not causes of awards. Use them
 | Figure 1 mentioned in the introduction | 29/55 |
 | Mathematical expressions in the introduction | 9/55 |
 | Separate outline paragraph | 4/55 |
+
+## Figures (44 of 55 papers with PDFs; details in `figures.md`)
+| Observation | Two-column (CVPR/ICCV, 26) | One-column (NeurIPS, 18) |
+|---|---|---|
+| Figures / tables in the main paper | 7 / 3 (p90: 9 / 5) | 5 / 0 (p90: 6 / 2) |
+| Figure 1 on page 1 | 21 / 26 (full width 16) | page 2 in 13 / 18 |
+| Figure 1 type | showcase 9, contrast 7, concept 3, system 2, resource 2, plot 2, diagnosis 1 | plot 7, concept 5, system 2, showcase 2, contrast 2 |
+| Method overview figure | 15 / 26, usually Figure 2 | 6 / 18 |
+| Caption words (all / Figure 1) | 42 / 65 | 46 / 66 |
+| Caption opens with a bold title | 48 % | 30 % |

@@ -42,7 +42,7 @@ Derived from the same 55 award papers. Experiments are the most templated part o
 4. **Fair comparison is stated once, in the setup** (same data, official code, same backbone); do not repeat qualifiers in every results sentence.
 5. **Every ablation answers one question** and is named by the change. Pair each with the method subsection it validates.
 6. **Explain, do not only report.** After each comparison, one sentence on why, tied to the mechanism (“because the 3D filter bounds the frequency …”).
-7. **Qualitative figures** show the claim the text makes (failure of the baseline, our fix), and their captions state the takeaway first.
+7. **Qualitative figures** show the claim the text makes (failure of the baseline, our fix), and their captions state the takeaway first. Layout, method order, insets and plot style: `figures.md` §5.
 8. **Tables:** booktabs, best in bold, second underlined if useful, ↑/↓ in headers, units, the setting in the caption. Missing numbers are `\TODO{}` cells, never estimates.
 9. **Limitations** are written here, concretely, with a cause and, where possible, a figure.
 10. Style: past tense for what was done (“we trained”), present tense for what the results show (“Ours outperforms”). No dashes; colons are fine for run-in lists.

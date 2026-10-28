@@ -1,0 +1,45 @@
+id,f1_type,f1_width,note
+P01,concept,column,general solution illustrated with two network variants
+P02,contrast-schematic,full,standard RANSAC loop vs. proposed pick-and-solve
+P04,showcase,full,programs and outputs for four tasks
+P05,contrast-results,full,prior methods vs. ours on a casual video with error numbers
+P06,showcase,full,input subject images and generated contexts
+P07,contrast-schematic,column,maximal vs. maximum cliques with success and failure
+P08,showcase,column,input pair to 3D Gaussians to novel views
+P09,concept,full,two behaviours illustrated on one image
+P11,contrast-schematic,column,deterministic vs. stochastic geometry
+P15,diagnosis,full,failure of the baseline and its mechanism in four panels
+P16,system,full,model plus two applications
+P17,resource,full,datasets and the capabilities they enable
+P18,showcase,column,input frames to cameras and point clouds
+P20,plot,column,training curves showing the motivating phenomenon
+P21,showcase,full,input images to cameras depth point maps tracks
+P22,plot,column,distribution curves (Figure 1 on page 3)
+P24,contrast-schematic,column,NeRF ray vs. mip-NeRF cone
+P25,contrast-schematic,full,prior approaches (a)(b) vs. ours (c)(d)
+P26,concept,column,from sparse to dense refinement
+P27,contrast-schematic,column,Swin hierarchy vs. ViT
+P28,resource,full,gallery of the dataset categories
+P29,system,full,task model data engine in three panels
+P30,showcase,full,long-range tracks over six videos
+P32,showcase,full,grid of edits
+P33,showcase,full,generation steps real assembly and gallery
+P36,plot,full,multi-panel theory and experiment plots
+P37,concept,full,noisy images and ideal denoiser outputs
+P38,plot,full,training curves (first figure is in the experiments)
+P39,plot,full,trajectory plots (first figure is in the analysis)
+P40,plot,column,zero-shot accuracy bar chart next to the dataset size table
+P41,system,full,environments agent and knowledge base
+P42,showcase,full,gallery of samples
+P44,concept,full,geodesic random walk on a sphere
+P45,concept,full,stimuli and two classes of priors
+P46,showcase,full,examples of undesirable responses per perspective
+P47,plot,full,emergence curves re-plotted from prior work
+P49,contrast-schematic,full,RLHF pipeline vs. DPO pipeline
+P50,plot,full,return and allocation curves with annotations
+P56,plot,full,performance vs. depth across ten tasks
+P57,contrast-schematic,full,search trees base vs. RLVR plus coverage plot
+P58,system,full,gating positions plus results plots
+P59,concept,full,superposition illustrations plus scaling plots
+P60,concept,full,qualitative summary of regimes
+P19,showcase,full,conventional image normals lidar frames relighting and decomposition

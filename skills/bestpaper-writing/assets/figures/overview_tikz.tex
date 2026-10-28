@@ -1,0 +1,26 @@
+%% Method overview (usually Figure 2, top of the method section, full width).
+%% Left to right: real inputs -> given/frozen parts (grey) -> our component (blue) -> outputs.
+%% Box names = subsection names; symbols = equation symbols. Unknown mechanisms use bp/todo (dashed).
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \bpframes{(0,0.55)}{1.0}{0.75}{4}
+  \node[bp/note, text=black] at (0.75,0.15) {input $\mathcal{V}$};
+  \node[bp/frozen, minimum width=2.0cm, minimum height=1.1cm] (enc) at (3.3,0.95) {Encoder $E$\\{\tiny given / pretrained}};
+  \draw[bp/flow] (1.55,0.95) -- (enc.west);
+  \node[bp/data, minimum width=1.2cm, minimum height=1.1cm] (rep) at (5.7,0.95) {$\mathcal{F}$};
+  \draw[bp/flow] (enc.east) -- (rep.west);
+  \node[bp/ours, minimum width=2.4cm, minimum height=1.1cm] (new) at (8.6,0.95) {Our component $D$\\{\tiny Sec.~3.2}};
+  \draw[bp/flow] (rep.east) -- (new.west);
+  \node[bp/data, minimum width=1.6cm] (q) at (8.6,-0.6) {query $q$};
+  \draw[bp/flow] (q.north) -- (new.south);
+  \node[bp/todo, minimum width=2.2cm] (out) at (12.0,0.95) {outputs\\{\tiny real examples here}};
+  \draw[bp/flow] (new.east) -- (out.west);
+  \draw[decorate, decoration={brace, amplitude=4pt, mirror}, bpGray] (2.2,-0.05) -- (6.4,-0.05)
+    node[midway, below=4pt, bp/note] {once per input};
+\end{tikzpicture}
+\caption{\textbf{Overview of [Method].}
+[One sentence per stage, in data-flow order, using the symbols of Sec.~3.]
+[Colour key: grey parts are reused, blue is new.]}
+\label{fig:overview}
+\end{figure*}

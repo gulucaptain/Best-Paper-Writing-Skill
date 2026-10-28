@@ -1,0 +1,30 @@
+# bestpaper-writing matplotlib style (see references/figures.md §5, §7).
+# Sizes are for print: column 3.25 in, full width 6.875 in (CVPR); use plot_style.figsize().
+font.family: sans-serif
+font.sans-serif: Helvetica, Arial, DejaVu Sans
+mathtext.fontset: dejavusans
+font.size: 7
+axes.titlesize: 7
+axes.labelsize: 7
+xtick.labelsize: 6
+ytick.labelsize: 6
+legend.fontsize: 6
+legend.frameon: False
+axes.linewidth: 0.6
+axes.spines.top: False
+axes.spines.right: False
+axes.grid: True
+grid.color: 0.9
+grid.linewidth: 0.5
+lines.linewidth: 1.2
+lines.markersize: 3
+xtick.major.width: 0.6
+ytick.major.width: 0.6
+xtick.major.size: 2.5
+ytick.major.size: 2.5
+image.cmap: viridis
+savefig.format: pdf
+savefig.bbox: tight
+savefig.pad_inches: 0.01
+pdf.fonttype: 42
+ps.fonttype: 42

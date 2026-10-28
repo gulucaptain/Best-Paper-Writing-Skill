@@ -1,0 +1,177 @@
+{
+ "source": "arXiv versions of 44 of the 55 corpus papers (11 not on arXiv); main body = pages before the References heading",
+ "layouts": {
+  "two_column_cvpr_iccv": {
+   "papers": 26,
+   "figures_per_paper": {
+    "median": 7,
+    "p10": 3,
+    "p90": 9,
+    "n": 21
+   },
+   "tables_per_paper": {
+    "median": 3,
+    "p10": 0,
+    "p90": 5,
+    "n": 21
+   },
+   "floats_per_main_page": {
+    "median": 1.1,
+    "p10": 0.5,
+    "p90": 1.62,
+    "n": 21
+   },
+   "figure_caption_words": {
+    "median": 42,
+    "p10": 10,
+    "p90": 91,
+    "n": 187
+   },
+   "caption_first_sentence_words": {
+    "median": 7,
+    "p10": 2,
+    "p90": 20,
+    "n": 187
+   },
+   "figure1_caption_words": {
+    "median": 65.5,
+    "p10": 32,
+    "p90": 100,
+    "n": 26
+   },
+   "caption_bold_title_share": 0.48,
+   "full_width_figure_share": 0.39,
+   "subpanel_caption_share": 0.27,
+   "figure1_page": {
+    "1": 21,
+    "2": 4,
+    "3": 1
+   },
+   "figure1_above_abstract": 13,
+   "overview_figure_papers": 15,
+   "overview_figure_number": {
+    "9": 2,
+    "2": 6,
+    "1": 3,
+    "6": 1,
+    "5": 1,
+    "3": 1,
+    "4": 1
+   },
+   "figure1_types": {
+    "concept": 3,
+    "contrast-schematic": 6,
+    "showcase": 9,
+    "contrast-results": 1,
+    "diagnosis": 1,
+    "system": 2,
+    "resource": 2,
+    "plot": 2
+   },
+   "figure1_full_width": 16
+  },
+  "one_column_neurips": {
+   "papers": 18,
+   "figures_per_paper": {
+    "median": 5,
+    "p10": 3,
+    "p90": 6,
+    "n": 13
+   },
+   "tables_per_paper": {
+    "median": 0,
+    "p10": 0,
+    "p90": 2,
+    "n": 13
+   },
+   "floats_per_main_page": {
+    "median": 0.7,
+    "p10": 0.5,
+    "p90": 0.89,
+    "n": 13
+   },
+   "figure_caption_words": {
+    "median": 46.5,
+    "p10": 14,
+    "p90": 102,
+    "n": 122
+   },
+   "caption_first_sentence_words": {
+    "median": 10.0,
+    "p10": 4,
+    "p90": 21,
+    "n": 122
+   },
+   "figure1_caption_words": {
+    "median": 66.0,
+    "p10": 21,
+    "p90": 153,
+    "n": 18
+   },
+   "caption_bold_title_share": 0.3,
+   "full_width_figure_share": 0.82,
+   "subpanel_caption_share": 0.39,
+   "figure1_page": {
+    "2": 13,
+    "7": 1,
+    "9": 1,
+    "4": 1,
+    "5": 1,
+    "1": 1
+   },
+   "figure1_above_abstract": 0,
+   "overview_figure_papers": 6,
+   "overview_figure_number": {
+    "2": 3,
+    "1": 1,
+    "3": 2
+   },
+   "figure1_types": {
+    "plot": 7,
+    "concept": 5,
+    "system": 2,
+    "showcase": 2,
+    "contrast-schematic": 2
+   },
+   "figure1_full_width": 17
+  }
+ },
+ "figure1_types_by_paper_type": {
+  "L1": {
+   "concept": 4,
+   "contrast-schematic": 6,
+   "contrast-results": 1,
+   "showcase": 5,
+   "diagnosis": 1,
+   "plot": 3
+  },
+  "L2": {
+   "showcase": 4,
+   "system": 2
+  },
+  "L3": {
+   "plot": 3
+  },
+  "L4": {
+   "showcase": 1,
+   "plot": 1,
+   "contrast-schematic": 1
+  },
+  "L5": {
+   "concept": 4,
+   "system": 1
+  },
+  "L6": {
+   "contrast-schematic": 1,
+   "plot": 1
+  },
+  "L7": {
+   "resource": 2,
+   "plot": 1,
+   "system": 1
+  },
+  "L8": {
+   "showcase": 1
+  }
+ }
+}

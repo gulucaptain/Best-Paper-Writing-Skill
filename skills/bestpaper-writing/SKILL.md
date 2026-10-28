@@ -1,9 +1,9 @@
 ---
 name: bestpaper-writing
-description: Draft or rewrite the title, Abstract, Introduction, Method and Experiments of an ML/CV paper in the style of CVPR/ICCV/NeurIPS best papers, distilled from 60 award papers. Use when the user either (A) fills in the intake form (assets/intake_form.html JSON) or describes problem, idea, method and results, or (B) pastes an existing abstract (or abstract plus introduction) to make it more convincing. Can write directly into a LaTeX template such as the CVPR author kit. Not for related-work surveys, rebuttals or plain proofreading.
+description: Draft or rewrite the title, Abstract, Introduction, Method and Experiments of an ML/CV paper in the style of CVPR/ICCV/NeurIPS best papers, distilled from 60 award papers, and plan and draw its figures (Figure 1, method overview, result figures) with award-paper layout and style. Use when the user either (A) fills in the intake form (assets/intake_form.html JSON) or describes problem, idea, method and results, or (B) pastes an existing abstract (or abstract plus introduction) to make it more convincing. Can write directly into a LaTeX template such as the CVPR author kit. Not for related-work surveys, rebuttals or plain proofreading.
 ---
 
-# Best-Paper Writing (v1.0): Abstract, Introduction, Method, Experiments
+# Best-Paper Writing (v1.1): Abstract, Introduction, Method, Experiments, Figures
 
 Turn a description of a research project (or a draft abstract) into an Abstract and Introduction that read like a recent CVPR/ICCV/NeurIPS award paper.
 
@@ -15,7 +15,7 @@ This skill is grounded in a sentence-by-sentence annotation of **55 award papers
 4. **Confident, evidenced claims told as a story** — results as claims with one or two headline numbers; the work is promoted where the evidence allows; a stance when the results support one. Weaknesses belong in the Limitations section, not in the Abstract or Introduction (author preference).
 5. **Plain, rhythmic prose**. Each claim is stated once. Short, quotable sentences at the pivots (the bottleneck, the cause, the idea); the rest are full sentences (mean 20–24 words) that carry their reasons through *because*, *while*, *by*, *which*, not through trailing “, making …” clauses. Few logical connectors; colons allowed, **no dashes** (author preference). Mechanisms and examples instead of adjectives, short background, no implementation details.
 
-Scope: title, Abstract and Introduction for all eight paper types (L1–L8, `references/routing.md`); also **Method** (`references/method.md`) and **Experiments** (`references/experiments.md`), mainly for method papers (L1/L2). Write the Abstract and Introduction first; Method and Experiments follow the same claim map.
+Scope: title, Abstract and Introduction for all eight paper types (L1–L8, `references/routing.md`); also **Method** (`references/method.md`) and **Experiments** (`references/experiments.md`), mainly for method papers (L1/L2); and the **figures** of the paper (`references/figures.md`): a figure plan, Figure 1, the method overview and result figures, drawn where the content is known and left as planned placeholders where results are needed. Write the Abstract and Introduction first; Method, Experiments and figures follow the same claim map.
 
 ## Workflow
 
@@ -64,6 +64,13 @@ For each paragraph, read 2–3 award-paper paragraphs with the same function and
 3. Experiments: follow `references/experiments.md` (opener, setup, claim-first results per benchmark, ablations that mirror the claims, analysis, limitations). Tables use booktabs with `\TODO{}` cells for missing numbers.
 4. Limitations belong in the experiments or a separate section; the author preference excludes them only from the abstract and introduction.
 
+### Step 5c — Figure plan and figures (whenever Method/Experiments are written, or when asked)
+Load `references/figures.md`.
+1. Make the **figure plan** from the evidence map: one row per figure with its place, the claim it carries, its type, panels, the material needed, its status and the caption's takeaway sentence (`figures.md` §2). Every main claim has a figure or a table; every figure carries one claim.
+2. Choose **Figure 1** by route (`figures.md` §3.2): `diagnosis`/`contrast-results` for `failure`, `contrast-schematic` for `cost` and `insight`, `showcase` for `capability-gap`/`trend`, `plot` for scaling and re-examination, `concept` for mechanism and theory, `resource` for datasets. In two-column templates it goes on page 1, usually full width.
+3. **Draw now** what the user has stated: schematics of the mechanism (Figure 1 contrast panels, method overview, query or data-flow illustrations) in TikZ with `assets/figures/figures_preamble.tex`; parts whose mechanism is `[TODO]` are drawn dashed. **Leave as placeholders** everything that shows results (renders, qualitative grids, plots, numbers): a blank framed area of the planned size whose caption carries the full plan as `\FigPlan{…}`. Plots the user has data for use `assets/figures/plot_style.py`.
+4. Captions open with the takeaway (`figures.md` §6); method colours, names and symbols are the same in every figure and match the text.
+
 ### Step 6 — Output
 - **LaTeX template given** (e.g., a CVPR author kit): load `references/latex-output.md` and follow it.
 - **No template**: write Markdown (`# Abstract`, `# Introduction`).
@@ -71,7 +78,8 @@ For each paragraph, read 2–3 award-paper paragraphs with the same function and
 
 ### Step 7 — Check
 1. Run `python3 scripts/check_draft.py <files>` on the abstract and the introduction. Fix every `ERROR`. Each `WARN` means the draft is outside the range of 90% of award papers (connectors, numbers, hedges, boosters, “key insight” formulas, sentence length, runs of short sentences, trailing participial clauses) or shows a known AI-draft habit — revise or justify it in the report. `NOTE`s are information (e.g., the draft promotes the work less than award papers do). `python3 scripts/style_metrics.py <files>` shows every metric with its corpus percentile.
-2. Semantic checks:
+2. If the paper has figures, run `python3 scripts/check_figures.py main.tex`: fix every `ERROR`; each `WARN` (caption length, long first sentence, raster plots, absolute widths, too many floats) is fixed or justified; `NOTE`s list the placeholders still to fill.
+3. Semantic checks:
    - Specific prior work is credited before the gap; the gap is concrete (what fails, when, why) and the tension is resolved by the idea.
    - The insight is an observation about the problem, stated directly, not a hypothesis and not a description of the architecture.
    - The closest work is named with one checkable difference (method papers).
@@ -84,7 +92,7 @@ For each paragraph, read 2–3 award-paper paragraphs with the same function and
 
 ### Step 8 — Deliver
 1. The paper files (LaTeX project or Markdown).
-2. `report.md` for the authors: claim, tension type, insight, handle, closest work, route, claim map, `check_draft` summary, `[TODO]` list, questions, and **notes for the Limitations section** (weaknesses deliberately left out of the abstract/introduction).
+2. `report.md` for the authors: claim, tension type, insight, handle, closest work, route, claim map, `check_draft` summary, `[TODO]` list, questions, **notes for the Limitations section** (weaknesses deliberately left out of the abstract/introduction), and, when figures were planned, the **figure plan** table with the material each placeholder needs and the `check_figures` summary.
 
 ## Hard rules
 - Never fabricate numbers, datasets, baselines, citations or results.
@@ -100,6 +108,7 @@ For each paragraph, read 2–3 award-paper paragraphs with the same function and
 - **Figure and table numbers from notes or intake forms** refer to the author’s full draft. Do not cite them in the abstract or introduction unless the figure is part of the paper being written; list the example and its figure in `report.md`.
 - **One aphorism.** Use at most one or two contrastive maxims (“X is not Y”) for the thesis; state the rest as plain fact.
 - **Keep what makes the draft memorable.** When revising for a checker WARN, do not merge away the short pivot sentences, the cause sentence, or the handle in the title; fix the WARN elsewhere or justify it. A memorable draft that is slightly off the corpus statistics beats a statistically average one.
+- **Never fabricate figure content.** No invented result images, renders, curves or numbers in figures; schematics show only mechanisms the user has stated. Results figures stay placeholders with their plan in the caption until the authors supply the material.
 - Do not end sentences with a participial clause that restates significance (“…, making X possible”, “…, extending Y”, “…, bringing Z”). Award papers do this in ~8% of sentences; AI drafts in 30% or more.
 
 ## Files
@@ -113,7 +122,8 @@ For each paragraph, read 2–3 award-paper paragraphs with the same function and
 | `references/exemplars/` (`paragraphs.jsonl`, `phrasebank.csv`, `moves.jsonl`, `cards/`), `scripts/find_exemplars.py` | Step 5 |
 | `references/style-rules.md` | Steps 5, 7 |
 | `references/method.md`, `references/experiments.md` | Step 5b |
+| `references/figures.md`, `assets/figures/` (`figures_preamble.tex`, `teaser_strip.tex`, `overview_tikz.tex`, `qualitative_grid.tex`, `bestpaper.mplstyle`, `plot_style.py`) | Step 5c |
 | `references/latex-output.md` | Step 6 (LaTeX) |
-| `scripts/check_draft.py`, `scripts/style_metrics.py`, `references/corpus/corpus_stats.json` | Step 7 |
+| `scripts/check_draft.py`, `scripts/style_metrics.py`, `references/corpus/corpus_stats.json`, `scripts/check_figures.py` | Step 7 |
 
 Use `python3`. Attribution and licences: `NOTICE.md`.

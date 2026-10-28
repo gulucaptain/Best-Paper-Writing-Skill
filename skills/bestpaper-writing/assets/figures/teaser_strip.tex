@@ -1,0 +1,35 @@
+%% Figure 1 teaser for two-column templates (CVPR kit: \input right after \maketitle).
+%% Three panels: (a) prior, (b) ours, (c) evidence. Replace each panel; keep the caption structure.
+\begin{strip}
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % (a) prior mechanism or prior result
+  \begin{scope}
+    \node[bp/panel] at (0,3.0) {(a) Prior work};
+    \bpframes{(0,1.1)}{0.6}{0.45}{3}
+    \node[bp/prior, minimum width=1.6cm] (pa) at (2.3,1.35) {prior module};
+    \draw[bp/flow] (0.95,1.35) -- (pa.west);
+    \node[bp/note, text=bpPrior] at (2.6,0.3) {what it costs or where it fails};
+  \end{scope}
+  % (b) our mechanism or our result
+  \begin{scope}[xshift=5.9cm]
+    \node[bp/panel] at (0,3.0) {(b) Ours};
+    \bpframes{(0,1.1)}{0.6}{0.45}{3}
+    \node[bp/ours, minimum width=1.6cm] (pb) at (2.3,1.35) {our module};
+    \draw[bp/flow] (0.95,1.35) -- (pb.west);
+    \node[bp/note, text=bpOurs] at (2.6,0.3) {what changes};
+  \end{scope}
+  % (c) evidence: needs results, so it stays a placeholder until the numbers exist
+  \begin{scope}[xshift=11.8cm]
+    \node[bp/panel] at (0,3.0) {(c) Evidence};
+    \bpplacebox{0}{0}{5.4}{2.7}
+  \end{scope}
+\end{tikzpicture}
+\captionsetup{hypcap=false}
+\captionof{figure}{\textbf{[Takeaway in 3 to 10 words].}
+(a) [Prior work and the property that limits it].
+(b) [Our idea, in the same visual language as (a)].
+(c) \FigPlan{[plot or results that prove the claim: axes, methods, benchmark, setting]}}
+\captionsetup{hypcap=true}
+\label{fig:teaser}
+\end{strip}

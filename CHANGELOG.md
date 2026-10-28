@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.1
+
+Figures.
+
+- New Step 5c and `references/figures.md`: a figure plan built from the evidence map (one claim per figure, placement, material needed, status, caption takeaway); Figure 1 types and how to choose one by route; method overview, qualitative comparison and plot conventions; caption structure; layout and typography for two-column and one-column templates.
+- Statistics from the figures of 44 of the 55 corpus papers (`data/figure_stats.json`, `data/figure1_types.csv`, extraction script in `tools/`; no PDFs or captions are stored).
+- `assets/figures/`: TikZ palette and styles, placeholder macros with the plan in the caption, teaser, overview and qualitative-grid templates, matplotlib style with fixed method colours.
+- `scripts/check_figures.py`: captions (length, takeaway first, dashes), labels and references, raster plots, absolute widths, float counts, remaining placeholders.
+- Hard rule: never fabricate figure content; result figures stay placeholders until the authors supply the material.
+- `template/CVPR2027/`: the official CVPR 2027 author kit.
+
 ## v1.0
 
 First public release.

@@ -1,0 +1,54 @@
+%% bestpaper-writing: figure preamble (see references/figures.md).
+%% \input{figures_preamble} after the template's preamble (CVPR kit: at the end of preamble.tex).
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,fit,calc,backgrounds,decorations.pathreplacing,shapes.geometric}
+
+%% Palette: colour-blind safe (Okabe-Ito based). One colour per role, used in every figure.
+\definecolor{bpOurs}{RGB}{0,114,178}      % our method / our new component
+\definecolor{bpPrior}{RGB}{213,94,0}      % prior work, failure, cost
+\definecolor{bpData}{RGB}{0,158,115}      % data, queries, inputs
+\definecolor{bpAccent}{RGB}{230,159,0}    % a third role if needed
+\definecolor{bpGray}{RGB}{110,110,110}    % reused / frozen / given parts, annotations
+\definecolor{bpLight}{RGB}{238,238,238}   % neutral fills
+\colorlet{bpOursFill}{bpOurs!18}
+\colorlet{bpPriorFill}{bpPrior!15}
+\colorlet{bpDataFill}{bpData!15}
+
+%% TikZ styles: boxes by role, one arrow style.
+\tikzset{
+  bp/base/.style   ={draw=black!70, line width=0.5pt, rounded corners=2pt, align=center,
+                     font=\sffamily\scriptsize, minimum height=0.6cm, inner sep=3pt},
+  bp/module/.style ={bp/base, fill=white},
+  bp/frozen/.style ={bp/base, fill=bpLight, draw=bpGray, text=black!80},
+  bp/ours/.style   ={bp/base, fill=bpOursFill, draw=bpOurs, line width=0.7pt},
+  bp/prior/.style  ={bp/base, fill=bpPriorFill, draw=bpPrior},
+  bp/data/.style   ={bp/base, fill=bpDataFill, draw=bpData},
+  bp/todo/.style   ={bp/base, dashed, draw=bpGray, text=bpGray},
+  bp/flow/.style   ={-{Latex[length=1.6mm]}, line width=0.6pt, black!75},
+  bp/note/.style   ={font=\sffamily\tiny, text=bpGray, align=center},
+  bp/panel/.style  ={font=\sffamily\footnotesize\bfseries, anchor=west},
+  bp/frame/.style  ={draw=black!70, fill=white, line width=0.4pt},
+}
+
+%% A stack of video frames: \bpframes{(x,y)}{width}{height}{number-1}
+\newcommand{\bpframes}[4]{%
+  \foreach \bpi in {#4,...,0}{\draw[bp/frame] ($#1+(\bpi*0.07,\bpi*0.07)$) rectangle ++(#2,#3);}}
+
+%% Blank area for a figure that needs results; the plan goes into the caption.
+\newcommand{\figplaceholder}[2]{%
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle (#1,#2);
+    \draw[bpGray, dashed, line width=0.6pt, fill=bpLight!45] (0.4pt,0.4pt) rectangle ($(#1,#2)-(0.4pt,0.4pt)$);
+    \node[bpGray, font=\sffamily\footnotesize] at ($0.5*(#1,#2)$) {Figure placeholder (see caption)};
+  \end{tikzpicture}}
+
+%% The same blank area drawn inside an existing tikzpicture (no nested tikzpicture):
+%% \bpplacebox{x}{y}{width}{height} in the picture's units.
+\newcommand{\bpplacebox}[4]{%
+  \draw[bpGray, dashed, line width=0.6pt, fill=bpLight!45] (#1,#2) rectangle ++(#3,#4);
+  \node[bpGray, font=\sffamily\scriptsize, align=center] at ($(#1,#2)+0.5*(#3,#4)$) {Figure placeholder\\(see caption)};}
+
+%% Figure plan inside a caption (red, removed for submission by redefining it as empty).
+\providecommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
+\newcommand{\FigPlan}[1]{\TODO{Figure plan: #1}}

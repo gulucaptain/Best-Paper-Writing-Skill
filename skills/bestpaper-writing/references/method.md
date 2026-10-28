@@ -57,7 +57,7 @@ Every method is different, but award method sections do the same five things.
 ```
 
 ## 5. Checklist
-- [ ] The opener states input, output and the components, and points to the overview figure.
+- [ ] The opener states input, output and the components, and points to the overview figure (drawn as in `figures.md` §4).
 - [ ] Each subsection opens with the problem it solves; each key equation is followed by its meaning.
 - [ ] Every symbol is defined once; notation matches the figures.
 - [ ] The delta to the base method is explicit; the obvious alternative is ruled out where relevant.

@@ -1,0 +1,22 @@
+%% Qualitative comparison grid: rows = inputs, columns = methods (input, baselines, ours, GT).
+%% \bpcell{file}{width} shows the image if it exists, a grey cell otherwise (never invent results).
+%% \bpzoom{file}{width}{trim l b r t} shows a zoomed crop for an inset row.
+\newcommand{\bpcell}[2]{\IfFileExists{#1}{\includegraphics[width=#2]{#1}}{%
+  \tikz{\draw[bpGray, dashed, fill=bpLight!45] (0,0) rectangle (#2,0.75*#2);}}}
+\newcommand{\bpzoom}[3]{\IfFileExists{#1}{\includegraphics[width=#2, trim=#3, clip]{#1}}{%
+  \tikz{\draw[bpGray, dashed, fill=bpLight!45] (0,0) rectangle (#2,0.5*#2);}}}
+
+\begin{figure*}[t]
+\centering
+\setlength{\tabcolsep}{1pt}
+\renewcommand{\arraystretch}{0.6}
+\begin{tabular}{ccccc}
+\footnotesize Input & \footnotesize [Baseline 1] & \footnotesize [Baseline 2] & \footnotesize\textbf{Ours} & \footnotesize GT \\
+\bpcell{fig/qual/s1_input}{0.195\linewidth} & \bpcell{fig/qual/s1_b1}{0.195\linewidth} & \bpcell{fig/qual/s1_b2}{0.195\linewidth} & \bpcell{fig/qual/s1_ours}{0.195\linewidth} & \bpcell{fig/qual/s1_gt}{0.195\linewidth} \\
+\bpcell{fig/qual/s2_input}{0.195\linewidth} & \bpcell{fig/qual/s2_b1}{0.195\linewidth} & \bpcell{fig/qual/s2_b2}{0.195\linewidth} & \bpcell{fig/qual/s2_ours}{0.195\linewidth} & \bpcell{fig/qual/s2_gt}{0.195\linewidth} \\
+\end{tabular}
+\caption{\textbf{[Takeaway: what ours gets right that the baselines do not].}
+[Inputs and why they are hard (fast motion, zoom, long video)]. [Insets: what to look at].
+\FigPlan{[scenes, baselines, viewpoint, colour map; same crop for all methods]}}
+\label{fig:qual}
+\end{figure*}
