@@ -6,7 +6,7 @@
 
 🏆 Writing patterns distilled from 60 CVPR / ICCV / NeurIPS award papers, packaged as a skill for both Claude and Codex
 
-![version](https://img.shields.io/badge/version-v1.2-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
+[![project page](https://img.shields.io/badge/Project%20Page-online-3b5bdb?logo=googlechrome&logoColor=white)](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) ![version](https://img.shields.io/badge/version-v1.2-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
 
 [🌐 Project Page](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) · [中文](README.md) · [English](README_en.md) · [Paper list](PAPER_LIST.md) · [Changelog](CHANGELOG.md)
 
