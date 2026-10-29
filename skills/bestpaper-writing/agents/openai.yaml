@@ -1,6 +1,6 @@
 interface:
   display_name: "Best-Paper Writing"
   short_description: "Draft CVPR/ICCV/NeurIPS best-paper-style abstracts, introductions, methods, experiments and figures"
-  default_prompt: "Use $bestpaper-writing to draft the abstract and introduction for my paper from the intake form."
+  default_prompt: "Use $bestpaper-writing to write the Title, Abstract, Introduction, Methods and Experiments of my paper from the intake form JSON."
 policy:
   allow_implicit_invocation: true

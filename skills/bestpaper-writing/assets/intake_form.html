@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>论文信息表 · bestpaper-writing</title>
+<title>论文信息表 · Best-Paper-Writing-Skill</title>
 <style>
-:root{--bg:#f7f7f5;--card:#fff;--ink:#1d1d1f;--muted:#6b6b70;--line:#e2e2e0;--accent:#2f5bd3;--req:#c4352b;--ok:#2e7d4f;--soft:#eef2fc}
-@media (prefers-color-scheme:dark){:root{--bg:#141416;--card:#1d1d20;--ink:#ececee;--muted:#9a9aa2;--line:#33333a;--accent:#7a9cff;--req:#ff7b6e;--ok:#6fcf97;--soft:#22283a}}
+:root{--bg:#f7f7f5;--card:#fff;--ink:#1d1d1f;--muted:#6b6b70;--line:#e2e2e0;--accent:#2f5bd3;--req:#c4352b;--ok:#2e7d4f;--soft:#eef2fc;--gold:#b7791f;--gold-soft:#fff4dc}
+@media (prefers-color-scheme:dark){:root{--bg:#141416;--card:#1d1d20;--ink:#ececee;--muted:#9a9aa2;--line:#33333a;--accent:#7a9cff;--req:#ff7b6e;--ok:#6fcf97;--soft:#22283a;--gold:#f0b24a;--gold-soft:#3a2f10}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Segoe UI",sans-serif}
 header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
@@ -17,22 +17,43 @@ h1{font-size:18px;margin:0}
 .bar{display:flex;align-items:center;gap:6px}
 .bar i{display:block;width:70px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
 .bar i b{display:block;height:100%;background:var(--accent);width:0}
+.bar.rec i b{background:var(--gold)}
 .actions{display:flex;gap:8px;flex-wrap:wrap}
 button,.btn{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
 button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 button:hover{border-color:var(--accent)}
 .intro{margin:20px 0 8px;color:var(--muted)}
+.intro b{color:var(--ink)}
+.tip{display:flex;gap:10px;align-items:flex-start;background:var(--gold-soft);border:1px solid color-mix(in srgb,var(--gold) 35%,transparent);border-radius:10px;padding:10px 14px;margin:12px 0 4px;font-size:14px}
+.tip b{color:var(--gold)}
 section.tier{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0}
-section.tier>h2{font-size:17px;margin:0 0 4px}
-section.tier>p{margin:0 0 12px;color:var(--muted);font-size:14px}
+section.tier>h2,section.tier summary h2{font-size:17px;margin:0 0 4px;display:inline-flex;align-items:center;gap:8px}
+section.tier>p,section.tier summary p{margin:0 0 12px;color:var(--muted);font-size:14px}
+.badge{font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px}
+.b-req{background:color-mix(in srgb,var(--req) 12%,transparent);color:var(--req)}
+.b-rec{background:var(--gold-soft);color:var(--gold)}
+.b-opt{background:var(--soft);color:var(--accent)}
+details>summary{list-style:none;cursor:pointer}
+details>summary::-webkit-details-marker{display:none}
+details>summary .chev{color:var(--muted);font-size:13px;font-weight:500}
+details[open]>summary .chev .o{display:none}
+details:not([open])>summary .chev .c{display:none}
+details.sub{border-top:1px dashed var(--line);margin-top:14px;padding-top:10px}
+details.sub>summary{font-weight:600;font-size:14px;color:var(--accent)}
 .field{margin:14px 0}
 .field label{display:block;font-weight:600}
 .field .hint{color:var(--muted);font-size:13px;margin:2px 0 6px}
 .field .eg{color:var(--muted);font-size:13px;background:var(--soft);border-radius:6px;padding:4px 8px;margin:4px 0 6px}
-.req::after{content:" 必填";color:var(--req);font-size:12px;font-weight:500}
+label.req::after{content:" 必填";color:var(--req);font-size:12px;font-weight:500}
+label.rec::before{content:"⭐ ";font-size:13px}
 input[type=text],textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
 textarea{min-height:64px;resize:vertical}
+textarea.big{min-height:140px}
 .missing input,.missing textarea,.missing select{border-color:var(--req)}
+.inline{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:inline-flex;align-items:center;gap:6px;font-weight:500;border:1px solid var(--line);border-radius:99px;padding:4px 12px;background:var(--bg);cursor:pointer;font-size:14px}
+.checks input{accent-color:var(--accent);margin:0}
 .group{border:1px dashed var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;position:relative}
 .group .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .group .row>div{min-width:0}
@@ -42,7 +63,10 @@ textarea{min-height:64px;resize:vertical}
 #toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:14px;display:none}
 #report{white-space:pre-wrap;font-size:14px}
 footer{color:var(--muted);font-size:13px;margin:24px 0 40px}
-@media (max-width:640px){.group .row{grid-template-columns:1fr}.bar i{width:44px}}
+/* embedded in the project page, which shows this intro itself */
+html.embed .intro,html.embed .tip{display:none}
+html.embed #form>section.tier:first-child{margin-top:20px}
+@media (max-width:640px){.group .row,.inline{grid-template-columns:1fr}.bar i{width:44px}}
 </style>
 </head>
 <body>
@@ -58,165 +82,220 @@ footer{color:var(--muted);font-size:13px;margin:24px 0 40px}
 </div></header>
 
 <div class="wrap">
-<p class="intro">填写你的工作信息，导出 JSON 后交给 <b>bestpaper-writing</b> skill 生成标题、摘要和引言。可以用中文写，也可以直接粘贴幻灯片文字、实验表格和组会笔记。<b>第一档</b>缺项时 skill 会先追问；<b>第二档</b>决定写出来有没有 best paper 的“韵味”；<b>第三档</b>是辅助信息。内容会自动保存在本浏览器中。</p>
+<p class="intro">填写你的工作信息，导出 JSON 后交给 <b>Best-Paper-Writing-Skill</b> 生成论文底稿。可以用中文写，也可以直接粘贴幻灯片文字、实验表格和组会笔记。<b>必填 5 项</b>填完就能导出；<b>⭐ 推荐项</b>决定底稿有没有获奖论文的“韵味”，没填的 skill 会先追问一次；其余都是补充。内容自动保存在本浏览器中。</p>
+<div class="tip"><span>💡</span><span><b>补充的内容越详细，底稿质量越高。</b>每多填一项，稿子里就少一个 [TODO]；机制、公式和数字没有给出时，skill 只会标 [TODO]，不会自行编造。</span></div>
 <div id="form"></div>
 <section class="tier" id="reportBox" hidden><h2>缺项检查</h2><div id="report"></div></section>
-<footer>导出的文件可用 <code>python3 scripts/intake_to_brief.py 文件.json</code> 转成写作简报，或直接把 JSON 交给 agent：“用 bestpaper-writing 根据这个 JSON 写摘要和引言”。</footer>
+<footer>导出的文件可用 <code>python3 scripts/intake_to_brief.py 文件.json</code> 转成写作简报，或直接把 JSON 交给 agent：“用 Best-Paper-Writing-Skill，根据这份信息表 JSON 写出论文的 Title、Abstract、Introduction、Methods 和 Experiments。”</footer>
 </div>
 <div id="toast"></div>
 
 <script>
+try{if(window.self!==window.top)document.documentElement.classList.add("embed");}catch(e){document.documentElement.classList.add("embed");}
 const SCHEMA = "bestpaper-intake/v1";
-const DIFF_TYPES = ["机制 mechanism","适用范围 scope","代价 cost","假设 assumption","输入 input","输出 output","评测 evaluation","理论 theory"];
-const TYPES = ["不确定","L1 方法改进","L2 新能力/新任务","L3 规模规律/配方","L4 重新审视已有结论","L5 机理分析","L6 理论","L7 数据集/基准/平台","L8 测量/传感/物理系统"];
-const TENSIONS = ["不确定","两头取舍 tradeoff","能力缺失 capability-missing","显而易见的做法代价太高 obvious-fix-too-costly","现象无法解释 unexplained-phenomenon","开放问题 open-question","推翻常见看法 belief-overturned"];
+const AUTO = "让 skill 判断";
+const DIFF_TYPES = ["机制不同","适用范围不同","代价不同","假设不同","输入不同","输出不同","评测不同","理论不同"];
+const TYPES = [AUTO,"提出新方法，把已有任务做得更好（L1）","做到以前做不到的事（L2）","发现规模规律或训练配方（L3）","重新审视一个流行结论（L4）","解释一个现象背后的机理（L5）","理论结果（L6）","数据集 / 基准 / 平台（L7）","新的测量或传感方式（L8）"];
+const TENSIONS = [AUTO,"两个目标此消彼长（tradeoff）","现有方法根本做不到（capability-missing）","显而易见的做法代价太高（obvious-fix-too-costly）","有个现象没人能解释（unexplained-phenomenon）","一个悬而未决的问题（open-question）","结果推翻了常见看法（belief-overturned）"];
+const DIRS = ["↑ 越高越好","↓ 越低越好"];
+const CONFS = ["CVPR","ICCV","ECCV","NeurIPS","ICLR","ICML","AAAI","SIGGRAPH","其他"];
+const YEARS = ["2026","2027","2028"];
+const PAGES = ["8 页","9 页","10 页","其他"];
+const SECTIONS = ["Title","Abstract","Introduction","Method","Experiments"];
+const RELEASE = ["代码","模型权重","数据","项目页","在线 demo"];
 
-const TIERS = [
- {id:"meta", title:"基本信息", desc:"用于选模板和论证路线。", fields:[
-  {k:"working_name", label:"方法/工作名称", type:"text", eg:"Mip-NeRF；DreamBooth"},
-  {k:"venue", label:"目标会议与页数", type:"text", eg:"CVPR 2027，8 页"},
-  {k:"paper_type", label:"论文类型", type:"select", options:TYPES},
-  {k:"one_line", label:"一句话说清这篇工作", type:"textarea", req:true, hint:"我们做了什么，达到了什么，为什么能做到。", eg:"用锥台上的积分位置编码代替点采样的位置编码，使 NeRF 在不同分辨率和远近距离下渲染都不出现锯齿。"}
+/* sec = where the value is stored in the JSON (unchanged keys, so older JSON and intake_to_brief.py keep working). */
+const BLOCKS = [
+ {id:"setup", title:"基本设置", desc:"决定版式和要写哪些部分。", fields:[
+  {sec:"meta", k:"working_name", label:"方法/工作名称", type:"text", eg:"Mip-NeRF；DreamBooth"},
+  {sec:"meta", k:"venue", label:"目标会议与页数", type:"venue"},
+  {sec:"meta", k:"sections", label:"需要写哪些部分", type:"checks", options:SECTIONS, store:"array", def:SECTIONS, hint:"不勾 Method 和 Experiments 时，下方“方法与实验”一档会隐藏。"}
  ]},
- {id:"required", title:"第一档 · 必需信息", desc:"缺了它们，只能写出合格但平淡的稿子。skill 遇到缺项会先追问。", fields:[
-  {k:"task", label:"任务与应用", type:"textarea", req:true, hint:"输入是什么，输出是什么，用在哪 1–2 个场景。", eg:"输入多视角图像和相机位姿，输出新视角图像；用于 VR 漫游和三维内容制作。"},
-  {k:"prior_best", label:"现有最强方法是怎么做的", type:"textarea", req:true, hint:"写机制，不只写名字。它们的核心假设是什么。", eg:"NeRF 沿每条光线采样若干点，对点坐标做位置编码，再由 MLP 预测颜色和密度。"},
-  {k:"failure", label:"它们在什么条件下失败（看得到的现象）", type:"textarea", req:true, eg:"训练图像分辨率不同，或相机拉远渲染时，画面出现锯齿，拉近时则过度模糊。"},
-  {k:"failure_reason", label:"失败的技术原因", type:"textarea", req:true, hint:"它们计算或假设了什么，导致这个现象。这一句通常会成为引言的支点：“The main reason is that …”", eg:"光线被当作一条线，点的位置编码看不到像素覆盖的范围，MLP 无法区分近处的小像素和远处的大像素。"},
-  {k:"insight", label:"核心观察：关于问题本身的判断", type:"textarea", req:true, hint:"不是复述架构，而是“问题的什么性质让我们的设计能成立”。", eg:"一个像素对应的是一个锥体而不是一条线，位置编码应该描述这个区域。"},
-  {k:"method", label:"方法的关键组成（2–3 个）", type:"group", req:true, item:"组成", sub:[
+ {id:"req", lvl:"req", title:"必填", badge:"5 项", desc:"填完这 5 项就能导出，skill 能写出一份完整底稿。", fields:[
+  {sec:"meta", k:"one_line", label:"一句话说清这篇工作", type:"textarea", req:true, hint:"我们做了什么，达到了什么，为什么能做到。", eg:"用锥台上的积分位置编码代替点采样的位置编码，使 NeRF 在不同分辨率和远近距离下渲染都不出现锯齿。"},
+  {sec:"required", k:"task", label:"任务：输入 → 输出，用在哪", type:"textarea", req:true, eg:"输入多视角图像和相机位姿，输出新视角图像；用于 VR 漫游和三维内容制作。"},
+  {sec:"required", k:"failure", label:"现有方法在什么情况下不行（看得到的现象）", type:"textarea", req:true, eg:"训练图像分辨率不同，或相机拉远渲染时，画面出现锯齿，拉近时则过度模糊。"},
+  {sec:"required", k:"method", label:"方法的关键组成（2–3 个）", type:"group", req:true, item:"组成", sub:[
     {k:"name", label:"名称", type:"text", eg:"积分位置编码"},
     {k:"mechanism", label:"一句话原理", type:"text", eg:"对锥台内的高斯近似求位置编码的期望"}]},
-  {k:"results", label:"头条结果（最能撑起主张的 1–3 个）", type:"group", req:true, item:"结果", hint:"没有数字也请写出对比设置，数字可以先空着。", sub:[
+  {sec:"required", k:"results", label:"头条结果（1–3 个）", type:"group", req:true, item:"结果", hint:"没有数字也请写出对比设置，数字可以先空着；数据或模型规模也可以写在这里。", sub:[
     {k:"benchmark", label:"数据集/场景", type:"text", eg:"多尺度 Blender 数据集"},
-    {k:"metric", label:"指标（越高/越低越好）", type:"text", eg:"PSNR，越高越好"},
+    {k:"metric", label:"指标", type:"text", eg:"PSNR"},
+    {k:"dir", label:"方向", type:"select", options:DIRS},
     {k:"baseline", label:"对比方法与其数值", type:"text", eg:"NeRF：[数值]"},
     {k:"ours", label:"我们的数值", type:"text", eg:"[数值]"},
-    {k:"where", label:"表/图编号", type:"text", eg:"Tab. 1"}]},
-  {k:"closest", label:"最相近的工作（1–3 个）与可核对的差异", type:"group", req:true, item:"相近工作", hint:"审稿人一定会问“这和 X 有什么不同”。", sub:[
+    {k:"where", label:"表/图编号", type:"text", eg:"Tab. 1"}]}
+ ]},
+ {id:"rec", lvl:"rec", title:"推荐填写", badge:"⭐ 8 项", desc:"best paper 与普通论文的差距主要在这里。没填的项 skill 会先追问一次，问不到就写成 [TODO]。", fields:[
+  {sec:"required", k:"prior_best", label:"现有最强方法是怎么做的", type:"textarea", rec:true, hint:"写机制，不只写名字。引言要先肯定它，再指出问题。", eg:"NeRF 沿每条光线采样若干点，对点坐标做位置编码，再由 MLP 预测颜色和密度。"},
+  {sec:"required", k:"failure_reason", label:"失败的技术原因", type:"textarea", rec:true, hint:"这一句通常会成为引言的支点：“The main reason is that …”", eg:"光线被当作一条线，点的位置编码看不到像素覆盖的范围。"},
+  {sec:"required", k:"insight", label:"核心观察：关于问题本身的判断", type:"textarea", rec:true, hint:"不是复述架构，而是“问题的什么性质让我们的设计能成立”。", eg:"一个像素对应的是一个锥体而不是一条线，位置编码应该描述这个区域。"},
+  {sec:"required", k:"closest", label:"最相近的工作（1–3 个）与差异", type:"group", rec:true, item:"相近工作", hint:"审稿人一定会问“这和 X 有什么不同”。", sub:[
     {k:"name", label:"工作名称", type:"text", eg:"NeRF"},
-    {k:"bibkey", label:"bib key（如有）", type:"text", eg:"mildenhall2020nerf"},
     {k:"diff_type", label:"差异类型", type:"select", options:DIFF_TYPES},
-    {k:"difference", label:"具体差异", type:"text", eg:"它对光线上的点编码，我们对锥台区域编码"}]}
+    {k:"difference", label:"具体差异", type:"text", eg:"它对光线上的点编码，我们对锥台区域编码"},
+    {k:"bibkey", label:"bib key（如有）", type:"text", eg:"mildenhall2020nerf"}]},
+  {sec:"enhancers", k:"example", label:"一个具体画面", type:"textarea", rec:true, hint:"失败案例、场景，或一个惊人的数字（应用领域列表不算）。", eg:"同一场景拉近和拉远渲染：远处出现锯齿，近处过度模糊。"},
+  {sec:"enhancers", k:"benefits_efficiency", label:"效率优势", type:"textarea", rec:true, hint:"内存、速度、参数量、数据量，最好有数字。", eg:"比超采样基线快 [X] 倍。"},
+  {sec:"enhancers", k:"surprising", label:"意外或反直觉之处", type:"textarea", rec:true, eg:"模型参数减半，渲染误差反而更低。"},
+  {sec:"enhancers", k:"handle", label:"团队内部对核心想法的叫法", type:"text", rec:true, hint:"区别于方法名；可能会进标题。", eg:"像素是锥体而不是光线 / pick & solve"}
  ]},
- {id:"enhancers", title:"第二档 · 决定“韵味”的信息", desc:"best paper 与普通论文的差距主要在这里。能写多少写多少。", fields:[
-  {k:"benefits_efficiency", label:"效率优势", type:"textarea", hint:"内存、速度、参数量、数据量，最好有数字。", eg:"比超采样基线快 [X] 倍。"},
-  {k:"benefits_integration", label:"能接入哪些现有管线/系统", type:"textarea", eg:"可直接替换现有 NeRF 实现中的位置编码。"},
-  {k:"benefits_inputs", label:"支持哪些输入或使用方式", type:"textarea", eg:"一个模型同时处理多个分辨率的训练图像。"},
-  {k:"applications", label:"新能力与应用", type:"textarea", eg:"零样本 inpainting / outpainting；交互式拖拽场景。"},
-  {k:"example", label:"一个具体画面", type:"textarea", hint:"失败案例、场景，或一个惊人的数字（应用领域列表不算）。", eg:"同一场景拉近和拉远渲染：远处出现锯齿，近处过度模糊。"},
-  {k:"surprising", label:"意外或反直觉之处", type:"textarea", eg:"模型参数减半，渲染误差反而更低。"},
-  {k:"trend", label:"受哪项热门工作启发 / 属于哪条发展线", type:"textarea", hint:"有的话，开头可以顺势写。", eg:"受图形学中 mip-mapping 的启发。"},
-  {k:"tension", label:"矛盾类型", type:"select", options:TENSIONS},
-  {k:"stance", label:"立场：读者读完应改变什么看法", type:"textarea", eg:"神经场也需要像传统渲染一样处理抗锯齿。"},
-  {k:"handle", label:"团队内部对核心想法的叫法", type:"text", hint:"区别于方法名；可能会进标题。", eg:"像素是锥体而不是光线 / pick & solve"}
+ {id:"opt", lvl:"opt", fold:true, title:"补充信息", badge:"可选", desc:"让措辞更准确、引用更完整。填得越多，[TODO] 越少。", fields:[
+  {sec:"enhancers", k:"applications", label:"额外优势与应用", type:"textarea", hint:"能接入哪些现有管线、支持哪些输入、带来哪些新应用。", eg:"可直接替换现有 NeRF 实现中的位置编码；一个模型同时处理多种分辨率。"},
+  {sec:"meta", k:"paper_type", label:"论文类型", type:"select", options:TYPES},
+  {sec:"enhancers", k:"tension", label:"这篇论文解决的矛盾属于哪种", type:"select", options:TENSIONS},
+  {sec:"support", k:"secondary", label:"次要结果与消融发现", type:"textarea"},
+  {sec:"support", k:"release", label:"会开源哪些内容", type:"checks", options:RELEASE, store:"string"},
+  {sec:"support", k:"limitations", label:"局限与失败案例", type:"textarea", hint:"不会写进摘要和引言，只用于把握措辞，并整理进 Limitations 一节。"},
+  {sec:"support", k:"materials", label:"其他材料与要求", type:"textarea", cls:"big", hint:"粘贴幻灯片文字、组会笔记、相关工作清单，或写下其他要求（如“突出效率优势”）。"},
+  {sec:"support", k:"bib", label:"refs.bib 内容", type:"textarea", hint:"粘贴 BibTeX；没有的话引用会以 [TODO: cite …] 标出。"}
  ]},
- {id:"support", title:"第三档 · 辅助信息", desc:"让措辞更准确、引用更完整。", fields:[
-  {k:"figure1", label:"Figure 1 画什么", type:"textarea", eg:"左：NeRF 的锯齿；右：我们的结果。"},
-  {k:"data_scale", label:"数据/模型规模", type:"text", eg:"[N] 个场景，每个场景 [M] 张图像"},
-  {k:"secondary", label:"次要结果与消融发现", type:"textarea"},
-  {k:"release", label:"是否开源（代码/数据/项目页）", type:"text"},
-  {k:"limitations", label:"局限与失败案例", type:"textarea", hint:"不会写进摘要和引言，只用于把握措辞，并整理进 Limitations 一节。"},
-  {k:"materials", label:"其他材料路径或粘贴内容", type:"textarea", hint:"幻灯片、实验表格、组会笔记的路径，或直接粘贴文字。"},
-  {k:"bib", label:"refs.bib 内容", type:"textarea", hint:"粘贴 BibTeX；没有的话引用会以 [TODO: cite …] 标出。"},
-  {k:"notes", label:"其他要求", type:"textarea", eg:"不用破折号；突出效率优势。"}
- ]},
- {id:"methodexp", title:"第四档 · 方法与实验", desc:"只在需要写 Method 和 Experiments 时填写。机制、公式和数字没有给出时，skill 会标 TODO，不会自行编造。", fields:[
-  {k:"setting", label:"问题设定与符号", type:"textarea", hint:"输入、输出、关键变量的符号定义。", eg:"输入 N 张 RGB 图像 I_i，输出相机参数 g_i、深度图 D_i …"},
-  {k:"base_model", label:"基于或修改的已有模型，以及保持不变的部分", type:"textarea", eg:"基于 3DGS 代码；损失函数、密度控制策略保持不变，只改滤波。"},
-  {k:"overview", label:"整体流程与 Figure 2", type:"textarea", hint:"输入 → 各组件 → 输出；方法总览图画什么。"},
-  {k:"components", label:"方法组件（每个组件一条）", type:"group", item:"组件", hint:"需要什么 → 怎么做 → 为什么有效。可以直接粘贴公式或伪代码。", sub:[
+ {id:"methodexp", lvl:"opt", fold:true, needs:["Method","Experiments"], title:"方法与实验", badge:"可选", desc:"写 Method 和 Experiments 时使用。最省事的方式是把材料直接粘贴到第一个框里；想写得更准，再展开逐项填写。", fields:[
+  {sec:"methodexp", k:"paste", label:"直接粘贴方法与实验材料", type:"textarea", cls:"big", hint:"方法说明、公式或伪代码、主结果表（CSV / Markdown / LaTeX 均可）、消融结果、实现细节，原样粘贴即可。"},
+  {subhead:"逐项填写（可选，越详细越好）", sec:"methodexp", k:"setting", label:"问题设定与符号", type:"textarea", eg:"输入 N 张 RGB 图像 I_i，输出相机参数 g_i、深度图 D_i …"},
+  {sec:"methodexp", k:"base_model", label:"基于或修改的已有模型，以及保持不变的部分", type:"textarea", eg:"基于 3DGS 代码；损失函数、密度控制策略保持不变，只改滤波。"},
+  {sec:"methodexp", k:"overview", label:"整体流程（输入 → 各组件 → 输出）", type:"textarea"},
+  {sec:"methodexp", k:"components", label:"方法组件（每个组件一条）", type:"group", item:"组件", hint:"需要什么 → 怎么做 → 为什么有效。", sub:[
     {k:"name", label:"名称", type:"text", eg:"3D smoothing filter"},
     {k:"need", label:"它解决什么问题", type:"text", eg:"放大时出现高频伪影"},
-    {k:"mechanism", label:"怎么做（公式、伪代码）", type:"text", eg:"按训练视角的最大采样率限制每个高斯的频率"},
-    {k:"property", label:"为什么有效 / 保证什么性质", type:"text", eg:"训练后成为表示的一部分，与视角无关"}]},
-  {k:"objective", label:"训练目标、优化与推理流程", type:"textarea", eg:"损失 = 光度损失 + λ·正则；推理时 …"},
-  {k:"implementation", label:"实现细节", type:"textarea", hint:"代码基础、迭代次数、超参、硬件、耗时。会放进实验设置或附录。"},
-  {k:"datasets", label:"数据集", type:"group", item:"数据集", sub:[
+    {k:"mechanism", label:"怎么做（公式、伪代码）", type:"text"},
+    {k:"property", label:"为什么有效 / 保证什么性质", type:"text"}]},
+  {sec:"methodexp", k:"objective", label:"训练目标、优化与推理流程", type:"textarea", eg:"损失 = 光度损失 + λ·正则；推理时 …"},
+  {sec:"methodexp", k:"implementation", label:"实现细节", type:"textarea", hint:"代码基础、迭代次数、超参、硬件、耗时。"},
+  {sec:"methodexp", k:"datasets", label:"数据集", type:"group", item:"数据集", sub:[
     {k:"name", label:"名称", type:"text"}, {k:"size", label:"规模与划分", type:"text"}, {k:"why", label:"为什么选它", type:"text"}]},
-  {k:"metrics", label:"评价指标及方向", type:"textarea", eg:"PSNR ↑，SSIM ↑，LPIPS ↓"},
-  {k:"baselines", label:"对比方法", type:"group", item:"对比方法", sub:[
+  {sec:"methodexp", k:"metrics", label:"评价指标", type:"group", item:"指标", sub:[
+    {k:"name", label:"指标", type:"text", eg:"LPIPS"}, {k:"dir", label:"方向", type:"select", options:DIRS}]},
+  {sec:"methodexp", k:"baselines", label:"对比方法", type:"group", item:"对比方法", sub:[
     {k:"name", label:"名称", type:"text"}, {k:"bibkey", label:"bib key", type:"text"}, {k:"how", label:"如何运行", type:"text", eg:"官方代码、同样的训练数据"}]},
-  {k:"main_tables", label:"主结果表", type:"textarea", hint:"直接粘贴表格（CSV、Markdown 或 LaTeX 都可以），并注明表号。"},
-  {k:"ablations", label:"消融实验", type:"group", item:"消融", sub:[
+  {sec:"methodexp", k:"main_tables", label:"主结果表", type:"textarea", hint:"直接粘贴表格，并注明表号。"},
+  {sec:"methodexp", k:"ablations", label:"消融实验", type:"group", item:"消融", sub:[
     {k:"variant", label:"变体（去掉或替换了什么）", type:"text", eg:"w/o 3D filter"},
     {k:"claim", label:"验证哪个设计主张", type:"text"},
     {k:"result", label:"结果", type:"text"}]},
-  {k:"analysis", label:"其他分析", type:"textarea", hint:"泛化、效率、规模、用户研究、应用。"},
-  {k:"qualitative", label:"定性结果与图", type:"textarea", hint:"每张图想说明什么。"},
-  {k:"failure_cases", label:"失败案例", type:"textarea", hint:"写进 Limitations，并配图说明。"}
+  {sec:"methodexp", k:"analysis", label:"其他分析", type:"textarea", hint:"泛化、效率、规模、用户研究、应用。"},
+  {sec:"methodexp", k:"qualitative", label:"定性结果与图", type:"textarea", hint:"每张图想说明什么。"},
+  {sec:"methodexp", k:"failure_cases", label:"失败案例", type:"textarea", hint:"写进 Limitations，并配图说明。"}
  ]}
 ];
+const STORES = ["meta","required","enhancers","support","methodexp"];
+const ALL = BLOCKS.flatMap(b=>b.fields.map(f=>({...f,block:b})));
 
 const STORE="bestpaper-intake-draft";
 const $=s=>document.querySelector(s);
 const formEl=$("#form");
 let data={};
-function initData(){for(const t of TIERS)if(!data[t.id]||typeof data[t.id]!=="object")data[t.id]={};}
+const openState={};
+function initData(){for(const s of STORES)if(!data[s]||typeof data[s]!=="object")data[s]={};
+  if(typeof data.methodexp.metrics==="string"&&data.methodexp.metrics.trim())data.methodexp.metrics=data.methodexp.metrics.split(/[，,;；\n]+/).filter(x=>x.trim()).map(x=>({name:x.replace(/[↑↓]/g,'').trim(),dir:/↓/.test(x)?DIRS[1]:DIRS[0]}));
+  if(!Array.isArray(data.meta.sections))data.meta.sections=SECTIONS.slice();
+  else data.meta.sections=data.meta.sections.filter(x=>SECTIONS.includes(x));
+}
 
 function el(tag,attrs={},html=""){const e=document.createElement(tag);for(const[k,v] of Object.entries(attrs))e.setAttribute(k,v);if(html)e.innerHTML=html;return e;}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 
 function input(f,val,on){
   let e;
-  if(f.type==="textarea"){e=el("textarea");e.value=val||"";}
-  else if(f.type==="select"){e=el("select");for(const o of f.options){const op=el("option",{value:o},esc(o));e.appendChild(op);}e.value=val||f.options[0];}
+  if(f.type==="textarea"){e=el("textarea");if(f.cls)e.className=f.cls;e.value=val||"";}
+  else if(f.type==="select"){e=el("select");for(const o of f.options){e.appendChild(el("option",{value:o},esc(o)));}
+    if(val&&!f.options.includes(val))e.appendChild(el("option",{value:val},esc(val)));e.value=val||f.options[0];}
   else{e=el("input",{type:"text"});e.value=val||"";}
   if(f.eg&&f.type==="text")e.placeholder="例："+f.eg;
-  e.addEventListener("input",()=>on(e.value));
-  if(f.type==="select")on(e.value);
+  e.addEventListener(f.type==="select"?"change":"input",()=>on(e.value));
+  if(f.type==="select"&&!val)on(e.value);
   return e;
+}
+function checks(f,val,on){
+  const cur=new Set(Array.isArray(val)?val:String(val||"").split(/[、,，]\s*/).filter(Boolean));
+  const box=el("div",{class:"checks"});
+  for(const o of f.options){const l=el("label");const c=el("input",{type:"checkbox"});c.checked=cur.has(o);
+    c.onchange=()=>{c.checked?cur.add(o):cur.delete(o);const arr=f.options.filter(x=>cur.has(x));on(f.store==="array"?arr:arr.join("、"));};
+    l.appendChild(c);l.appendChild(document.createTextNode(o));box.appendChild(l);}
+  return box;
+}
+function venue(){
+  const m=data.meta;const row=el("div",{class:"inline"});
+  const mk=(k,opts)=>{const s=el("select");s.appendChild(el("option",{value:""},k==="venue_conf"?"会议":k==="venue_year"?"年份":"页数"));
+    for(const o of opts)s.appendChild(el("option",{value:o},o));s.value=m[k]||"";
+    s.onchange=()=>{m[k]=s.value;m.venue=[m.venue_conf,m.venue_year].filter(Boolean).join(" ")+(m.venue_pages?"，"+m.venue_pages:"");save();};return s;};
+  row.appendChild(mk("venue_conf",CONFS));row.appendChild(mk("venue_year",YEARS));row.appendChild(mk("venue_pages",PAGES));
+  return row;
+}
+
+function fieldBox(f){
+  const d=data[f.sec];
+  const box=el("div",{class:"field",id:"f-"+f.sec+"-"+f.k});
+  box.appendChild(el("label",{class:f.req?"req":(f.rec?"rec":"")},esc(f.label)));
+  if(f.hint)box.appendChild(el("div",{class:"hint"},esc(f.hint)));
+  if(f.type==="group"){
+    const list=el("div");box.appendChild(list);
+    let arr=Array.isArray(d[f.k])?d[f.k]:[];
+    if(!arr.length)arr=[{}];d[f.k]=arr;
+    const draw=()=>{list.innerHTML="";arr.forEach((it,i)=>{
+      const g=el("div",{class:"group"});
+      const del=el("button",{class:"del",type:"button"},"删除");del.onclick=()=>{arr.splice(i,1);if(!arr.length)arr.push({});draw();save();};
+      g.appendChild(del);g.appendChild(el("b",{},esc(f.item)+" "+(i+1)));
+      const row=el("div",{class:"row"});
+      for(const sf of f.sub){const c=el("div");c.appendChild(el("small",{},esc(sf.label)));c.appendChild(input(sf,it[sf.k],v=>{it[sf.k]=v;save();}));row.appendChild(c);}
+      g.appendChild(row);list.appendChild(g);});};
+    draw();
+    const add=el("button",{class:"add",type:"button"},"+ 添加"+esc(f.item));add.onclick=()=>{arr.push({});draw();save();};
+    box.appendChild(add);
+  }else if(f.type==="checks"){
+    box.appendChild(checks(f,d[f.k]??f.def,v=>{d[f.k]=v;save();if(f.k==="sections")visibility();}));
+  }else if(f.type==="venue"){
+    box.appendChild(venue());
+  }else{
+    if(f.eg&&f.type==="textarea")box.appendChild(el("div",{class:"eg"},"例："+esc(f.eg)));
+    box.appendChild(input(f,d[f.k],v=>{d[f.k]=v;save();}));
+  }
+  return box;
 }
 
 function render(){
   initData();
   formEl.innerHTML="";
-  for(const t of TIERS){
-    data[t.id]=data[t.id]||{};
-    const s=el("section",{class:"tier",id:"tier-"+t.id});
-    s.appendChild(el("h2",{},esc(t.title)));s.appendChild(el("p",{},esc(t.desc)));
-    for(const f of t.fields){
-      const box=el("div",{class:"field",id:"f-"+t.id+"-"+f.k});
-      box.appendChild(el("label",{class:f.req?"req":""},esc(f.label)));
-      if(f.hint)box.appendChild(el("div",{class:"hint"},esc(f.hint)));
-      if(f.type==="group"){
-        if(f.eg)box.appendChild(el("div",{class:"eg"},"例："+esc(f.eg)));
-        const list=el("div");box.appendChild(list);
-        let arr=Array.isArray(data[t.id][f.k])?data[t.id][f.k]:[];
-        if(!arr.length)arr=[{}];data[t.id][f.k]=arr;
-        const draw=()=>{list.innerHTML="";arr.forEach((it,i)=>{
-          const g=el("div",{class:"group"});
-          const del=el("button",{class:"del",type:"button"},"删除");del.onclick=()=>{arr.splice(i,1);if(!arr.length)arr.push({});draw();save();};
-          g.appendChild(del);g.appendChild(el("b",{},esc(f.item)+" "+(i+1)));
-          const row=el("div",{class:"row"});
-          for(const sf of f.sub){const c=el("div");c.appendChild(el("small",{},esc(sf.label)));c.appendChild(input(sf,it[sf.k],v=>{it[sf.k]=v;save();}));row.appendChild(c);}
-          g.appendChild(row);list.appendChild(g);});};
-        draw();
-        const add=el("button",{class:"add",type:"button"},"+ 添加"+esc(f.item));add.onclick=()=>{arr.push({});draw();save();};
-        box.appendChild(add);
-      }else{
-        if(f.eg&&f.type==="textarea")box.appendChild(el("div",{class:"eg"},"例："+esc(f.eg)));
-        box.appendChild(input(f,data[t.id][f.k],v=>{data[t.id][f.k]=v;save();}));
-      }
-      s.appendChild(box);
+  for(const b of BLOCKS){
+    const s=el("section",{class:"tier",id:"tier-"+b.id});
+    const badge=b.badge?`<span class="badge b-${b.lvl}">${esc(b.badge)}</span>`:"";
+    let host=s;
+    if(b.fold){
+      const det=el("details");if(openState[b.id])det.open=true;det.ontoggle=()=>{openState[b.id]=det.open;};
+      const sum=el("summary",{},`<h2>${esc(b.title)} ${badge} <span class="chev"><span class="c">展开 ▾</span><span class="o">收起 ▴</span></span></h2><p>${esc(b.desc)}</p>`);
+      det.appendChild(sum);s.appendChild(det);host=det;
+    }else{
+      s.appendChild(el("h2",{},esc(b.title)+" "+badge));s.appendChild(el("p",{},esc(b.desc)));
+    }
+    let subHost=null;
+    for(const f of b.fields){
+      if(f.subhead){subHost=el("details",{class:"sub"});subHost.appendChild(el("summary",{},esc(f.subhead)));host.appendChild(subHost);}
+      (subHost||host).appendChild(fieldBox(f));
     }
     formEl.appendChild(s);
   }
-  progress();
+  visibility();progress();
+}
+function visibility(){
+  const secs=data.meta.sections||SECTIONS;
+  for(const b of BLOCKS)if(b.needs){const t=$("#tier-"+b.id);if(t)t.hidden=!b.needs.some(x=>secs.includes(x));}
 }
 
 function filled(f,v){
-  if(f.type==="group")return Array.isArray(v)&&v.some(it=>Object.entries(it).some(([k,x])=>x&&String(x).trim()&&!(f.sub.find(s=>s.k===k)||{}).options));
-  if(f.type==="select")return !!v&&v!=="不确定";
-  return v&&String(v).trim().length>0;
+  if(f.type==="group")return Array.isArray(v)&&v.some(it=>Object.entries(it).some(([k,x])=>x&&String(x).trim()&&!((f.sub.find(s=>s.k===k)||{}).options)));
+  if(f.type==="select")return !!v&&v!==AUTO&&v!=="不确定";
+  if(f.type==="venue")return !!(data.meta.venue_conf||data.meta.venue);
+  if(Array.isArray(v))return v.length>0;
+  return !!v&&String(v).trim().length>0;
 }
 function progress(){
   const bars=$("#bars");bars.innerHTML="";
-  for(const t of TIERS.slice(1)){
-    const n=t.fields.length,k=t.fields.filter(f=>filled(f,data[t.id][f.k])).length;
-    const b=el("span",{class:"bar"},esc(t.title.split(" · ")[0])+" <i><b style='width:"+(100*k/n)+"%'></b></i> "+k+"/"+n);
-    bars.appendChild(b);
+  for(const [lvl,name] of [["req","必填"],["rec","⭐ 推荐"]]){
+    const fs=ALL.filter(f=>f.block.lvl===lvl),n=fs.length,k=fs.filter(f=>filled(f,data[f.sec][f.k])).length;
+    bars.appendChild(el("span",{class:"bar "+lvl},name+" <i><b style='width:"+(100*k/n)+"%'></b></i> "+k+"/"+n));
   }
+  const k=ALL.filter(f=>f.block.lvl==="opt"&&filled(f,data[f.sec][f.k])).length;
+  bars.appendChild(el("span",{class:"bar"},"补充已填 "+k+" 项"));
 }
 let timer;
 function save(){progress();clearTimeout(timer);timer=setTimeout(()=>{try{localStorage.setItem(STORE,JSON.stringify(data));}catch(e){}},300);}
@@ -224,20 +303,23 @@ function toast(m){const t=$("#toast");t.textContent=m;t.style.display="block";se
 
 function missing(){
   const out=[];document.querySelectorAll(".missing").forEach(e=>e.classList.remove("missing"));
-  for(const t of TIERS)for(const f of t.fields){
-    if(!filled(f,data[t.id][f.k])){out.push({tier:t.id,field:f.k,label:f.label,req:!!f.req});
-      if(f.req)$("#f-"+t.id+"-"+f.k).classList.add("missing");}
+  for(const f of ALL){
+    if(f.block.id==="setup")continue;
+    if(!filled(f,data[f.sec][f.k])){out.push({sec:f.sec,field:f.k,label:f.label,lvl:f.block.lvl});
+      if(f.req){const b=$("#f-"+f.sec+"-"+f.k);if(b)b.classList.add("missing");}}
   }
   return out;
 }
 function exportObj(){
   const clean=JSON.parse(JSON.stringify(data));
-  for(const t of TIERS)for(const f of t.fields)if(f.type==="group"){
-    clean[t.id][f.k]=(clean[t.id][f.k]||[]).filter(it=>f.sub.some(s=>s.type!=="select"&&it[s.k]&&String(it[s.k]).trim()));
+  for(const f of ALL)if(f.type==="group"){
+    clean[f.sec][f.k]=(clean[f.sec][f.k]||[]).filter(it=>f.sub.some(s=>s.type!=="select"&&it[s.k]&&String(it[s.k]).trim()));
   }
   const miss=missing();
   return {schema:SCHEMA,exported_at:new Date().toISOString(),...clean,
-    _missing:{required:miss.filter(m=>m.req).map(m=>m.tier+"."+m.field),optional:miss.filter(m=>!m.req).map(m=>m.tier+"."+m.field)}};
+    _missing:{required:miss.filter(m=>m.lvl==="req").map(m=>m.sec+"."+m.field),
+      recommended:miss.filter(m=>m.lvl==="rec").map(m=>m.sec+"."+m.field),
+      optional:miss.filter(m=>m.lvl==="opt").map(m=>m.sec+"."+m.field)}};
 }
 $("#btnExport").onclick=()=>{
   const obj=exportObj();
@@ -247,16 +329,16 @@ $("#btnExport").onclick=()=>{
   toast(obj._missing.required.length?"已导出；还有 "+obj._missing.required.length+" 个必填项未填":"已导出");
 };
 $("#btnCheck").onclick=()=>{
-  const m=missing(),r=m.filter(x=>x.req),o=m.filter(x=>!x.req&&x.tier==="enhancers");
+  const m=missing(),r=m.filter(x=>x.lvl==="req"),o=m.filter(x=>x.lvl==="rec");
   $("#reportBox").hidden=false;
-  $("#report").textContent=(r.length?"必填未填（skill 会先追问这些）：\n· "+r.map(x=>x.label).join("\n· "):"必填项已全部填写。")+
-    (o.length?"\n\n第二档尚缺（填得越多，写出来越有亮点）：\n· "+o.map(x=>x.label).join("\n· "):"");
+  $("#report").textContent=(r.length?"必填未填：\n· "+r.map(x=>x.label).join("\n· "):"必填项已全部填写，可以导出。")+
+    (o.length?"\n\n⭐ 推荐项尚缺（skill 会先追问这些；填得越多，写出来越有亮点）：\n· "+o.map(x=>x.label).join("\n· "):"\n\n⭐ 推荐项已全部填写。");
   $("#reportBox").scrollIntoView({behavior:"smooth"});
 };
 $("#btnImport").onclick=()=>$("#file").click();
 $("#file").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{
   try{const o=JSON.parse(r.result);if(o.schema&&!/^bestpaper-intake\/v1$/.test(o.schema))toast("版本不同，已尽量导入");
-    data={};for(const t of TIERS)data[t.id]=o[t.id]||{};render();save();toast("已导入");}
+    data={};for(const s of STORES)data[s]=o[s]||{};render();save();toast("已导入");}
   catch(err){toast("无法读取这个文件");}};r.readAsText(f);e.target.value="";};
 
 try{const s=localStorage.getItem(STORE);if(s)data=JSON.parse(s)||{};}catch(e){data={};}

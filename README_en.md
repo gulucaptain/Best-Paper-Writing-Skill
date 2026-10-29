@@ -6,9 +6,9 @@
 
 🏆 Writing patterns distilled from 60 CVPR / ICCV / NeurIPS award papers, packaged as a skill for both Claude and Codex
 
-![version](https://img.shields.io/badge/version-v1.1-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
+![version](https://img.shields.io/badge/version-v1.2-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
 
-[中文](README.md) · [English](README_en.md) · [Paper list](PAPER_LIST.md) · [Changelog](CHANGELOG.md)
+[🌐 Project Page](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) · [中文](README.md) · [English](README_en.md) · [Paper list](PAPER_LIST.md) · [Changelog](CHANGELOG.md)
 
 </div>
 
@@ -48,24 +48,25 @@ The rules come from a sentence-level annotation of the corpus. Every rule has bo
 
 ### 📝 Mode A: fill in the form
 
-Open [`skills/bestpaper-writing/assets/intake_form.html`](skills/bestpaper-writing/assets/intake_form.html) in a browser (offline, autosaves, exports and re-imports JSON; the interface is in Chinese). Four tiers:
+Open [`skills/bestpaper-writing/assets/intake_form.html`](skills/bestpaper-writing/assets/intake_form.html) in a browser (offline, autosaves, exports and re-imports JSON; the interface is in Chinese). Only five fields are required; the more you add, the better the draft:
 
-| Tier | Content |
+| Block | Content |
 |---|---|
-| 🔴 Required | task, strongest prior approach, failure and its reason, key insight, method components, headline results, closest work |
-| 🟡 Memorability | efficiency, integration with existing pipelines, a concrete example, what is surprising, stance, the team's name for the idea |
-| 🟢 Support | Figure 1, data scale, limitations, refs.bib |
-| 🔵 Method and experiments | notation, components, objective, datasets, metrics, baselines, result tables, ablations |
+| ⚙️ Setup | venue / year / pages (dropdowns), sections to write (checkboxes) |
+| 🔴 Required (5) | one-line claim, task, when prior methods fail, method components, headline results |
+| ⭐ Recommended (8) | strongest prior approach, reason for the failure, key insight, closest work, a concrete example, efficiency, what is surprising, the team's name for the idea; the skill asks once for any that are missing |
+| 🟢 Optional (folded) | further advantages and applications, paper type, tension type, secondary results, release, limitations, other material, refs.bib |
+| 🔵 Method and experiments (folded) | one paste box for your material, plus itemised fields for notation, components, objective, datasets, metrics, baselines, result tables, ablations |
 
 Send the exported JSON to your agent:
 
-> Use bestpaper-writing to write the abstract and introduction from this intake JSON.
+> Use Best-Paper-Writing-Skill to write the Title, Abstract, Introduction, Methods and Experiments from this intake JSON.
 
 ### 📄 Mode B: paste a complete abstract
 
-The skill does not rewrite blindly. It first breaks the abstract into the same fields and shows which are **present, vague or missing**, asks for the gaps once, then rewrites and returns a **change table** (original sentence, revised sentence, reason) so you can accept or reject each change. Your numbers and terminology are kept.
+The skill does not rewrite blindly. It first breaks the abstract into the same fields and shows which are **present, vague or missing**, asks for the gaps once, then writes the full draft and returns a **change table** for the abstract (original sentence, revised sentence, reason) so you can accept or reject each change. Your numbers and terminology are kept; numbers, baselines and citations the abstract does not give stay [TODO].
 
-> Use bestpaper-writing to rewrite this abstract so it reads like a best paper: ...
+> Use Best-Paper-Writing-Skill to write the Title, Abstract, Introduction, Methods and Experiments from this abstract.
 
 You can also describe the work in plain text. Output is Markdown, or written directly into a LaTeX template such as the CVPR author kit.
 

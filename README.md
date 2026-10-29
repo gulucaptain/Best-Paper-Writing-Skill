@@ -6,9 +6,9 @@
 
 🏆 写作规律提炼自 60 篇 CVPR / ICCV / NeurIPS 获奖论文，一个 Skill 同时支持 Claude 与 Codex
 
-![version](https://img.shields.io/badge/version-v1.1-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
+![version](https://img.shields.io/badge/version-v1.2-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
 
-[中文](README.md) · [English](README_en.md) · [论文清单](PAPER_LIST.md) · [更新日志](CHANGELOG.md)
+[🌐 项目主页](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) · [中文](README.md) · [English](README_en.md) · [论文清单](PAPER_LIST.md) · [更新日志](CHANGELOG.md)
 
 </div>
 
@@ -48,24 +48,25 @@
 
 ### 📝 方式一：填写表单
 
-用浏览器打开 [`skills/bestpaper-writing/assets/intake_form.html`](skills/bestpaper-writing/assets/intake_form.html)（离线可用，自动保存草稿，可导出和再次导入 JSON）。表单分四档：
+用浏览器打开 [`skills/bestpaper-writing/assets/intake_form.html`](skills/bestpaper-writing/assets/intake_form.html)（离线可用，自动保存草稿，可导出和再次导入 JSON）。必填只有 5 项，其余按需补充，**补充得越详细，底稿质量越高**：
 
 | 档位 | 内容 |
 |---|---|
-| 🔴 必需 | 任务、现有最强方法、失败现象与原因、核心观察、方法组成、头条结果、最相近工作 |
-| 🟡 韵味 | 效率、可接入的管线、具体画面、反直觉之处、立场、团队内部的叫法 |
-| 🟢 辅助 | Figure 1、数据规模、局限、refs.bib |
-| 🔵 方法与实验 | 符号、组件、目标、数据集、指标、对比方法、结果表、消融 |
+| ⚙️ 基本设置 | 会议 / 年份 / 页数（下拉）、需要写哪些部分（勾选） |
+| 🔴 必填（5） | 一句话说清这篇工作、任务、现有方法在什么情况下不行、方法组成、头条结果 |
+| ⭐ 推荐（8） | 现有最强方法、失败原因、核心观察、最相近工作、具体画面、效率优势、反直觉之处、团队内部的叫法；缺了 skill 会先追问一次 |
+| 🟢 补充（折叠） | 额外优势与应用、论文类型、矛盾类型、次要结果、开源内容、局限、其他材料、refs.bib |
+| 🔵 方法与实验（折叠） | 一个直接粘贴材料的大框；需要时再逐项填写符号、组件、目标、数据集、指标、对比方法、结果表、消融 |
 
 把导出的 JSON 发给 agent：
 
-> 用 bestpaper-writing，根据这份信息表 JSON 写摘要和引言。
+> 用 Best-Paper-Writing-Skill，根据这份信息表 JSON 写出论文的 Title、Abstract、Introduction、Methods 和 Experiments。
 
 ### 📄 方式二：直接给完整摘要
 
-skill 不会盲目重写。它先把摘要拆回上面的字段，告诉你**哪些已有、哪些模糊、哪些缺失**，一次性追问缺项，再改写，最后给出**修改对照表**（原句 → 改后句 → 理由），你可以逐条接受或拒绝。你的数字和术语原样保留。
+skill 不会盲目重写。它先把摘要拆回上面的字段，告诉你**哪些已有、哪些模糊、哪些缺失**，一次性追问缺项，再写出完整底稿，并给出摘要的**修改对照表**（原句 → 改后句 → 理由），你可以逐条接受或拒绝。你的数字和术语原样保留；摘要里没有的数字、基线和引用一律留作 [TODO]。
 
-> 用 bestpaper-writing 改写这篇摘要，让它更接近最佳论文的写法：……
+> 用 Best-Paper-Writing-Skill，根据这段摘要写出论文的 Title、Abstract、Introduction、Methods 和 Experiments。
 
 也可以直接用文字描述工作。输出为 Markdown，或直接写进 LaTeX 模板（如 CVPR author kit）。
 

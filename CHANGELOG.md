@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.2
+
+Simpler intake form.
+
+- `assets/intake_form.html`: 5 required fields instead of 9; 8 recommended fields (marked ⭐) that the skill asks for once if missing; everything else folded under "补充信息" and "方法与实验", with a note that more detail means fewer `[TODO]`s.
+- Dropdowns and checkboxes instead of free text: venue / year / pages, sections to write (Title, Abstract, Introduction, Method, Experiments; the method-and-experiments block hides when neither is ticked), paper type and tension type in plain language (default "let the skill decide"), metric direction ↑/↓, release items.
+- Merged or removed fields the skill can infer: Figure 1 plan, stance and trend are no longer asked; pipeline integration, supported inputs and applications are one field; a single paste box for method and experiment material.
+- Same JSON keys and schema (`bestpaper-intake/v1`): older JSON files import and convert unchanged. `scripts/intake_to_brief.py` follows the new required/recommended split and reads the new fields (sections, metric direction, pasted material).
+
 ## v1.1
 
 Figures.

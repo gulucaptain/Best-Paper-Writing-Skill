@@ -2,6 +2,8 @@
 
 Students can fill the same fields in `assets/intake_form.html` (Chinese, works offline, exports JSON); `scripts/intake_to_brief.py` turns the JSON into this structure.
 
+Since v1.2 the form asks for only five fields as required (one-line claim, task, observable failure, method components, headline results) and marks eight as recommended (prior approach, reason for the failure, insight, closest work, concrete example, efficiency, surprising aspect, handle); the rest is folded away as optional, with a single paste box for method and experiment material. The brief lists missing recommended fields separately: ask for them once, in one message, then continue with `[TODO]`. The table below is still the full checklist the skill works from.
+
 Fill this from what the user provides. Ask for missing **required** fields in one compact message; never invent them.
 
 ## Required

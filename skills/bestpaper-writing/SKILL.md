@@ -3,7 +3,7 @@ name: bestpaper-writing
 description: Draft or rewrite the title, Abstract, Introduction, Method and Experiments of an ML/CV paper in the style of CVPR/ICCV/NeurIPS best papers, distilled from 60 award papers, and plan and draw its figures (Figure 1, method overview, result figures) with award-paper layout and style. Use when the user either (A) fills in the intake form (assets/intake_form.html JSON) or describes problem, idea, method and results, or (B) pastes an existing abstract (or abstract plus introduction) to make it more convincing. Can write directly into a LaTeX template such as the CVPR author kit. Not for related-work surveys, rebuttals or plain proofreading.
 ---
 
-# Best-Paper Writing (v1.1): Abstract, Introduction, Method, Experiments, Figures
+# Best-Paper Writing (v1.2): Abstract, Introduction, Method, Experiments, Figures
 
 Turn a description of a research project (or a draft abstract) into an Abstract and Introduction that read like a recent CVPR/ICCV/NeurIPS award paper.
 
