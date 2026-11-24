@@ -65,3 +65,24 @@ These are descriptive statistics of award papers, not causes of awards. Use them
 | Method overview figure | 15 / 26, usually Figure 2 | 6 / 18 |
 | Caption words (all / Figure 1) | 42 / 65 | 46 / 66 |
 | Caption opens with a bold title | 48 % | 30 % |
+
+## ACL Award Corpus Supplement (40 papers, 2021–2026)
+
+Source: 40 ACL Best Papers, Outstanding Papers, Best Theme/Resource/Social-Impact/Reproduction Papers from **ACL 2021–2026** (recent 6 years; `style_by_venue.ACL` in `corpus/corpus_stats.json`, usable via `check_draft.py --venue ACL` and `style_metrics.py --venue ACL`).
+
+Paper types (ACL 40): L1 method 14, L2 capability 2, L3 scaling 1, L4 re-examination 5, L5 mechanism/analysis 9, L6 theory 3, L7 resource/benchmark 6.
+
+| Metric (median; p90) | ACL Abstract (n=40) | ACL Introduction (n=40) | Notable difference vs. CVPR/ICCV/NeurIPS |
+|---|---|---|---|
+| Words | 168; 201 | 626; 893 | Slightly tighter abstracts; similar intro length |
+| Sentences | 7; 9 | 24.5; 45 | Comparable 7-sentence abstract rhythm |
+| Mean sentence length | 23.6; 29.9 | 25.9; 30.3 | Slightly longer analytical sentences in ACL intros |
+| Numbers | 1.5; 4.1 | 6.5; 25.9 | Fewer abstract numbers (p90 = 4.1 vs. 5.6) |
+| Connectors / 100 words | 0.77; 1.47 | 0.73; 1.45 | Equally lean connective tissue |
+| Colon/dash sentences | 11%; 22% | 10%; 26% | Nearly identical |
+| Hedges | 0; 1 | 1; 3.1 | Calibrated hedging on empirical findings |
+| Evaluative words | 1; 2 | 2; 4 | More restrained self-praise than CVPR |
+| “key insight” formulas | 0; 0 | 0; 0 | Almost never used in ACL award papers |
+| Dedicated Limitations section | — | 28/40 explicit heading (mandatory since ACL 2022) | Always write a concrete Limitations section for ACL |
+
+For full-paper **subsection excerpts, topic selection, and style sheets** (`exp.datasets`, `exp.baselines`, `exp.implementation`, `exp.main_results`, `method.component`, `related_work`, `limitations`), run `python3 scripts/paper_memory.py list --venue ACL`.

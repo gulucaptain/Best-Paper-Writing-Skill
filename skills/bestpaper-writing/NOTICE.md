@@ -17,7 +17,5 @@ Routing by paper type and motivation type, claim calibration, style rules, exemp
 and the checking script are original to this project and are released under CC BY 4.0, like the rest of the
 parent repository.
 
-## Quoted sentences
-Exemplar sentences are short excerpts from published papers, quoted with attribution for commentary and
-education. Their copyright remains with the authors. They are not licensed under CC BY 4.0, and they must not be
-copied into new papers.
+## Quoted excerpts (`references/exemplars/` & `references/memory/`)
+Exemplar quotes in `references/exemplars/` and focused subsection excerpts (≤ 300 words) in `references/memory/section_memory.jsonl` are short verbatim excerpts from published CVPR/ICCV/NeurIPS/ACL award papers, quoted with attribution (paper title, venue, year, page; full paper list and links in repository `PAPER_LIST.md`) for commentary and education. Their copyright remains with the authors. They are not licensed under CC BY 4.0, and they must not be copied into new papers (`scripts/check_draft.py` flags ≥ 6-word overlaps against both banks).

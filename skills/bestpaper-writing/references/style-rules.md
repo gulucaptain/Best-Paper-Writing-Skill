@@ -116,15 +116,23 @@ Each rule in this file aims at the award-paper median, not at an extreme. Fixing
 6. Define a term at first use (an in-sentence clause is enough: “neural scaling laws, in which error falls off as a power of …”).
 7. Never mix `although … but`.
 
-## 4. Originality
-- Exemplars teach structure. Do not reuse any exemplar sentence or any run of ≥ 6 consecutive words from it.
+## 4. Imitating Award-Paper Compression, Syntax & Vocabulary (`paper_memory.py`)
+Run `python3 scripts/paper_memory.py style-sheet --subsection <subsec> --venue <ACL|all>` to study concrete syntax and vocabulary before drafting. Four high-leverage compression habits shared by CVPR/NeurIPS/ACL award papers:
+1. **Citation-as-compression**: offload standard benchmark specs, baselines, and protocols via `following \citet{...}` or `across standard benchmarks (\citealp{...})` instead of rewriting known trivia.
+2. **Taxonomic grouping**: collapse flat enumerations into 2–3 meaningful axes (`spanning three axes: (1) ..., (2) ..., and (3) ...`) so the reader immediately sees *why* each item was chosen.
+3. **Appendix deferral**: keep main text focused on claims, mechanisms, and key margins; move train/dev/test counts, prompt templates, and full optimizer tables via `Full dataset statistics and hyperparameters are detailed in Appendix X.`
+4. **ACL-specific conventions**: author-year citations (`\citet{}` as subject, `\citep{}` parenthetical); slightly tighter abstracts (ACL median 168 words vs. CVPR/NeurIPS 174 words) and restrained evaluative adjectives (ACL median 2 per intro vs. CVPR 3); mandatory dedicated `\section*{Limitations}` at the end.
+
+## 5. Originality
+- Exemplars and Paper Memory excerpts teach **focus, structure, syntax, and lexical calibration**. Never reuse any verbatim sentence or any run of ≥ 6 consecutive words from `moves.jsonl`, `paragraphs.jsonl`, `phrasebank.csv`, `cards/`, or `references/memory/section_memory.jsonl` (`check_draft.py` flags overlap).
 - Vary openings across paragraphs; do not start more than two paragraphs with the same word.
 
-## 5. Final checklist
+## 6. Final checklist
 - [ ] No item from “Avoid” or “Never in the paper text”.
 - [ ] No dashes; colons only where they introduce a list, example or handle; few trailing “, making …” clauses.
 - [ ] The pivots (bottleneck, cause, idea, turn) are short sentences; the rest average 20–24 words.
-- [ ] `check_draft.py`: no ERROR; no WARN for connectors, numbers, hedges, sentence length, runs of short sentences or participial clauses (or each is justified).
+- [ ] `check_draft.py [--venue ACL]`: no ERROR; no WARN for connectors, numbers, hedges, sentence length, runs of short sentences, participial clauses, or inline split dumps (or each is justified).
+- [ ] `paper_memory.py audit <body_file> --subsection auto`: body sections focus on claims and mechanisms without laundry-list narration or inline setup dumps.
 - [ ] Every conditional word in §1 has its concrete follow-up.
 - [ ] Every number has a unit, benchmark and baseline.
 - [ ] Terminology identical across abstract, introduction and contributions.

@@ -177,8 +177,63 @@ def sections(path):
     return {k: [' '.join(p.split()) for p in v.split('\n\n') if p.strip()] for k, v in secs.items()}
 
 
-def load_stats():
-    return json.loads(STATS.read_text(encoding='utf-8'))
+VENUE_FAMILIES = {
+    "NLP": ("ACL", "EMNLP", "NAACL", "EACL", "AACL", "COLING", "TACL", "COLM", "CONLL", "CL"),
+    "CV": ("CVPR", "ICCV", "ECCV", "WACV", "BMVC", "3DV", "SIGGRAPH", "TPAMI", "IJCV"),
+    "ML": ("NEURIPS", "NIPS", "ICLR", "ICML", "AAAI", "IJCAI", "AISTATS", "UAI", "JMLR", "TMLR"),
+}
+FAMILY_CORE = {
+    "NLP": ["ACL"],
+    "CV": ["CVPR", "ICCV"],
+    "ML": ["NeurIPS"],
+}
+
+
+def venue_family(name: str):
+    u = name.strip().upper()
+    if u in VENUE_FAMILIES:
+        return u
+    for fam, members in VENUE_FAMILIES.items():
+        if u in members:
+            return fam
+    return None
+
+
+def resolve_venues(venue: str, include_related: bool = False):
+    """Return (exact_list, related_list, family_name) for a venue arg like 'EMNLP', 'CVPR,ICCV', or 'NLP'."""
+    if not venue or venue.strip().lower() == "all":
+        return [], [], None
+    tokens = [t.strip() for t in venue.split(",") if t.strip()]
+    exact, related, fams = [], [], []
+    for t in tokens:
+        u = t.upper()
+        fam = venue_family(u)
+        if fam and fam not in fams:
+            fams.append(fam)
+        if u in VENUE_FAMILIES:
+            # Domain alias like 'NLP', 'CV', 'ML' directly expands to its family members + core venues
+            for v in FAMILY_CORE[u] + list(VENUE_FAMILIES[u]):
+                if v.upper() not in {x.upper() for x in related}:
+                    related.append(v)
+        else:
+            exact.append(t)
+            if fam:
+                for v in [t] + FAMILY_CORE[fam] + list(VENUE_FAMILIES[fam]):
+                    if v.upper() not in {x.upper() for x in related}:
+                        related.append(v)
+    if include_related and related:
+        return related, related, "/".join(fams) if fams else None
+    return exact or related, related, "/".join(fams) if fams else None
+
+
+def load_stats(venue=None):
+    data = json.loads(STATS.read_text(encoding='utf-8'))
+    if venue and 'ACL' in data.get('style_by_venue', {}):
+        _, _, fam = resolve_venues(venue)
+        if fam == 'NLP':
+            data = dict(data)
+            data['style'] = data['style_by_venue']['ACL']
+    return data
 
 
 def band(value, d):
@@ -189,11 +244,17 @@ def band(value, d):
 
 
 def main():
-    stats = load_stats()['style']
-    for f in sys.argv[1:]:
+    args = sys.argv[1:]
+    venue = None
+    if '--venue' in args:
+        i = args.index('--venue')
+        venue = args[i + 1]
+        args = args[:i] + args[i + 2:]
+    stats = load_stats(venue)['style']
+    for f in args:
         for sec, paras in sections(f).items():
             m, _ = metric(paras)
-            print(f'== {f} [{sec}]')
+            print(f'== {f} [{sec}]' + (f' ({venue})' if venue else ''))
             for k, v in m.items():
                 d = stats[sec].get(k)
                 extra = f"  corpus p10/p50/p90 = {d['p10']}/{d['p50']}/{d['p90']}  ({band(v, d)})" if d else ''

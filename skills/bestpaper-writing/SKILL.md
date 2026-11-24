@@ -1,19 +1,20 @@
 ---
 name: bestpaper-writing
-description: Draft or rewrite the title, Abstract, Introduction, Method and Experiments of an ML/CV paper in the style of CVPR/ICCV/NeurIPS best papers, distilled from 60 award papers, and plan and draw its figures (Figure 1, method overview, result figures) with award-paper layout and style. Use when the user either (A) fills in the intake form (assets/intake_form.html JSON) or describes problem, idea, method and results, or (B) pastes an existing abstract (or abstract plus introduction) to make it more convincing. Can write directly into a LaTeX template such as the CVPR author kit. Not for related-work surveys, rebuttals or plain proofreading.
+description: Draft or rewrite the title, Abstract, Introduction, Method, Experiments and Limitations of an ML/CV/NLP paper in the style of CVPR/ICCV/NeurIPS/ACL best papers, distilled from 100 award papers (including ACL 2021–2026), with a queryable Paper Memory Bank for learning section-level topic selection, detail granularity, syntax, and lexical style, plus figure planning and drawing. Use when the user either (A) fills in the intake form (assets/intake_form.html JSON) or describes problem, idea, method and results, or (B) pastes an existing abstract/draft to sharpen its focus and award-paper style. Can write directly into a LaTeX template (CVPR/ACL/NeurIPS). Not for related-work surveys, rebuttals or plain proofreading.
 ---
 
-# Best-Paper Writing (v1.2): Abstract, Introduction, Method, Experiments, Figures
+# Best-Paper Writing: Abstract, Introduction, Method, Experiments, Paper Memory & Figures
 
-Turn a description of a research project (or a draft abstract) into an Abstract and Introduction that read like a recent CVPR/ICCV/NeurIPS award paper.
+Turn a description of a research project (or a draft abstract/section) into prose that reads like a recent CVPR/ICCV/NeurIPS/ACL award paper — matching both **what human readers focus on** and **how award authors express it**.
 
-This skill is grounded in a sentence-by-sentence annotation of **55 award papers** (2021–2025; 60 papers are analysed in total, and 5 of them (from 2024) are held out for testing, see `PAPER_LIST.md` in the repository root): what functions their abstracts and introductions contain, in which order, and how they read (`references/corpus-profile.md`). Award papers persuade through:
+This skill is grounded in **100 award-winning papers** (**55 CVPR/ICCV/NeurIPS 2021–2025** + **40 ACL 2021–2026** in the corpus, plus 5 held-out evaluation papers; see `PAPER_LIST.md` in the repository root): sentence-by-sentence annotation of abstracts and introductions (`references/corpus-profile.md`), PLUS a queryable **Paper Memory Bank** (`references/memory/paper_memory.db` via `scripts/paper_memory.py`, `references/paper-memory.md`) storing real section/subsection excerpts (datasets, baselines, implementation, main results, ablations, method components, related work, limitations) annotated with **what award authors include, what they omit or defer to Appendix, and their syntactic/lexical style**. Award papers persuade through:
 
 1. **A sharp motivation** — credit to specific prior work, then a concrete gap (what fails or is missing, when, and why), set up as a tension the paper resolves.
 2. **An idea about the problem** — an observation from which the method follows, stated directly; a short handle for the idea when there is one (“next-brick prediction”).
 3. **Clear positioning** — the closest work is named and one checkable difference is stated.
-4. **Confident, evidenced claims told as a story** — results as claims with one or two headline numbers; the work is promoted where the evidence allows; a stance when the results support one. Weaknesses belong in the Limitations section, not in the Abstract or Introduction (author preference).
-5. **Plain, rhythmic prose**. Each claim is stated once. Short, quotable sentences at the pivots (the bottleneck, the cause, the idea); the rest are full sentences (mean 20–24 words) that carry their reasons through *because*, *while*, *by*, *which*, not through trailing “, making …” clauses. Few logical connectors; colons allowed, **no dashes** (author preference). Mechanisms and examples instead of adjectives, short background, no implementation details.
+4. **Confident, evidenced claims told as a story** — results as claims with one or two headline numbers; the work is promoted where the evidence allows; a stance when the results support one. Weaknesses belong in the Limitations section (mandatory for ACL), not in the Abstract or Introduction (author preference).
+5. **Focus-first granularity (calibrated via the Paper Memory Bank)** — award papers never drown the reader in routine specs (such as train/val/test split counts for standard public benchmarks or inline hyperparameter lists). Every subsection selects the 2–4 points human readers care about and offloads routine reproducibility details via citations, tables, or Appendix pointers.
+6. **Plain, rhythmic prose learned from exemplars**. Each claim is stated once. Short, quotable sentences at the pivots (the bottleneck, the cause, the idea); the rest are full sentences (mean 20–24 words) that carry their reasons through *because*, *while*, *by*, *which*, not through trailing “, making …” clauses. Few logical connectors; colons allowed, **no dashes** (author preference). Mechanisms and examples instead of adjectives, short background, no implementation details in front matter.
 
 Scope: title, Abstract and Introduction for all eight paper types (L1–L8, `references/routing.md`); also **Method** (`references/method.md`) and **Experiments** (`references/experiments.md`), mainly for method papers (L1/L2); and the **figures** of the paper (`references/figures.md`): a figure plan, Figure 1, the method overview and result figures, drawn where the content is known and left as planned placeholders where results are needed. Write the Abstract and Introduction first; Method, Experiments and figures follow the same claim map.
 
@@ -25,6 +26,8 @@ Do not write prose before Step 4.
 **Mode A: intake form.** If the user provides an intake JSON (exported from `assets/intake_form.html`, schema `bestpaper-intake/v1`), run `python3 scripts/intake_to_brief.py <file.json> --out brief.md --bib refs.bib` (paths relative to this skill folder) and work from `brief.md`; exit code 2 means a required field is missing. If the user describes the work in free text, load `references/intake-form.md` and map the description onto it. When a user has no material ready, point them to `assets/intake_form.html` (a local, offline form that exports JSON; the form is in Chinese).
 
 **Mode B: complete abstract in.** If the user pastes an existing abstract (optionally with the introduction), do not rewrite it blindly. First reverse-engineer it into the intake fields of `references/intake-form.md` (task, dominant prior approach, gap and its reason, closest work, key insight, method components, results with numbers) and show the user a short table: field, what the draft says, status (present / vague / missing). Facts, numbers and terminology in the draft are the user's and are kept verbatim; never add a result, baseline or reference the draft does not contain. Then handle missing fields as below, and continue with Steps 1–8. In `report.md` add a **change table** (original sentence → revised sentence → reason, citing the award-paper pattern it follows) so the author can accept or reject each change.
+
+**Mode C: direct Paper Memory query / style study / anti-laundry-list audit / add favorite paper.** If the user asks directly in natural language to study how award papers write a specific subsection (e.g., *"how do ACL/EMNLP award papers write Datasets / Ablations / Limitations?"*), audit an existing section for over-detailing or laundry-list prose, or save a favorite paper excerpt into their personal memory bank, run `scripts/paper_memory.py` (`query`, `style-sheet`, `audit`, `add`, or `list` — automatically matching exact or sibling conferences via `--venue`) silently on their behalf and answer directly in natural language without forcing them through Steps 0–4 or asking them to run CLI commands.
 
 In both modes:
 - If a **required** field is missing (key idea, concrete gap with its reason, closest work, results with numbers), ask once in a compact list **before drafting**. In the same message, ask for the memorability fields that are empty (efficiency, integration with existing pipelines, supported inputs, applications, a concrete example, what is surprising, the trend it follows, the team’s name for the idea): these, not the prose, are what made award abstracts stand out in our comparisons. If the user cannot answer now, continue with `[TODO: …]` placeholders. Ask in plain text; do not depend on any agent-specific question tool.
@@ -55,14 +58,22 @@ Load `references/introduction.md` and `references/abstract.md`. One line per par
 The abstract defaults to Setting → Gap → Method → Result (`abstract.md` §3).
 Mark the **pivot sentences** (the bottleneck, the cause, the tension, the idea); they will be short and quotable. Then make a **claim index**: list every claim (gap, insight, each advantage, each result, stance) and the one paragraph where it appears. A claim listed under two paragraphs is merged into one. Generic field background gets at most two sentences.
 
-### Step 5 — Draft with exemplars
-For each paragraph, read 2–3 award-paper paragraphs with the same function and, if possible, the same paper type: `python3 scripts/find_exemplars.py --para <function> --type <L*>`; for sentences, `python3 scripts/find_exemplars.py <move>` or `--phrases <function>`; for whole introductions, the route’s card in `references/exemplars/cards/`. Learn their order of information and rhythm; never copy a sentence or a run of ≥ 6 words. Write in the authors’ voice (“we”, “our model”); never describe the user’s input as “supplied”, “provided” or “reported”.
+### Step 5 — Draft with exemplars & Paper Memory (Focus + Style Imitation)
+Load `references/paper-memory.md`. Before writing any section or paragraph, study how award papers choose topics, set their detail budget, and phrase ideas:
+1. **Paragraph & sentence exemplars (Abstract/Intro)**: read 2–3 award-paper paragraphs with the same function and venue/paper type: `python3 scripts/find_exemplars.py --para <function> --type <L*> [--venue ACL]`; for sentences, `python3 scripts/find_exemplars.py <move> [--venue ACL]` or `--phrases <function>`; for whole introductions, the route’s card in `references/exemplars/cards/` (including ACL cards `volt.md`, `impossible-lms.md`, `native-sparse-attention.md`, `cure.md`).
+2. **Paper Memory Bank (all sections & subsections)**: run `python3 scripts/paper_memory.py query --subsection <subsec> --venue <ACL|all> --topic "<your topic>" -k 3` (or `style-sheet --subsection <subsec>`). Study four things before drafting:
+   - **Topic selection**: which 2–4 points award authors keep in main text;
+   - **Deliberate omission**: what routine specs (e.g., train/val/test split counts for standard datasets, raw hyperparameters, prompt strings) they omit or defer to citations/Appendix;
+   - **Detail budget**: median and p25–p75 word/sentence budget for that subsection;
+   - **Writing style**: reusable syntactic patterns, high-signal verbs/collocations, tone, and rhythm.
+Never copy a sentence or any run of ≥ 6 consecutive words. Write in the authors’ voice (“we”, “our model”); never describe the user’s input as “supplied”, “provided” or “reported”.
 
-### Step 5b — Method and Experiments (when requested)
+### Step 5b — Method, Experiments and Limitations (when requested)
 1. Extend the claim map into an **evidence map**: claim → method subsection → experiment (table/figure) → ablation. Claims without evidence are softened in the introduction or get an experiment `[TODO]`.
-2. Method: follow `references/method.md` (opener, preliminaries, one subsection per component with need → mechanism → property, objective, optional discussion). Mechanisms, equations and losses the user has not given are `[TODO]`; never invent them.
-3. Experiments: follow `references/experiments.md` (opener, setup, claim-first results per benchmark, ablations that mirror the claims, analysis, limitations). Tables use booktabs with `\TODO{}` cells for missing numbers.
-4. Limitations belong in the experiments or a separate section; the author preference excludes them only from the abstract and introduction.
+2. **Query the Paper Memory Bank before every subsection** (`method.overview`, `method.component`, `method.training`, `exp.datasets`, `exp.baselines`, `exp.metrics`, `exp.implementation`, `exp.main_results`, `exp.ablation`, `exp.analysis`, `limitations`) using `python3 scripts/paper_memory.py query --subsection <subsec> --venue <VENUE> -k 3`. Match award-paper **topic selection and conciseness** rather than dumping every number from user notes into main prose.
+3. Method: follow `references/method.md` (opener, preliminaries, one subsection per component with need → mechanism → property, objective, optional discussion). Mechanisms, equations and losses the user has not given are `[TODO]`; never invent them.
+4. Experiments: follow `references/experiments.md` (opener, concise setup with standard benchmark specs & hyperparameters deferred to citations/Appendix, claim-first results per benchmark, ablations that mirror the claims, analysis, limitations). Tables use booktabs with `\TODO{}` cells for missing numbers.
+5. Limitations belong in the experiments or a dedicated `\section*{Limitations}` (mandatory for ACL); the author preference excludes them only from the abstract and introduction.
 
 ### Step 5c — Figure plan and figures (whenever Method/Experiments are written, or when asked)
 Load `references/figures.md`.
@@ -72,33 +83,35 @@ Load `references/figures.md`.
 4. Captions open with the takeaway (`figures.md` §6); method colours, names and symbols are the same in every figure and match the text.
 
 ### Step 6 — Output
-- **LaTeX template given** (e.g., a CVPR author kit): load `references/latex-output.md` and follow it.
-- **No template**: write Markdown (`# Abstract`, `# Introduction`).
+- **LaTeX template given** (e.g., a CVPR or ACL author kit): load `references/latex-output.md` and follow it.
+- **No template**: write Markdown (`# Abstract`, `# Introduction`, etc.).
 - The paper text contains no move labels, workflow comments, or bracketed notes other than `[TODO: …]` / `\todo{…}`.
 
 ### Step 7 — Check
-1. Run `python3 scripts/check_draft.py <files>` on the abstract and the introduction. Fix every `ERROR`. Each `WARN` means the draft is outside the range of 90% of award papers (connectors, numbers, hedges, boosters, “key insight” formulas, sentence length, runs of short sentences, trailing participial clauses) or shows a known AI-draft habit — revise or justify it in the report. `NOTE`s are information (e.g., the draft promotes the work less than award papers do). `python3 scripts/style_metrics.py <files>` shows every metric with its corpus percentile.
-2. If the paper has figures, run `python3 scripts/check_figures.py main.tex`: fix every `ERROR`; each `WARN` (caption length, long first sentence, raster plots, absolute widths, too many floats) is fixed or justified; `NOTE`s list the placeholders still to fill.
-3. Semantic checks:
+1. Run `python3 scripts/check_draft.py <files> [--venue ACL]` on the abstract and the introduction. Fix every `ERROR`. Each `WARN` means the draft is outside the range of 90% of award papers (connectors, numbers, hedges, boosters, “key insight” formulas, sentence length, runs of short sentences, trailing participial clauses, inline dataset split dumps) or shows a known AI-draft habit — revise or justify it in the report. `NOTE`s are information. `python3 scripts/style_metrics.py <files> [--venue ACL]` shows every metric with its corpus percentile.
+2. When Method, Related Work, Experiments, or Limitations are written, run `python3 scripts/paper_memory.py audit <body_files> --subsection auto [--venue ACL]` to check for laundry-list prose (step-by-step walkthroughs, paper-by-paper roll-calls, inline dataset split / hyperparameter / plumbing dumps, per-row table narration, and section roadmaps).
+3. If the paper has figures, run `python3 scripts/check_figures.py main.tex`: fix every `ERROR`; each `WARN` (caption length, long first sentence, raster plots, absolute widths, too many floats) is fixed or justified; `NOTE`s list the placeholders still to fill.
+4. Semantic checks:
    - Specific prior work is credited before the gap; the gap is concrete (what fails, when, why) and the tension is resolved by the idea.
    - The insight is an observation about the problem, stated directly, not a hypothesis and not a description of the architecture.
    - The closest work is named with one checkable difference (method papers).
    - Results are claims at the strongest supported level, with headline numbers; the work is promoted where evidence allows; nothing is claimed that the evidence does not support (no unscoped “first”, “state-of-the-art on all benchmarks”).
    - No limitation, failure case or disclaimer in the Abstract or Introduction; mixed results are scoped to the wins.
-   - No defensive qualifiers about the protocol; no implementation details.
+   - No defensive qualifiers about the protocol; no implementation details in front matter; body sections stay claim-focused (routine dataset splits, hyperparameter lists, and setup plumbing deferred to citations, tables, or Appendix).
    - Abstract, introduction and contributions state the same claims with the same strength.
    - Nothing is said twice inside the introduction (insight, research questions, results, advantages); the contributions do not repeat the results paragraph.
    - Read the draft aloud once: if several consecutive sentences each carry one bare fact, merge them so that each sentence carries a relation (cause, contrast, means, consequence).
 
 ### Step 8 — Deliver
 1. The paper files (LaTeX project or Markdown).
-2. `report.md` for the authors: claim, tension type, insight, handle, closest work, route, claim map, `check_draft` summary, `[TODO]` list, questions, **notes for the Limitations section** (weaknesses deliberately left out of the abstract/introduction), and, when figures were planned, the **figure plan** table with the material each placeholder needs and the `check_figures` summary.
+2. `report.md` for the authors: claim, tension type, insight, handle, closest work, route, claim map, `check_draft` summary, `paper_memory audit` summary (when body sections are written), `[TODO]` list, questions, **notes for the Limitations section** (weaknesses deliberately left out of the abstract/introduction), and, when figures were planned, the **figure plan** table with the material each placeholder needs and the `check_figures` summary.
 
 ## Hard rules
 - Never fabricate numbers, datasets, baselines, citations or results.
 - Never cite a key that is not in the user’s bibliography; mark missing references with `[TODO: cite …]`.
 - No limitations, self-undermining sentences or defensive qualifiers in the Abstract or Introduction.
 - The Abstract and Introduction tell the story; tables tell the numbers.
+- Query `paper_memory.py` before drafting body subsections (see `references/paper-memory.md`): organize by mechanism or conceptual axis, state the takeaway first, and defer routine splits, hyperparameters, and plumbing to citations, tables, or Appendix.
 - No generic openings (“has attracted increasing attention”, bare “plays an important role”) and no adjectives about the method without a concrete follow-up.
 - Do not frame the work as a patch on a naive baseline (ruling out an obvious alternative with a quantified reason is fine).
 - Keep terminology fixed once introduced.
@@ -118,7 +131,8 @@ Load `references/figures.md`.
 | `references/routing.md` | Step 2 |
 | `references/claim-calibration.md` | Steps 3, 7 |
 | `references/introduction.md`, `references/abstract.md` | Steps 4–5 |
-| `references/corpus-profile.md` | when you need the award-paper statistics |
+| `references/corpus-profile.md` | when you need the CVPR/ICCV/NeurIPS/ACL award-paper statistics |
+| `references/paper-memory.md`, `references/memory/` (`section_memory.jsonl`, `paper_memory.db`), `scripts/paper_memory.py` | Steps 5, 5b, 7 (topic selection, detail budget, style imitation, user paper ingestion) |
 | `references/exemplars/` (`paragraphs.jsonl`, `phrasebank.csv`, `moves.jsonl`, `cards/`), `scripts/find_exemplars.py` | Step 5 |
 | `references/style-rules.md` | Steps 5, 7 |
 | `references/method.md`, `references/experiments.md` | Step 5b |

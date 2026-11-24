@@ -1,8 +1,8 @@
-# Analysed papers (60)
+# Analysed papers (100)
 
-The corpus: best papers, best student papers and honorable mentions of CVPR, ICCV and NeurIPS, 2021–2025. For the exact award of each paper, please check the official conference pages. **This repository contains no paper PDFs or full texts**; search each title on the conference website, CVF Open Access, NeurIPS Proceedings or arXiv.
+The corpus: best papers, outstanding papers, best theme/resource/social-impact papers, best student papers, and honorable mentions of CVPR, ICCV, NeurIPS (2021–2025) and ACL (2021–2026, recent 6 years). For the exact award of each paper, please check the official conference pages. **This repository contains no paper PDFs or full texts**; search each title on the conference website, CVF Open Access, NeurIPS Proceedings or arXiv.
 
-Rules in the skill were fitted on 55 papers. The 5 papers marked **held-out** (all 2024) were removed from the exemplar bank and used only to test the skill (`skills/bestpaper-writing/evals/`).
+Rules in the skill were fitted on 95 corpus papers (55 CVPR/ICCV/NeurIPS + 40 ACL). The 5 papers marked **held-out** (all 2024) were removed from the exemplar bank and used only to test the skill (`skills/bestpaper-writing/evals/`).
 
 Type codes follow `skills/bestpaper-writing/references/routing.md`: L1 Method improvement / problem reframing; L2 New task / new capability; L3 Empirical law / practical guide; L4 Re-examination of a claim; L5 Mechanism / analysis; L6 Theory; L7 Dataset / benchmark / resource; L8 Measurement / system.
 
@@ -123,3 +123,73 @@ Machine-readable version: [`data/papers.csv`](data/papers.csv).
 | P59 | Superposition Scaling | Superposition Yields Robust Neural Scaling | L5 Mechanism / analysis | corpus |
 | P60 | Why Diffusion Models Don't Memorize | Why Diffusion Models Don't Memorize: The Role of Implicit Dynamical Regularization in Training | L5 Mechanism / analysis | corpus |
 | P61 | Transductive Online Learning | Optimal Mistake Bounds for Transductive Online Learning | L6 Theory | corpus |
+
+## ACL 2021
+
+| ID | Short name | Title | Type | Award | Role |
+|---|---|---|---|---|---|
+| P62 | VOLT | Vocabulary Learning via Optimal Transport for Neural Machine Translation | L1 Method improvement / problem reframing | Best Paper | corpus |
+| P63 | Signed Languages NLP | Including Signed Languages in Natural Language Processing | L4 Re-examination of a claim | Best Theme Paper | corpus |
+| P64 | Human Eval Not Gold | All That’s ‘Human’ Is Not Gold: Evaluating Human Evaluation of Generated Text | L4 Re-examination of a claim | Outstanding Paper | corpus |
+| P65 | Intrinsic Dimensionality | Intrinsic Dimensionality Explains the Effectiveness of Language Model Fine-Tuning | L5 Mechanism / analysis | Outstanding Paper | corpus |
+| P66 | Monolingual TM NMT | Neural Machine Translation with Monolingual Translation Memory | L1 Method improvement / problem reframing | Outstanding Paper | corpus |
+| P67 | UnNatural NLI | UnNatural Language Inference | L4 Re-examination of a claim | Outstanding Paper | corpus |
+
+## ACL 2022
+
+| ID | Short name | Title | Type | Award | Role |
+|---|---|---|---|---|---|
+| P68 | Incremental Parsing | Learned Incremental Representations for Parsing | L1 Method improvement / problem reframing | Best Paper | corpus |
+| P69 | DiBiMT | DiBiMT: A Novel Benchmark for Measuring Word Sense Disambiguation Biases in Machine Translation | L7 Dataset / benchmark / resource | Best Resource Paper | corpus |
+| P70 | KinyaBERT | KinyaBERT: a Morphology-aware Kinyarwanda Language Model | L1 Method improvement / problem reframing | Best Linguistic Insight Paper | corpus |
+| P71 | Fantastically Ordered Prompts | Fantastically Ordered Prompts and Where to Find Them: Overcoming Few-Shot Prompt Order Sensitivity | L5 Mechanism / analysis | Outstanding Paper | corpus |
+| P72 | Generative PLM Quantization | Compression of Generative Pre-trained Language Models via Quantization | L1 Method improvement / problem reframing | Outstanding Paper | corpus |
+| P73 | CSANMT | Learning to Generalize to More: Continuous Semantic Augmentation for Neural Machine Translation | L1 Method improvement / problem reframing | Outstanding Paper | corpus |
+
+## ACL 2023
+
+| ID | Short name | Title | Type | Award | Role |
+|---|---|---|---|---|---|
+| P74 | New Yorker Caption Humor | Do Androids Laugh at Electric Sheep? Humor “Understanding” Benchmarks from The New Yorker Caption Contest | L7 Dataset / benchmark / resource | Best Paper | corpus |
+| P75 | DAAM | What the DAAM: Interpreting Stable Diffusion Using Cross Attention | L5 Mechanism / analysis | Best Paper | corpus |
+| P76 | Political Biases in LMs | From Pretraining Data to Language Models to Downstream Tasks: Tracking the Trails of Political Biases Leading to Unfair NLP Models | L5 Mechanism / analysis | Best Paper | corpus |
+| P77 | CoNLL-2003 in 2023 | Do CoNLL-2003 Named Entity Taggers Still Work Well in 2023? | L4 Re-examination of a claim | Reproduction Award | corpus |
+| P78 | Context-Aware MT | When Does Translation Require Context? A Data-driven, Multilingual Exploration | L7 Dataset / benchmark / resource | Resource Award | corpus |
+| P79 | Marked Personas | Marked Personas: Using Natural Language Prompts to Measure Stereotypes in Language Models | L2 New task / new capability | Social Impact Award | corpus |
+
+## ACL 2024
+
+| ID | Short name | Title | Type | Award | Role |
+|---|---|---|---|---|---|
+| P80 | Impossible Language Models | Mission: Impossible Language Models | L5 Mechanism / analysis | Best Paper | corpus |
+| P81 | Proto-Language Reconstruction | Semisupervised Neural Proto-Language Reconstruction | L1 Method improvement / problem reframing | Best Paper | corpus |
+| P82 | Sensitive Functions Transformers | Why are Sensitive Functions Hard for Transformers? | L6 Theory | Best Paper | corpus |
+| P83 | Oracle Bone Diffusion | Deciphering Oracle Bone Language with Diffusion Models | L2 New task / new capability | Best Paper | corpus |
+| P84 | Causal Memorisation Profiles | Causal Estimation of Memorisation Profiles | L5 Mechanism / analysis | Best Paper | corpus |
+| P85 | Aya Model | Aya Model: An Instruction Finetuned Open-Access Multilingual Language Model | L7 Dataset / benchmark / resource | Best Paper | corpus |
+| P86 | OLMo | OLMo: Accelerating the Science of Language Models | L7 Dataset / benchmark / resource | Best Theme Paper | corpus |
+| P87 | AppWorld | AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents | L7 Dataset / benchmark / resource | Best Resource Paper | corpus |
+
+## ACL 2025
+
+| ID | Short name | Title | Type | Award | Role |
+|---|---|---|---|---|---|
+| P88 | Response Sampling Theory | A Theory of Response Sampling in LLMs: Part Descriptive and Part Prescriptive | L6 Theory | Best Paper | corpus |
+| P89 | Difference Awareness Fairness | Fairness through Difference Awareness: Measuring Desired Group Discrimination in LLMs | L4 Re-examination of a claim | Best Paper | corpus |
+| P90 | LMs Resist Alignment | Language Models Resist Alignment: Evidence From Data Compression | L5 Mechanism / analysis | Best Paper | corpus |
+| P91 | Native Sparse Attention | Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention | L1 Method improvement / problem reframing | Best Paper | corpus |
+| P92 | Byte Latent Transformer | Byte Latent Transformer: Patches Scale Better Than Tokens | L3 Empirical law / practical guide | Outstanding Paper | corpus |
+| P93 | Meta-rater | Meta-rater: A Multi-dimensional Data Selection Method for Pre-training Language Models | L1 Method improvement / problem reframing | Best Theme Paper | corpus |
+| P94 | Token Recycling | Turning Trash into Treasure: Accelerating Inference of Large Language Models with Token Recycling | L1 Method improvement / problem reframing | Outstanding Paper | corpus |
+
+## ACL 2026
+
+| ID | Short name | Title | Type | Award | Role |
+|---|---|---|---|---|---|
+| P95 | Imperfective Paradox | The Imperfective Paradox in Large Language Models | L5 Mechanism / analysis | Best Paper | corpus |
+| P96 | Resource-Rational Encoding | Memory efficiency and resource-rational encoding in sentence processing | L5 Mechanism / analysis | Best Paper | corpus |
+| P97 | Local Attention Expressivity | Characterizing the Expressivity of Local Attention in Transformers | L6 Theory | Best Paper | corpus |
+| P98 | Evolutionary Guided Decoding | Evolutionary Guided Decoding: Iterative Value Refinement for LLMs | L1 Method improvement / problem reframing | Outstanding Paper | corpus |
+| P99 | GeoRA | GeoRA: Geometry-Aware Low-Rank Adaptation for RLVR | L1 Method improvement / problem reframing | Outstanding Paper | corpus |
+| P100 | CURE | CURE: Critique-Driven Unified Reinforcement Learning for Test-Time Self-Improvement | L1 Method improvement / problem reframing | Outstanding Paper | corpus |
+| P101 | Global Structured Pruning | From Local to Global: Revisiting Structured Pruning Paradigms for Large Language Models | L1 Method improvement / problem reframing | Outstanding Paper | corpus |
