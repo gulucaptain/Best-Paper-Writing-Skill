@@ -4,9 +4,9 @@
 
 **生成最佳论文风格的高质量论文底稿：摘要、引言、方法、实验与配图**
 
-🏆 写作规律提炼自 60 篇 CVPR / ICCV / NeurIPS 获奖论文，一个 Skill 同时支持 Claude 与 Codex
+🏆 写作规律提炼自 100 篇 CVPR / ICCV / NeurIPS / ACL（2021–2026）获奖论文，内置可检索论文记忆库（Paper Memory Bank），一个 Skill 同时支持 Claude、Codex 与 Gemini
 
-[![project page](https://img.shields.io/badge/Project%20Page-online-3b5bdb?logo=googlechrome&logoColor=white)](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) ![version](https://img.shields.io/badge/version-v1.2-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
+[![project page](https://img.shields.io/badge/Project%20Page-online-3b5bdb?logo=googlechrome&logoColor=white)](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) ![version](https://img.shields.io/badge/version-v1.2-blue) ![papers](https://img.shields.io/badge/papers-100-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![Gemini](https://img.shields.io/badge/Gemini-Skill-4285F4) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
 
 [🌐 项目主页](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) · [中文](README.md) · [English](README_en.md) · [论文清单](PAPER_LIST.md) · [更新日志](CHANGELOG.md)
 
@@ -19,10 +19,11 @@
 输入你的研究（填表或直接给摘要），输出一份接近获奖论文写法的稿子：
 
 - 📝 **摘要与引言**：具体肯定前人，点明缺口及其原因，给出关于问题本身的洞察，让少数几个数字撑起主张
+- 🧠 **论文记忆库（Paper Memory Bank）**：内置基于 SQLite FTS5 的子章节检索库（`scripts/paper_memory.py`，82 篇获奖论文、306 条真实节选），标注各子章节**写什么**、**省略或下放附录什么**以及句式与用词特征，支持按目标会议或同领域姊妹会议匹配（如 `EMNLP → ACL`、`ECCV → CVPR/ICCV`、`ICLR → NeurIPS`），并可通过 `paper_memory.py add` 补充你收藏的论文
 - 🧩 **方法与实验**：每个组件按"需要 → 机制 → 性质"展开；消融与主张一一对应
 - 🖼️ **配图规划与绘制**（v1.1）：先做图像规划表（每张图承载哪个主张、放哪、需要什么素材），按论证路线选 Figure 1 类型，用统一的配色与样式直接画出示意图和方法总览图；需要实验结果的图留白，规划写进图注。排版与风格规则来自 44 篇获奖论文的配图统计
 - 🧭 **按论文类型路由**：八类论文（方法改进、新能力、规模规律、再检验、机理分析、理论、数据集、测量）各有论证路线
-- ✅ **自带检查器**：对照语料统计检查草稿，揪出 AI 腔、破折号、堆砌的警句和凭空的数字；`check_figures.py` 检查图注长度、首句、引用、矢量图与占位图
+- ✅ **自带检查器**：对照语料统计检查草稿，揪出 AI 腔、破折号、堆砌的警句和凭空的数字；`paper_memory.py audit` 检查正文的各类流水账与细节堆砌；`check_figures.py` 检查图注长度、首句、引用、矢量图与占位图
 - 📋 **附带作者报告 `report.md`**：核心主张、主张-证据表、待补充清单，以及留给 Limitations 的要点
 - 🔒 **不编造**：没给的数字、基线、引用，一律保留为 `[TODO]`
 
@@ -80,7 +81,8 @@ cd Best-Paper-Writing-Skill
 
 ./install.sh claude     # Claude Code → ~/.claude/skills/
 ./install.sh codex      # Codex       → ~/.agents/skills/
-./install.sh all        # 两个都装；加 --project 则装到当前项目目录
+./install.sh gemini     # Gemini      → ~/.gemini/config/skills/
+./install.sh all        # 全部安装；加 --project 则装到当前项目目录
 ```
 
 | 平台 | 方式 |
@@ -88,8 +90,9 @@ cd Best-Paper-Writing-Skill
 | 🟣 **Claude Code** | `./install.sh claude`，或手动复制 `skills/bestpaper-writing/` 到 `~/.claude/skills/` |
 | 🟣 **Claude.ai / Cowork** | 把 `bestpaper-writing` 文件夹打成 zip，在 Skills 页面上传 |
 | 🟢 **Codex** | `./install.sh codex`，或手动复制到 `~/.agents/skills/`；用 `$bestpaper-writing` 显式调用 |
+| 🔵 **Gemini** | `./install.sh gemini`，或手动复制到 `~/.gemini/config/skills/` |
 
-两个平台使用同一种 `SKILL.md` 格式。装好后若看不到，重启 agent。辅助脚本需要 Python 3。
+各平台使用同一种 `SKILL.md` 格式；重复运行 `install.sh` 会自动保留已有的个人记忆库 `user_memory.jsonl`。装好后若看不到，重启 agent。辅助脚本需要 Python 3。
 
 ---
 
@@ -98,16 +101,17 @@ cd Best-Paper-Writing-Skill
 ```
 Best-Paper-Writing-Skill/
 ├── README.md / README_en.md
-├── PAPER_LIST.md              # 60 篇论文清单
+├── PAPER_LIST.md              # 100 篇论文清单（含 ACL 2021–2026）
 ├── data/                      # papers.csv · figure_stats.json · figure1_types.csv
 ├── template/CVPR2027/         # 官方 CVPR 2027 LaTeX 模板
 ├── tools/                     # 语料配图统计脚本
-├── install.sh                 # 一键安装
+├── install.sh                 # 一键安装（Claude / Codex / Gemini）
 └── skills/bestpaper-writing/
     ├── SKILL.md               # 入口：工作流与硬性规则
-    ├── references/            # 摘要、引言、方法、实验、配图、路由、风格规则、语料统计
-    │   └── exemplars/         # 段落与句式范例库
-    ├── scripts/               # check_draft.py · check_figures.py · find_exemplars.py · intake_to_brief.py · style_metrics.py
+    ├── references/            # 摘要、引言、方法、实验、记忆库、配图、路由、风格规则、语料统计
+    │   ├── exemplars/         # 段落、句式范例库与论文卡片（含 ACL）
+    │   └── memory/            # Paper Memory Bank（section_memory.jsonl + 自动构建的 paper_memory.db）
+    ├── scripts/               # paper_memory.py · check_draft.py · check_figures.py · find_exemplars.py · intake_to_brief.py · style_metrics.py
     ├── assets/                # intake_form.html · figures/（TikZ 样式、teaser/总览/对比网格模板、matplotlib 样式）
     ├── evals/                 # 留出测试集与盲评标准
     └── agents/openai.yaml     # Codex 界面配置
@@ -115,26 +119,27 @@ Best-Paper-Writing-Skill/
 
 ---
 
-## 📚 语料：60 篇获奖论文
+## 📚 语料：100 篇获奖论文
 
-2021 至 2025 年 CVPR、ICCV、NeurIPS 的最佳论文、最佳学生论文与荣誉提名。
+2021 至 2025 年 CVPR、ICCV、NeurIPS，以及 2021 至 2026 年 ACL 的最佳论文、杰出论文、最佳学生论文与荣誉提名。
 
-| 会议 | 篇数 |
-|---|---|
-| CVPR | 22 |
-| ICCV | 12 |
-| NeurIPS | 26 |
+| 会议 | 篇数 | 年份 |
+|---|---|---|
+| ACL | 40 | 2021–2026 |
+| NeurIPS | 26 | 2022–2025 |
+| CVPR | 22 | 2022–2025 |
+| ICCV | 12 | 2021–2025 |
 
-类型分布：方法改进 26 · 新能力 7 · 数据集 6 · 测量 5 · 机理分析 5 · 理论 4 · 规模规律 4 · 再检验 3。完整清单见 [PAPER_LIST.md](PAPER_LIST.md)。
+类型分布：方法改进 40 · 机理分析 14 · 数据集 12 · 新能力 9 · 再检验 8 · 理论 7 · 测量 5 · 规模规律 5。完整清单见 [PAPER_LIST.md](PAPER_LIST.md)。
 
-> 🔬 **关于留出测试**：风格规则由其中 55 篇拟合。另外 5 篇（均为 2024 年）从范例库中移除，只用来测试，避免规则在自己的测试集上调参。
+> 🔬 **关于留出测试**：原有 CVPR/ICCV/NeurIPS 风格规则由其中 55 篇拟合，另外 5 篇（均为 2024 年）从范例库中移除，只用来测试，避免规则在自己的测试集上调参；新增 40 篇 ACL 2021–2026 获奖论文作为 NLP 独立统计档（`style_by_venue.ACL`）与论文记忆库语料。
 
 ---
 
 ## 📄 版权与许可
 
 - 原创内容（说明、模板、脚本）采用 [CC BY 4.0](LICENSE)。
-- `references/exemplars/` 中的论文短句仅作教学评论引用并注明出处，版权归原作者，请勿复制进新论文。
+- `references/exemplars/` 与 `references/memory/section_memory.jsonl` 中的论文短节选（≤ 300 词）仅作教学评论引用并注明出处（完整论文清单见 [PAPER_LIST.md](PAPER_LIST.md)），版权归原作者，请勿复制进新论文。
 - 本仓库**不含任何论文 PDF 或全文**。如果你是原作者，希望调整或移除相关引用，请提 Issue。
 
 ## 🙏 致谢

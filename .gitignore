@@ -4,3 +4,8 @@ __pycache__/
 # Never commit paper PDFs or full texts (copyright)
 *.pdf
 corpus_fulltext/
+# Auto-rebuilt from references/memory/*.jsonl on first query
+skills/bestpaper-writing/references/memory/paper_memory.db
+# Private user-imported paper favorites
+skills/bestpaper-writing/references/memory/user_memory.jsonl
+

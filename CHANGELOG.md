@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+ACL 2021–2026 award corpus (recent 6 years) + Paper Memory Bank for topic-selection and writing-style imitation.
+
+- **ACL 2021–2026 corpus supplement (+40 award papers → 100 papers total)**: added 40 Best Papers, Outstanding Papers, and Best Theme/Resource/Social-Impact/Reproduction Papers from ACL 2021–2026 (`data/papers.csv`, `PAPER_LIST.md`, `references/corpus/corpus_stats.json` `style_by_venue.ACL`, `references/corpus-profile.md`), 4 full ACL exemplar cards (`volt.md`, `impossible-lms.md`, `native-sparse-attention.md`, `cure.md`), plus ACL sentence moves, paragraph exemplars, and aligned phrasebank entries.
+- **Paper Memory Bank (`references/memory/section_memory.jsonl`, `scripts/paper_memory.py`, `references/paper-memory.md`)**: SQLite FTS5 + BM25 searchable database of 306 curated award-paper subsection excerpts across 82 papers (`exp.datasets`, `exp.baselines`, `exp.metrics`, `exp.implementation`, `exp.main_results`, `exp.ablation`, `exp.analysis`, `method.*`, `related_work`, `limitations`, etc.) annotated with what award authors **include**, what they **omit or defer to Appendix**, **reader focus**, and **syntactic/lexical style signatures**. Supports personal favorites (`paper_memory.py add`, stored in gitignored `user_memory.jsonl` and preserved by `install.sh`).
+- **Anti-laundry-list workflow & audit**: Step 5/5b queries `paper_memory.py` before drafting each subsection (plus Mode C for direct natural-language memory queries/audits); `paper_memory.py audit` and `check_draft.py` flag procedural walkthroughs, paper-by-paper roll-calls, dataset split / hyperparameter / plumbing dumps, per-row table narration, and section-roadmap filler.
+- **Venue & sibling-conference matching + Gemini support**: `--venue` (with automatic sibling-conference fallback, e.g., `EMNLP/NAACL → ACL`, `ECCV → CVPR/ICCV`, `ICLR/ICML → NeurIPS`, plus `--related`) added across `paper_memory.py`, `find_exemplars.py`, `style_metrics.py`, and `check_draft.py`; `install.sh` now supports `gemini` and preserves `user_memory.jsonl`; `assets/intake_form.html` includes ACL/EMNLP/NAACL and Limitations.
+
 ## v1.2
 
 Simpler intake form.

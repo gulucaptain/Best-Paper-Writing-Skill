@@ -59,13 +59,20 @@ WARN_PHRASES = {
     r"\bto the best of our knowledge\b": "only with a scoped claim",
     r"\btables? \d+ (reports|shows)\b|\btab\.\s*\d+ (reports|shows)\b": "put the claim first and cite the table",
     r"\bin our setup\b": "hedge-like phrase",
+    r"\b(the rest of )?(this|the) paper is organized as follows\b": "paper-roadmap laundry list; cut and save space for insight/evidence",
 }
 DETAIL = r"\b\d+ (layers?|heads?|views?|steps?|epochs?|tokens? per)\b|\d+\s*[×x]\s*\d+\s*[×x]\s*\d+|\bbatch size\b|\blearning rate of\b|\bhidden (size|dimension)\b"
 NUMBER = r"(?<![A-Za-z\d.])\d+(?:[.,]\d+)*(?![A-Za-z\d])"
 PARAS = ROOT / "references/exemplars/paragraphs.jsonl"
 PHRASES = ROOT / "references/exemplars/phrasebank.csv"
+MEMORY = ROOT / "references/memory/section_memory.jsonl"
 SECNAME = {"abstract": "abstract", "intro": "introduction"}
 COMPARE = r"\b(outperform\w*|surpass\w*|better than|improv\w+|reduc\w+|faster|higher|lower|exceed\w*)\b"
+SPLIT_DUMP = re.compile(
+    r"(?:\btrain(?:ing)?\b.{0,45}\b(?:val(?:idation)?|dev(?:elopment)?)\b.{0,45}\btest\b|"
+    r"\b\d[\d,]*\s+(?:training|train)\s+(?:examples?|samples?|instances?|pairs?|sentences?)\b.{0,80}\b\d[\d,]*\s+(?:test|validation|dev)\b)",
+    re.I,
+)
 
 
 def strip_latex(t):
@@ -125,6 +132,10 @@ def bank_ngrams():
     if PARAS.exists():
         for l in PARAS.open(encoding="utf-8"):
             bank |= ngrams(json.loads(l)["text"])
+    if MEMORY.exists():
+        for l in MEMORY.open(encoding="utf-8"):
+            if l.strip():
+                bank |= ngrams(json.loads(l)["excerpt"])
     if PHRASES.exists():
         for r in csv.DictReader(PHRASES.open(encoding="utf-8")):
             bank |= ngrams(r["example"])
@@ -136,9 +147,9 @@ def bank_ngrams():
                    "our main contributions are as follows", "we make the following contributions", "code and models are publicly available"}
 
 
-def corpus_checks(path):
+def corpus_checks(path, venue=None):
     """Compare section-level style metrics with the award-paper distribution."""
-    stats = sm.load_stats()["style"]
+    stats = sm.load_stats(venue)["style"]
     issues = []
     for sec, paras in sm.sections(path).items():
         if not paras:
@@ -168,7 +179,7 @@ def corpus_checks(path):
         run_limit = 3 if sec == "intro" else 2
         if m["short_run_max"] >= run_limit:
             level = "WARN" if m["short_run_max"] >= 3 else "NOTE"
-            issues.append((level, 0, f"{name}: {m['short_run_max']} consecutive sentences under 15 words (" + ("50 of 55 award introductions never have 3" if sec == "intro" else "49 of 55 award abstracts never have 2") + "); merge them", ""))
+            issues.append((level, 0, f"{name}: {m['short_run_max']} consecutive sentences under 15 words (" + ("most award introductions never have 3" if sec == "intro" else "most award abstracts never have 2") + "); merge them", ""))
         if sec == "intro":
             for key, what in (("connector_per_100w", "logical connectors"),):
                 if m[key] < d[key]["p10"]:
@@ -176,7 +187,7 @@ def corpus_checks(path):
         if sec == "abstract" and m["self_praise_count"] == 0:
             issues.append(("NOTE", 0, "abstract makes no evaluative claim (outperforms, first, efficient, …); add one that the evidence supports", ""))
         if sec == "abstract" and m["insight_formula_count"] >= 1:
-            issues.append(("WARN", 0, "abstract uses a formula such as 'key insight'/'key idea' (4 of 55 award papers do this anywhere); state the insight directly", ""))
+            issues.append(("WARN", 0, "abstract uses a formula such as 'key insight'/'key idea'; state the insight directly", ""))
         if sec == "intro" and m["insight_formula_count"] >= 2:
             issues.append(("WARN", 0, f"introduction uses 'key insight'-type formulas {m['insight_formula_count']}×; use at most one, prefer stating the observation directly", ""))
         if sec == "intro" and m["self_praise_count"] < d["self_praise_count"]["p10"]:
@@ -203,12 +214,12 @@ def line_kinds(path, n_lines):
     return kinds
 
 
-def check(path, bank, max_words):
+def check(path, bank, max_words, venue=None):
     lines, labels = load_lines(path)
     kinds = line_kinds(path, len(lines))
     is_body_file = path.endswith(".tex") and kinds.get(1) == "body"
     issues = []
-    issues += corpus_checks(path)
+    issues += corpus_checks(path, venue=venue)
     raw = Path(path).read_text(encoding="utf-8")
     if path.endswith(".tex"):
         for m in re.finditer(r"(?<![\\\w])[A-Za-z]+(?<!\\)'[aeiou][a-z]+", raw):
@@ -242,6 +253,8 @@ def check(path, bank, max_words):
             issues.append(("NOTE", n, "comparison without a number or table/figure reference (fine for mechanisms; results need evidence)", s))
         if not body and re.search(DETAIL, s, flags=re.I):
             issues.append(("WARN", n, "implementation detail in abstract/introduction", s))
+        if body and SPLIT_DUMP.search(s):
+            issues.append(("WARN", n, "verbose dataset train/val/test split dump inline; for standard benchmarks summarize role + cite and defer split counts to Appendix (see paper_memory.py audit)", s))
         if len(s.split()) > max_words:
             issues.append(("WARN", n, f"long sentence ({len(s.split())} words)", s))
         ov = ngrams(s) & bank
@@ -259,11 +272,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("files", nargs="+")
     ap.add_argument("--max-words", type=int, default=60)
+    ap.add_argument("--venue", help="venue stats profile, e.g. ACL (default: CVPR/ICCV/NeurIPS)")
     a = ap.parse_args()
     bank = bank_ngrams()
     total_e = total_w = total_n = 0
     for f in a.files:
-        issues = check(f, bank, a.max_words)
+        issues = check(f, bank, a.max_words, venue=a.venue)
         print(f"== {f}")
         if not issues:
             print("OK: no issues found")

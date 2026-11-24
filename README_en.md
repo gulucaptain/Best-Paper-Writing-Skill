@@ -4,9 +4,9 @@
 
 **Generate high-quality paper drafts: abstract, introduction, method, experiments and figures, written and drawn the way best papers are**
 
-🏆 Writing patterns distilled from 60 CVPR / ICCV / NeurIPS award papers, packaged as a skill for both Claude and Codex
+🏆 Writing patterns distilled from 100 CVPR / ICCV / NeurIPS / ACL (2021–2026) award papers, with a searchable Paper Memory Bank, packaged as a skill for Claude, Codex, and Gemini
 
-[![project page](https://img.shields.io/badge/Project%20Page-online-3b5bdb?logo=googlechrome&logoColor=white)](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) ![version](https://img.shields.io/badge/version-v1.2-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
+[![project page](https://img.shields.io/badge/Project%20Page-online-3b5bdb?logo=googlechrome&logoColor=white)](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) ![version](https://img.shields.io/badge/version-v1.2-blue) ![papers](https://img.shields.io/badge/papers-100-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![Gemini](https://img.shields.io/badge/Gemini-Skill-4285F4) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
 
 [🌐 Project Page](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) · [中文](README.md) · [English](README_en.md) · [Paper list](PAPER_LIST.md) · [Changelog](CHANGELOG.md)
 
@@ -19,10 +19,11 @@
 Give it your research (an intake form or a complete abstract) and get a draft that argues like an award paper:
 
 - 📝 **Abstract and introduction**: credit specific prior work, name a concrete gap and its reason, state one insight about the problem, let a few numbers carry the claim
+- 🧠 **Paper Memory Bank**: SQLite FTS5 searchable subsection bank (`scripts/paper_memory.py`, 306 curated excerpts across 82 award papers) annotated with what award authors **include**, what they **omit or defer to Appendix**, and their syntactic/lexical patterns; matches exact or sibling conferences (`EMNLP → ACL`, `ECCV → CVPR/ICCV`, `ICLR → NeurIPS`) and lets you import favorite papers via `paper_memory.py add`
 - 🧩 **Method and experiments**: each component told as need, mechanism, property; ablations that mirror the claims
 - 🖼️ **Figure planning and drawing** (v1.1): a figure plan (the claim each figure carries, where it goes, the material it needs), Figure 1 chosen by line of argument, schematics and method overviews drawn in one consistent style; figures that need results stay as placeholders with their plan in the caption. Layout and style rules come from the figures of 44 award papers
 - 🧭 **Routing by paper type**: eight types (method improvement, new capability, empirical law, re-examination, mechanism, theory, dataset, measurement), each with its own line of argument
-- ✅ **Built-in checkers**: compares a draft with corpus statistics and flags AI habits, dashes, piled-up aphorisms and invented numbers; `check_figures.py` checks caption length and first sentence, references, vector plots and remaining placeholders
+- ✅ **Built-in checkers**: compares a draft with corpus statistics and flags AI habits, dashes, piled-up aphorisms and invented numbers; `paper_memory.py audit` checks body sections for laundry-list prose and setup detail dumps; `check_figures.py` checks caption length and first sentence, references, vector plots and remaining placeholders
 - 📋 **Author report `report.md`**: claim, claim-evidence map, TODO list, and notes for the Limitations section
 - 🔒 **No fabrication**: missing numbers, baselines and references stay as `[TODO]`
 
@@ -80,7 +81,8 @@ cd Best-Paper-Writing-Skill
 
 ./install.sh claude     # Claude Code -> ~/.claude/skills/
 ./install.sh codex      # Codex       -> ~/.agents/skills/
-./install.sh all        # both; add --project to install into the current repo
+./install.sh gemini     # Gemini      -> ~/.gemini/config/skills/
+./install.sh all        # all; add --project to install into the current repo
 ```
 
 | Platform | How |
@@ -88,8 +90,9 @@ cd Best-Paper-Writing-Skill
 | 🟣 **Claude Code** | `./install.sh claude`, or copy `skills/bestpaper-writing/` to `~/.claude/skills/` |
 | 🟣 **Claude.ai / Cowork** | zip the `bestpaper-writing` folder and upload it on the Skills page |
 | 🟢 **Codex** | `./install.sh codex`, or copy to `~/.agents/skills/`; invoke explicitly with `$bestpaper-writing` |
+| 🔵 **Gemini** | `./install.sh gemini`, or copy `skills/bestpaper-writing/` to `~/.gemini/config/skills/` |
 
-Both platforms use the same `SKILL.md` format. Restart the agent if the skill does not appear. Python 3 is needed for the helper scripts.
+All platforms share the same `SKILL.md` format; reinstalling via `install.sh` preserves any personal `user_memory.jsonl`. Restart the agent if the skill does not appear. Python 3 is needed for the helper scripts.
 
 ---
 
@@ -98,16 +101,17 @@ Both platforms use the same `SKILL.md` format. Restart the agent if the skill do
 ```
 Best-Paper-Writing-Skill/
 ├── README.md / README_en.md
-├── PAPER_LIST.md              # the 60 analysed papers
+├── PAPER_LIST.md              # the 100 analysed papers (incl. ACL 2021–2026)
 ├── data/                      # papers.csv · figure_stats.json · figure1_types.csv
 ├── template/CVPR2027/         # official CVPR 2027 LaTeX kit
 ├── tools/                     # corpus figure statistics
-├── install.sh                 # one-step install
+├── install.sh                 # one-step install (Claude / Codex / Gemini)
 └── skills/bestpaper-writing/
     ├── SKILL.md               # entry point: workflow and hard rules
-    ├── references/            # abstract, introduction, method, experiments, figures, routing, style rules, corpus statistics
-    │   └── exemplars/         # paragraph and sentence exemplars
-    ├── scripts/               # check_draft.py · check_figures.py · find_exemplars.py · intake_to_brief.py · style_metrics.py
+    ├── references/            # abstract, introduction, method, experiments, paper-memory, figures, routing, style rules, corpus statistics
+    │   ├── exemplars/         # paragraph/sentence exemplars and paper cards (incl. ACL)
+    │   └── memory/            # Paper Memory Bank (section_memory.jsonl + auto-built paper_memory.db)
+    ├── scripts/               # paper_memory.py · check_draft.py · check_figures.py · find_exemplars.py · intake_to_brief.py · style_metrics.py
     ├── assets/                # intake_form.html · figures/ (TikZ styles, teaser/overview/grid templates, matplotlib style)
     ├── evals/                 # held-out test cases and blind-comparison rubric
     └── agents/openai.yaml     # Codex UI metadata
@@ -115,26 +119,27 @@ Best-Paper-Writing-Skill/
 
 ---
 
-## 📚 The corpus: 60 award papers
+## 📚 The corpus: 100 award papers
 
-Best papers, best student papers and honorable mentions of CVPR, ICCV and NeurIPS, 2021 to 2025.
+Best papers, outstanding papers, best student papers, and honorable mentions of CVPR, ICCV, and NeurIPS (2021–2025), plus ACL (2021–2026).
 
-| Venue | Papers |
-|---|---|
-| CVPR | 22 |
-| ICCV | 12 |
-| NeurIPS | 26 |
+| Venue | Papers | Years |
+|---|---|---|
+| ACL | 40 | 2021–2026 |
+| NeurIPS | 26 | 2022–2025 |
+| CVPR | 22 | 2022–2025 |
+| ICCV | 12 | 2021–2025 |
 
-By type: method improvement 26 · new capability 7 · dataset 6 · measurement 5 · mechanism 5 · theory 4 · empirical law 4 · re-examination 3. Full list in [PAPER_LIST.md](PAPER_LIST.md).
+By type: method improvement 40 · mechanism 14 · dataset 12 · new capability 9 · re-examination 8 · theory 7 · measurement 5 · empirical law 5. Full list in [PAPER_LIST.md](PAPER_LIST.md).
 
-> 🔬 **Held-out test**: the style rules were fitted on 55 of them. The other 5 (all from 2024) were removed from the exemplar bank and used only for testing, so the rules are not tuned on their own test set.
+> 🔬 **Held-out test**: the CVPR/ICCV/NeurIPS style rules were fitted on 55 papers, with 5 (all from 2024) removed from the exemplar bank and used only for testing; the 40 ACL 2021–2026 award papers provide NLP venue statistics (`style_by_venue.ACL`) and populate the Paper Memory Bank.
 
 ---
 
 ## 📄 Copyright and licence
 
 - Original content (instructions, templates, scripts) is [CC BY 4.0](LICENSE).
-- Short excerpts of published papers in `references/exemplars/` are quoted with attribution for commentary and education. Their copyright stays with the authors; do not copy them into new papers.
+- Short excerpts (≤ 300 words) of published papers in `references/exemplars/` and `references/memory/section_memory.jsonl` are quoted with attribution (full list in [PAPER_LIST.md](PAPER_LIST.md)) for commentary and education. Their copyright stays with the authors; do not copy them into new papers.
 - This repository contains **no paper PDFs or full texts**. If you are an author and want your excerpts changed or removed, please open an issue.
 
 ## 🙏 Acknowledgements
