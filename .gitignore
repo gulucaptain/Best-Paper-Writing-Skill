@@ -4,3 +4,7 @@ __pycache__/
 # Never commit paper PDFs or full texts (copyright)
 *.pdf
 corpus_fulltext/
+
+# Local-only files (not for release)
+README_preview.html
+examples/

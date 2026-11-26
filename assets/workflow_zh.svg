@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="210" viewBox="0 0 1000 210" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Noto Sans SC',Helvetica,Arial,sans-serif">
+<rect x="0" y="0" width="1000" height="210" rx="16" fill="#F6F7FB"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9AA5CE"/></marker></defs>
+<text x="20" y="34" font-size="16" font-weight="700" fill="#1F2A5C">工作流</text>
+<rect x="20.0" y="52" width="125.1" height="132" rx="12" fill="#3F5BD8" stroke="#3F5BD8" stroke-width="1.5"/>
+<circle cx="40.0" cy="74" r="11" fill="#FFD166"/>
+<text x="40.0" y="78.5" font-size="12" font-weight="700" text-anchor="middle" fill="#1F2A5C">0</text>
+<text x="82.6" y="114" font-size="18" font-weight="700" text-anchor="middle" fill="#FFFFFF">输入</text>
+<text x="82.6" y="142" font-size="13.5" text-anchor="middle" fill="#E3E8FF">信息表 JSON</text>
+<text x="82.6" y="162" font-size="13.5" text-anchor="middle" fill="#E3E8FF">或已有摘要</text>
+<line x1="147.1" y1="118.0" x2="156.1" y2="118.0" stroke="#9AA5CE" stroke-width="2" marker-end="url(#a)"/>
+<rect x="159.1" y="52" width="125.1" height="132" rx="12" fill="#FFFFFF" stroke="#D5DAEE" stroke-width="1.5"/>
+<circle cx="179.1" cy="74" r="11" fill="#EEF1FD"/>
+<text x="179.1" y="78.5" font-size="12" font-weight="700" text-anchor="middle" fill="#1F2A5C">1</text>
+<text x="221.7" y="114" font-size="18" font-weight="700" text-anchor="middle" fill="#1F2A5C">补全</text>
+<text x="221.7" y="142" font-size="13.5" text-anchor="middle" fill="#5A6485">缺失信息</text>
+<text x="221.7" y="162" font-size="13.5" text-anchor="middle" fill="#5A6485">只追问一次</text>
+<line x1="286.3" y1="118.0" x2="295.3" y2="118.0" stroke="#9AA5CE" stroke-width="2" marker-end="url(#a)"/>
+<rect x="298.3" y="52" width="125.1" height="132" rx="12" fill="#FFFFFF" stroke="#D5DAEE" stroke-width="1.5"/>
+<circle cx="318.3" cy="74" r="11" fill="#EEF1FD"/>
+<text x="318.3" y="78.5" font-size="12" font-weight="700" text-anchor="middle" fill="#1F2A5C">2</text>
+<text x="360.9" y="114" font-size="18" font-weight="700" text-anchor="middle" fill="#1F2A5C">路由</text>
+<text x="360.9" y="142" font-size="13.5" text-anchor="middle" fill="#5A6485">8 种论文类型</text>
+<text x="360.9" y="162" font-size="13.5" text-anchor="middle" fill="#5A6485">× 5 种动机</text>
+<line x1="425.4" y1="118.0" x2="434.4" y2="118.0" stroke="#9AA5CE" stroke-width="2" marker-end="url(#a)"/>
+<rect x="437.4" y="52" width="125.1" height="132" rx="12" fill="#FFFFFF" stroke="#D5DAEE" stroke-width="1.5"/>
+<circle cx="457.4" cy="74" r="11" fill="#EEF1FD"/>
+<text x="457.4" y="78.5" font-size="12" font-weight="700" text-anchor="middle" fill="#1F2A5C">3</text>
+<text x="500.0" y="114" font-size="18" font-weight="700" text-anchor="middle" fill="#1F2A5C">主张表</text>
+<text x="500.0" y="142" font-size="13.5" text-anchor="middle" fill="#5A6485">证据支撑的</text>
+<text x="500.0" y="162" font-size="13.5" text-anchor="middle" fill="#5A6485">最强措辞</text>
+<line x1="564.6" y1="118.0" x2="573.6" y2="118.0" stroke="#9AA5CE" stroke-width="2" marker-end="url(#a)"/>
+<rect x="576.6" y="52" width="125.1" height="132" rx="12" fill="#FFFFFF" stroke="#D5DAEE" stroke-width="1.5"/>
+<circle cx="596.6" cy="74" r="11" fill="#EEF1FD"/>
+<text x="596.6" y="78.5" font-size="12" font-weight="700" text-anchor="middle" fill="#1F2A5C">4</text>
+<text x="639.1" y="114" font-size="18" font-weight="700" text-anchor="middle" fill="#1F2A5C">起草</text>
+<text x="639.1" y="142" font-size="13.5" text-anchor="middle" fill="#5A6485">参照 55 篇</text>
+<text x="639.1" y="162" font-size="13.5" text-anchor="middle" fill="#5A6485">获奖论文范例</text>
+<line x1="703.7" y1="118.0" x2="712.7" y2="118.0" stroke="#9AA5CE" stroke-width="2" marker-end="url(#a)"/>
+<rect x="715.7" y="52" width="125.1" height="132" rx="12" fill="#FFFFFF" stroke="#D5DAEE" stroke-width="1.5"/>
+<circle cx="735.7" cy="74" r="11" fill="#EEF1FD"/>
+<text x="735.7" y="78.5" font-size="12" font-weight="700" text-anchor="middle" fill="#1F2A5C">5</text>
+<text x="778.3" y="114" font-size="18" font-weight="700" text-anchor="middle" fill="#1F2A5C">自检</text>
+<text x="778.3" y="142" font-size="13.5" text-anchor="middle" fill="#5A6485">check_draft.py</text>
+<text x="778.3" y="162" font-size="13.5" text-anchor="middle" fill="#5A6485">check_figures.py</text>
+<line x1="842.9" y1="118.0" x2="851.9" y2="118.0" stroke="#9AA5CE" stroke-width="2" marker-end="url(#a)"/>
+<rect x="854.9" y="52" width="125.1" height="132" rx="12" fill="#3F5BD8" stroke="#3F5BD8" stroke-width="1.5"/>
+<circle cx="874.9" cy="74" r="11" fill="#FFD166"/>
+<text x="874.9" y="78.5" font-size="12" font-weight="700" text-anchor="middle" fill="#1F2A5C">6</text>
+<text x="917.4" y="114" font-size="18" font-weight="700" text-anchor="middle" fill="#FFFFFF">输出</text>
+<text x="917.4" y="142" font-size="13.5" text-anchor="middle" fill="#E3E8FF">LaTeX / Markdown</text>
+<text x="917.4" y="162" font-size="13.5" text-anchor="middle" fill="#E3E8FF">+ report.md</text>
+</svg>

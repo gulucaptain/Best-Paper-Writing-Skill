@@ -2,145 +2,297 @@
 
 # <img src="assets/logo.svg" height="44" align="top" alt="logo"> Best-Paper-Writing-Skill
 
-**生成最佳论文风格的高质量论文底稿：摘要、引言、方法、实验与配图**
+### Write Your Draft Like a Best Paper
 
-🏆 写作规律提炼自 60 篇 CVPR / ICCV / NeurIPS 获奖论文，一个 Skill 同时支持 Claude 与 Codex
+Distilled from 60 CVPR / ICCV / NeurIPS award papers　|　Works with Claude, Codex, Gemini and other agents
 
-[![project page](https://img.shields.io/badge/Project%20Page-online-3b5bdb?logo=googlechrome&logoColor=white)](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) ![version](https://img.shields.io/badge/version-v1.2-blue) ![papers](https://img.shields.io/badge/papers-60-orange) ![Claude](https://img.shields.io/badge/Claude-Skill-8A63D2) ![Codex](https://img.shields.io/badge/Codex-Skill-10A37F) ![license](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)
+<p>
+<a href="https://gulucaptain.github.io/Best-Paper-Writing-Skill/"><img src="https://img.shields.io/badge/Project_Page-online-3F5BD8?style=flat-square&logo=googlechrome&logoColor=white&labelColor=2D3348" alt="Project Page"></a>
+<a href="README_zh.md"><img src="https://img.shields.io/badge/README-%E4%B8%AD%E6%96%87-3F5BD8?style=flat-square&logo=readme&logoColor=white&labelColor=2D3348" alt="README"></a>
+<a href="https://github.com/gulucaptain/Best-Paper-Writing-Skill/stargazers"><img src="https://img.shields.io/github/stars/gulucaptain/Best-Paper-Writing-Skill?style=flat-square&logo=github&label=Stars&color=F0A500&labelColor=2D3348" alt="GitHub stars"></a>
+<a href="#-installation"><img src="https://img.shields.io/badge/Agent_Skill-Claude_·_Codex-D97757?style=flat-square&logo=claude&logoColor=white&labelColor=2D3348" alt="Agent Skill for Claude and Codex"></a>
+<a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v1.2-6E7781?style=flat-square&logo=semver&logoColor=white&labelColor=2D3348" alt="Version"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/License-CC_BY_4.0-6E7781?style=flat-square&logo=creativecommons&logoColor=white&labelColor=2D3348" alt="License"></a>
+</p>
 
-[🌐 项目主页](https://gulucaptain.github.io/Best-Paper-Writing-Skill/) · [中文](README.md) · [English](README_en.md) · [论文清单](PAPER_LIST.md) · [更新日志](CHANGELOG.md)
+<a href="https://gulucaptain.github.io/Best-Paper-Writing-Skill/"><img src="assets/project_page_en.jpg" width="88%" alt="Project page preview"></a>
+<br>
+<sub>👆 Click to open the project page: video demo, sentence-level before/after, and a blind-judged leaderboard of 4 models</sub>
 
 </div>
 
----
+<br>
 
-## ✨ 它能做什么
+AI-written paper drafts tend to **spend too long on background and stay vague about the contribution**, leaning on words like *novel* and *effective* to sell the method.
+We took apart the abstracts and introductions of **60 CVPR, ICCV and NeurIPS award papers** sentence by sentence, and turned the way they explain a piece of work into this skill.
 
-输入你的研究（填表或直接给摘要），输出一份接近获奖论文写法的稿子：
+Give it the key points of your research and you get a draft written the way best papers are written, from the title, abstract and introduction to the **method, experiments and schematic figures**. Numbers and citations you did not give stay as `[TODO]`: **it never invents them**.
 
-- 📝 **摘要与引言**：具体肯定前人，点明缺口及其原因，给出关于问题本身的洞察，让少数几个数字撑起主张
-- 🧩 **方法与实验**：每个组件按"需要 → 机制 → 性质"展开；消融与主张一一对应
-- 🖼️ **配图规划与绘制**（v1.1）：先做图像规划表（每张图承载哪个主张、放哪、需要什么素材），按论证路线选 Figure 1 类型，用统一的配色与样式直接画出示意图和方法总览图；需要实验结果的图留白，规划写进图注。排版与风格规则来自 44 篇获奖论文的配图统计
-- 🧭 **按论文类型路由**：八类论文（方法改进、新能力、规模规律、再检验、机理分析、理论、数据集、测量）各有论证路线
-- ✅ **自带检查器**：对照语料统计检查草稿，揪出 AI 腔、破折号、堆砌的警句和凭空的数字；`check_figures.py` 检查图注长度、首句、引用、矢量图与占位图
-- 📋 **附带作者报告 `report.md`**：核心主张、主张-证据表、待补充清单，以及留给 Limitations 的要点
-- 🔒 **不编造**：没给的数字、基线、引用，一律保留为 `[TODO]`
+> [!TIP]
+> **Measured result**: on a held-out case, the abstract an AI writes directly gets **1 error and 1 warning** from the checker, and 67% of its sentences end in a “, making …” clause. The version written with this skill gets **0 errors and 0 warnings**, and such sentences drop to **0%**, back within the range of award papers (median 8%).
 
-### 为什么不直接让 AI 写？
-
-通用 AI 的稿子彼此相似：先铺背景，用形容词代替机制，并排罗列组件，句尾总带一个"……，making X possible"。获奖论文不是这样写的。
-
-| 写法 | 通用 AI 草稿 | 获奖论文 |
-|---|---|---|
-| 句尾分词短语（", making …"） | 约 32% 的句子 | 约 8% |
-| 开头 | 泛泛的背景（"has attracted increasing attention"） | 具体的场景或前人工作 |
-| 缺口 | 一句"现有方法有局限" | 什么条件下失败、为什么失败 |
-| 组件 | A 做 …… B 做 …… C 做 ……（并排） | 第二个组件解决第一个留下的问题 |
-| 局限 | 常写进摘要 | 留给 Limitations 一节 |
-
-规则来自对语料的逐句标注与统计，每条规则都有上下限，而不是一味向"平均值"靠拢。
-
----
-
-## 🚀 两种使用方式
-
-**📝 填表 / 📄 贴摘要**　→　🔍 补全缺项　→　🧭 判断类型　→　✍️ 参照范例起草　→　✅ 自检　→　📦 论文稿 + `report.md`
-
-### 📝 方式一：填写表单
-
-用浏览器打开 [`skills/bestpaper-writing/assets/intake_form.html`](skills/bestpaper-writing/assets/intake_form.html)（离线可用，自动保存草稿，可导出和再次导入 JSON）。必填只有 5 项，其余按需补充，**补充得越详细，底稿质量越高**：
-
-| 档位 | 内容 |
-|---|---|
-| ⚙️ 基本设置 | 会议 / 年份 / 页数（下拉）、需要写哪些部分（勾选） |
-| 🔴 必填（5） | 一句话说清这篇工作、任务、现有方法在什么情况下不行、方法组成、头条结果 |
-| ⭐ 推荐（8） | 现有最强方法、失败原因、核心观察、最相近工作、具体画面、效率优势、反直觉之处、团队内部的叫法；缺了 skill 会先追问一次 |
-| 🟢 补充（折叠） | 额外优势与应用、论文类型、矛盾类型、次要结果、开源内容、局限、其他材料、refs.bib |
-| 🔵 方法与实验（折叠） | 一个直接粘贴材料的大框；需要时再逐项填写符号、组件、目标、数据集、指标、对比方法、结果表、消融 |
-
-把导出的 JSON 发给 agent：
-
-> 用 Best-Paper-Writing-Skill，根据这份信息表 JSON 写出论文的 Title、Abstract、Introduction、Methods 和 Experiments。
-
-### 📄 方式二：直接给完整摘要
-
-skill 不会盲目重写。它先把摘要拆回上面的字段，告诉你**哪些已有、哪些模糊、哪些缺失**，一次性追问缺项，再写出完整底稿，并给出摘要的**修改对照表**（原句 → 改后句 → 理由），你可以逐条接受或拒绝。你的数字和术语原样保留；摘要里没有的数字、基线和引用一律留作 [TODO]。
-
-> 用 Best-Paper-Writing-Skill，根据这段摘要写出论文的 Title、Abstract、Introduction、Methods 和 Experiments。
-
-也可以直接用文字描述工作。输出为 Markdown，或直接写进 LaTeX 模板（如 CVPR author kit）。
-
----
-
-## 📦 安装
+## ⚡ Quick start
 
 ```bash
 git clone https://github.com/gulucaptain/Best-Paper-Writing-Skill.git
-cd Best-Paper-Writing-Skill
-
-./install.sh claude     # Claude Code → ~/.claude/skills/
-./install.sh codex      # Codex       → ~/.agents/skills/
-./install.sh all        # 两个都装；加 --project 则装到当前项目目录
+cd Best-Paper-Writing-Skill && ./install.sh claude      # Codex users: ./install.sh codex
 ```
 
-| 平台 | 方式 |
+Then tell your agent:
+
+> Use Best-Paper-Writing-Skill to write the Title, Abstract and Introduction from this abstract.
+
+## ✨ Features
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### 📝 Abstract & introduction
+Credit specific prior work, then name a concrete gap and its cause; the method follows from one observation about the problem; a few numbers carry the claim.
+
+</td>
+<td width="33%" valign="top">
+
+### 🧩 Method & experiments
+Each component told as need → mechanism → property; ablations mirror the claims; missing table cells stay `\TODO{}`.
+
+</td>
+<td width="33%" valign="top">
+
+### 🖼️ Figure planning & drawing
+A figure plan first, Figure 1 chosen by line of argument, schematics and method overviews drawn in TikZ; result figures stay placeholders with the plan in the caption.
+
+</td>
+</tr>
+<tr>
+<td valign="top">
+
+### 🧭 Routing by paper type
+Method improvement, new capability, empirical law, re-examination, mechanism, theory, dataset, measurement: each type has its own line of argument and exemplars.
+
+</td>
+<td valign="top">
+
+### ✅ Checked against the corpus
+`check_draft.py` flags boilerplate, participial tails, dashes and excess numbers against award-paper ranges; `style_metrics.py` shows 20 metrics with their corpus percentiles; `check_figures.py` checks captions, references, vector plots and placeholders.
+
+</td>
+<td valign="top">
+
+### 📋 Author report
+`report.md` lists the claim, the claim-evidence map, every `[TODO]`, open questions, and notes for the Limitations section.
+
+</td>
+</tr>
+</table>
+
+## 🧠 How it works
+
+<p align="center"><img src="assets/workflow_en.svg" width="100%" alt="Workflow: input, intake, route, claim map, draft, check, output"></p>
+
+Principles that run through every step:
+
+- **No fabrication.** Numbers, datasets, baselines, citations and result figures come only from your input; anything missing is a `[TODO]` and appears in the report.
+- **Strong, not inflated.** Each claim gets the strongest wording its evidence supports: *outperforms* and *first* when the evidence is there, a narrower scope when it is not, never a disclaimer.
+- **Learn structure, never copy.** Exemplars teach the order of information and the rhythm; reusing any run of 6 or more words from an exemplar is a violation.
+- **Rules with a floor and a ceiling.** Every style metric aims at the award-paper range, so drafts lose the AI habits without collapsing into strings of short sentences.
+
+## 🚀 Two ways to use it
+
+### 📝 Mode A: fill in the intake form
+
+Open [`intake_form.html`](skills/bestpaper-writing/assets/intake_form.html) in a browser (offline, autosaves, exports and re-imports JSON; the interface is in Chinese). Only five fields are required; **the more you fill in, the fewer `[TODO]`s**.
+
+<details>
+<summary>What the form asks for</summary>
+
+| Block | Content |
 |---|---|
-| 🟣 **Claude Code** | `./install.sh claude`，或手动复制 `skills/bestpaper-writing/` 到 `~/.claude/skills/` |
-| 🟣 **Claude.ai / Cowork** | 把 `bestpaper-writing` 文件夹打成 zip，在 Skills 页面上传 |
-| 🟢 **Codex** | `./install.sh codex`，或手动复制到 `~/.agents/skills/`；用 `$bestpaper-writing` 显式调用 |
+| ⚙️ Setup | venue / year / pages (dropdowns), sections to write (checkboxes) |
+| 🔴 Required (5) | one-line claim, task, when prior methods fail, method components, headline results |
+| ⭐ Recommended (8) | strongest prior approach, reason for the failure, key observation, closest work, a concrete example, efficiency, what is surprising, the team's name for the idea; the skill asks once for any that are missing |
+| 🟢 Optional (folded) | further advantages and applications, paper type, tension type, secondary results, release, limitations, other material, refs.bib |
+| 🔵 Method and experiments (folded) | one paste box for your material, plus itemised fields for notation, components, objective, datasets, metrics, baselines, result tables, ablations |
 
-两个平台使用同一种 `SKILL.md` 格式。装好后若看不到，重启 agent。辅助脚本需要 Python 3。
+</details>
 
----
+> Use Best-Paper-Writing-Skill to write the Title, Abstract, Introduction, Method and Experiments from this intake JSON.
 
-## 🗂️ 目录结构
+### 📄 Mode B: paste an existing abstract
+
+The skill does not rewrite blindly. It maps the abstract back onto the intake fields, shows you **what is present, vague or missing**, asks once for the gaps, and delivers a **change table** (original sentence → revised sentence → the award-paper pattern it follows) so you can accept or reject each change. Your numbers and terminology are kept verbatim.
+
+> Use Best-Paper-Writing-Skill to write the Title, Abstract, Introduction, Method and Experiments from this abstract.
+
+Both modes write Markdown or directly into a LaTeX template. The official [CVPR 2027 author kit](template/CVPR2027/) is included:
+
+> Use Best-Paper-Writing-Skill to write the abstract and introduction into a copy of `template/CVPR2027`: the abstract in `sec/0_abstract.tex`, the introduction in `sec/1_intro.tex`.
+
+## 🩺 Use the checkers on their own
+
+For a draft you already have (Python 3 only, no dependencies):
+
+```bash
+S=skills/bestpaper-writing/scripts
+python3 $S/check_draft.py   paper/sec/0_abstract.tex paper/sec/1_intro.tex   # ERROR / WARN / NOTE
+python3 $S/style_metrics.py paper/sec/0_abstract.tex                         # every metric with its corpus percentile
+python3 $S/check_figures.py paper/main.tex                                   # captions, references, vector plots, placeholders
+```
+
+```text
+ERROR line 3: boilerplate claim
+           > Extensive experiments demonstrate the effectiveness of our method on ImageNet, ...
+WARN  line 0: abstract: share of sentences ending in a participial clause (', making …', ', extending …');
+            merge with because/while/by/which or end the sentence (0.67; 90% of award papers ≤ 0.25)
+```
+
+## 📦 Installation
+
+```bash
+./install.sh claude     # Claude Code → ~/.claude/skills/
+./install.sh codex      # Codex       → ~/.agents/skills/
+./install.sh all        # both; add --project to install into the current project
+```
+
+| Platform | How |
+|---|---|
+| **Claude Code** | `./install.sh claude`, or copy `skills/bestpaper-writing/` to `~/.claude/skills/` |
+| **Claude web / desktop app** | `cd skills && zip -r bestpaper-writing.zip bestpaper-writing`, then upload the zip in the Skills settings |
+| **Codex** | `./install.sh codex`, or copy to `~/.agents/skills/`; invoke explicitly with `$bestpaper-writing` |
+
+Both platforms read the same `SKILL.md`. Restart the agent if the skill does not show up. The helper scripts need Python 3.
+
+## 📚 Corpus and evaluation
+
+**Corpus**: best papers, best student papers and honorable mentions of CVPR, ICCV and NeurIPS, 2021–2025, 60 papers in total.
+
+| Use | Papers | Notes |
+|---|---|---|
+| Fit the rules | 55 | every sentence of the abstract and introduction labelled by function; structure and style statistics ([corpus-profile.md](skills/bestpaper-writing/references/corpus-profile.md)) |
+| Figure statistics | 44 | the papers among the 55 with usable figures; layouts and Figure 1 types ([data/](data/)) |
+| Held-out test | 5 | five 2024 papers, removed from the exemplar bank and used only for testing |
+
+By venue: CVPR 22 · ICCV 12 · NeurIPS 26. By type: method improvement 26 · new capability 7 · dataset 6 · measurement 5 · mechanism 5 · theory 4 · empirical law 4 · re-examination 3. Full list: [PAPER_LIST.md](PAPER_LIST.md).
+
+**Held-out test set** ([`evals/`](skills/bestpaper-writing/evals/)): each case gives author notes and a real `refs.bib`; outputs are judged on 13 criteria (invented numbers or citations, compilation, whether the key observation is stated directly, …), and 8-gram overlap with the original is computed to rule out memorisation.
+
+| Case | Original paper (hidden at test time) | Award |
+|---|---|---|
+| `image-space-motion-prior` | Generative Image Dynamics | CVPR 2024 Best Paper |
+| `next-scale-autoregressive-images` | Visual Autoregressive Modeling (VAR) | NeurIPS 2024 Best Paper |
+| `taylor-mode-operator-estimator` | Stochastic Taylor Derivative Estimator | NeurIPS 2024 Best Paper |
+| `participatory-alignment-dataset` | The PRISM Alignment Dataset | NeurIPS 2024 D&B Best Paper |
+| `guidance-with-weaker-model` | Guiding a Diffusion Model with a Bad Version of Itself | NeurIPS 2024 Best Paper Runner-up |
+
+## ❓ FAQ
+
+<details>
+<summary><b>What is it for, and what not?</b></summary>
+
+The Title, Abstract, Introduction, Method, Experiments and figure planning of ML / CV papers. For reviewing papers, use the sibling project [Best-Paper-Review-Skill](https://github.com/gulucaptain/Best-Paper-Review-Skill). The corpus comes from CVPR, ICCV and NeurIPS; other fields (NLP, robotics, systems, …) can use it, but the patterns may not hold as well. Contributions to the corpus are welcome.
+</details>
+
+<details>
+<summary><b>Can it write papers in Chinese?</b></summary>
+
+The rules and statistics come from English papers, so the paper text it writes is in English. You can describe your work in Chinese, and the intake form is in Chinese.
+</details>
+
+<details>
+<summary><b>Will it copy award papers?</b></summary>
+
+No. Exemplars only teach the order of information and the rhythm of a paragraph; reusing any run of 6 or more words is forbidden, and the evaluation script measures n-gram overlap with the original. The repository contains no paper PDFs or full texts.
+</details>
+
+<details>
+<summary><b>Why no limitations in the abstract and introduction?</b></summary>
+
+Author preference: limitations, failure cases and disclaimers go to the Limitations section. The skill records them in `report.md` so you can write that section.
+</details>
+
+<details>
+<summary><b>Why no dashes?</b></summary>
+
+Also an author preference. AI drafts overuse dashes, so the skill uses a colon, a comma, parentheses or a second sentence instead, and `check_draft.py` reports each dash as an ERROR. To drop this rule, remove it from the Hard rules in `SKILL.md`.
+</details>
+
+<details>
+<summary><b>Repository layout</b></summary>
 
 ```
 Best-Paper-Writing-Skill/
-├── README.md / README_en.md
-├── PAPER_LIST.md              # 60 篇论文清单
+├── PAPER_LIST.md              # the 60 papers
 ├── data/                      # papers.csv · figure_stats.json · figure1_types.csv
-├── template/CVPR2027/         # 官方 CVPR 2027 LaTeX 模板
-├── tools/                     # 语料配图统计脚本
-├── install.sh                 # 一键安装
+├── examples/                  # before/after example with checker output
+├── template/CVPR2027/         # official CVPR 2027 LaTeX author kit
+├── tools/                     # figure statistics script
+├── install.sh                 # one-line install
 └── skills/bestpaper-writing/
-    ├── SKILL.md               # 入口：工作流与硬性规则
-    ├── references/            # 摘要、引言、方法、实验、配图、路由、风格规则、语料统计
-    │   └── exemplars/         # 段落与句式范例库
-    ├── scripts/               # check_draft.py · check_figures.py · find_exemplars.py · intake_to_brief.py · style_metrics.py
-    ├── assets/                # intake_form.html · figures/（TikZ 样式、teaser/总览/对比网格模板、matplotlib 样式）
-    ├── evals/                 # 留出测试集与盲评标准
-    └── agents/openai.yaml     # Codex 界面配置
+    ├── SKILL.md               # entry point: workflow and hard rules
+    ├── references/            # abstract, introduction, method, experiments, figures, routing, style, corpus stats
+    │   └── exemplars/         # paragraph and phrase exemplars
+    ├── scripts/               # check_draft · check_figures · style_metrics · find_exemplars · intake_to_brief
+    ├── assets/                # intake_form.html · figures/ (TikZ styles and templates, matplotlib style)
+    ├── evals/                 # held-out test set and graders
+    └── agents/openai.yaml     # Codex UI config
+```
+</details>
+
+## 🧩 The Best-Paper series
+
+Once your draft is written, look at it from the other side. **[Best-Paper-Review-Skill](https://github.com/gulucaptain/Best-Paper-Review-Skill)** is our reviewing skill, also for Claude and Codex.
+
+<table>
+<tr>
+<th width="50%">✍️ Best-Paper-Writing-Skill (this repo)</th>
+<th width="50%">🔍 <a href="https://github.com/gulucaptain/Best-Paper-Review-Skill">Best-Paper-Review-Skill</a></th>
+</tr>
+<tr>
+<td valign="top">
+
+Drafts the abstract, introduction, method, experiments and figures the way award papers are written; numbers and citations you did not give stay as `[TODO]`.
+
+[Project page](https://gulucaptain.github.io/Best-Paper-Writing-Skill/)
+
+</td>
+<td valign="top">
+
+Reviews a paper claim by claim: quotes come only from the PDF and a script checks their page numbers, a sub-agent searches prior work for each contribution, and every criticism is tested against the authors' defense and re-checked by an independent critic. Outputs a review in Chinese and an English review ready to submit.
+
+[Project page](https://gulucaptain.github.io/Best-Paper-Review-Skill/) · [GitHub](https://github.com/gulucaptain/Best-Paper-Review-Skill)
+
+</td>
+</tr>
+</table>
+
+> [!NOTE]
+> Many conferences restrict the use of LLMs in reviewing; check your venue's policy before using the Review skill. It is an assistant, and its conclusions are yours to verify.
+
+## 📖 Citation
+
+If the skill helps your writing, please cite:
+
+```bibtex
+@misc{bestpaperwritingskill2026,
+  title        = {Best-Paper-Writing-Skill: Writing Papers the Way Award Papers Are Written},
+  author       = {{Best-Paper-Writing-Skill contributors}},
+  year         = {2026},
+  howpublished = {\url{https://github.com/gulucaptain/Best-Paper-Writing-Skill}}
+}
 ```
 
----
+## 🤝 Contributing
 
-## 📚 语料：60 篇获奖论文
+Issues, corpus additions from other fields, and drafts you wrote with the skill are all welcome. If it helps you, a ⭐ star helps others find it.
 
-2021 至 2025 年 CVPR、ICCV、NeurIPS 的最佳论文、最佳学生论文与荣誉提名。
+## 📄 License and acknowledgements
 
-| 会议 | 篇数 |
-|---|---|
-| CVPR | 22 |
-| ICCV | 12 |
-| NeurIPS | 26 |
+- Original content (instructions, templates, scripts) is licensed under [CC BY 4.0](LICENSE).
+- Short quotations in `references/exemplars/` are used for teaching commentary with attribution; copyright stays with the original authors, so do not copy them into new papers. The repository **contains no paper PDFs or full texts**; if you are an author and want a quotation adjusted or removed, please open an issue.
 
-类型分布：方法改进 26 · 新能力 7 · 数据集 6 · 测量 5 · 机理分析 5 · 理论 4 · 规模规律 4 · 再检验 3。完整清单见 [PAPER_LIST.md](PAPER_LIST.md)。
+<div align="center">
 
-> 🔬 **关于留出测试**：风格规则由其中 55 篇拟合。另外 5 篇（均为 2024 年）从范例库中移除，只用来测试，避免规则在自己的测试集上调参。
+<a href="https://star-history.com/#gulucaptain/Best-Paper-Writing-Skill&Date"><img src="https://api.star-history.com/svg?repos=gulucaptain/Best-Paper-Writing-Skill&type=Date" width="600" alt="Star History Chart"></a>
 
----
-
-## 📄 版权与许可
-
-- 原创内容（说明、模板、脚本）采用 [CC BY 4.0](LICENSE)。
-- `references/exemplars/` 中的论文短句仅作教学评论引用并注明出处，版权归原作者，请勿复制进新论文。
-- 本仓库**不含任何论文 PDF 或全文**。如果你是原作者，希望调整或移除相关引用，请提 Issue。
-
-## 🙏 致谢
-
-工作流与模板基于 [Master-cai/Research-Paper-Writing-Skills](https://github.com/Master-cai/Research-Paper-Writing-Skills)（MIT），其写作知识来自[彭思达的学习笔记](https://github.com/pengsida/learning_research)。详见 [`NOTICE.md`](skills/bestpaper-writing/NOTICE.md)。
-
-## 🤝 参与
-
-欢迎通过 Issue 反馈问题、补充语料中缺少的领域（NLP、机器人、系统等），或分享你用它写出的稿子。如果它对你有帮助，欢迎点一个 ⭐ Star。
+</div>
